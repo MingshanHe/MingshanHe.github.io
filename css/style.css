@@ -1393,7 +1393,7 @@ body input {
   margin-bottom: 30px;
 }
 .post .post-item .post-wrap:hover {
-  box-shadow: 0 16px 32px 0 rgb(169, 223, 255);
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.1);
 }
 .post .post-item .post-wrap {
   box-shadow: 0 5px 40px -1px rgba(2,10,18,0.11);
@@ -1444,7 +1444,7 @@ body input {
   transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
 .post .post-item .post-wrap .post-image img:hover {
-  filter: grayscale(100%);
+  filter: grayscale(10%);
 }
 .post .post-item .post-wrap .post-content {
   position: relative;
