@@ -1444,7 +1444,7 @@ body input {
   transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
 .post .post-item .post-wrap .post-image img:hover {
-  filter: drop-shadow(16px 16px 20px red) invert(75%);
+  filter: contrast(175%) brightness(3%)
 }
 .post .post-item .post-wrap .post-content {
   position: relative;
