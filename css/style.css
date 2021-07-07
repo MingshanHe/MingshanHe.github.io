@@ -1393,7 +1393,7 @@ body input {
   margin-bottom: 30px;
 }
 .post .post-item .post-wrap:hover {
-  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 16px 32px 0 rgb(169, 223, 255);
 }
 .post .post-item .post-wrap {
   box-shadow: 0 5px 40px -1px rgba(2,10,18,0.11);
