@@ -28,9 +28,9 @@ Completed by *Mingshan He* (First Author & Engineer)
 
   The `*`  flag means the file is created and edited by Mingshan He.
 
-### 1. Computer Vision
+### 1. Computer Vision （catkin_rs）
 
-  In this module, it need to launch the camera to recognize. This project has been designed to recognize the position and orientation of the object by using the *aruco* tag. In the *aruco_ros* folder contains the file to launch the recognition algorithm and it will publish the result in the particular topic as pose message. There is a gripper (DH Robotics PGI140) in the end of robot arm which supply the producer the gripper function. The grasp function is developed in Cartesian coordinate, which has a better performance.
+  In this module, it need to launch the camera to recognize. This project has been designed to recognize the position and orientation of the object by using the *aruco* tag. In the *aruco_ros* folder contains the file to launch the recognition algorithm and it will publish the result in the particular topic as pose message. There is a gripper (DH Robotics PGI140) in the end of robot arm which supply the producer the gripper function. The grasp function is developed in Cartesian coordinate, which has a better performance. 
 
 #### 1.1 Realsense2 Camera
 
@@ -41,6 +41,8 @@ $ roslaunch realsense2_camera rs_rgbd.launch
 ```
 
   After launch this file, the node of camera has been registered in the ros master. If you wanna to have a look at the image callback from the camera, you can use the `rqt` plugins.
+
+  Installation can be refered the link website: https://github.com/IntelRealSense/realsense-ros.
 
 #### 1.2 Calibration
 
@@ -64,7 +66,7 @@ $ rosrun realsense2_camera aruco_tf_node
 
   In this node, it has also published the information of tag in the topic. The robot controller need it to arrive at the appointed position to grasp object.
 
-### 2. SLAM(Simultaneous Localization and Mapping)
+### 2. SLAM(Simultaneous Localization and Mapping: catkin_ws)
 
   Navigation is the ability of a mobile robot to determine its position in the environment where it is located (localization), and to plan and execute the path to a target location. It enables autonomous avoiding both static and dynamic obstacles. For navigation to work, it is very important to have a map of the environment.
 
@@ -148,7 +150,7 @@ $ roslaunch four_wheels navigation_mode.launch
 
 
 
-### 3. Robot Arm (ROKAE xMate 3 Pro & DH Robotics PGI140)
+### 3. Robot Arm (ROKAE xMate 3 Pro & DH Robotics PGI140: catkin_ca)
 
 #### 3.1 Control Device
 
@@ -202,4 +204,14 @@ $ roslaunch move_control cartesian_demo_node
 ```bash
 $ rosrun move_control Gripper_node
 ```
+
+
+
+* 描述视觉算法，以及其他，特征识别， 边缘提取。aruco的算法的描述，功能包中的实现位置。思维导图（代码位置）。
+* 关键技术的描述，提前了解的基础。
+* 上架的实现。
+* 动作规划的算法，描述以及代码位置。
+* 指令顺序，每输入一个指令后的截图，演示视频。
+* 自主建图：不能用keyboard建图，给一系列必须经过的点（这些点给定），边走边图，实时的避障，需要嵌入目标识别和定位的算法，最终成功实现对目标的自助规划抓取。
+* 所有的文档，需要调参的参数的说明，调参的代码位置。
 
