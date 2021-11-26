@@ -14,17 +14,17 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../css/bootstrap.min.css">
 <!-- Site CSS -->
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../../style.css">
 <!-- Colors CSS -->
-<link rel="stylesheet" href="../../css/colors.css">
+<link rel="stylesheet" href="../../../css/colors.css">
 <!-- ALL VERSION CSS -->
-<link rel="stylesheet" href="../../css/versions.css">
+<link rel="stylesheet" href="../../../css/versions.css">
 <!-- Responsive CSS -->
-<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../../css/responsive.css">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="../../css/custom.css">
+<link rel="stylesheet" href="../../../css/custom.css">
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
 <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
@@ -856,21 +856,21 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
               <p><font size="5" color="white"><b>HomePage</b></font></p>
           </div>
           <div class="logo-sidebar" align="center">
-              <a href="../../index.html"><img src="../../images/logos/Mingshan.png" style="width:210px; height:210px; border-radius:50%;" alt="image"></a>
+              <a href="../../../index.html"><img src="../../../images/logos/Mingshan.png" style="width:210px; height:210px; border-radius:50%;" alt="image"></a>
               <p><font size="1" color="white"><b>B.Eng., Robotic Engineering</b></font></p>
               <p><font size="1" color="white"><b>Research Assitant</b></font></p>
               <a href="mailto:mshe.research@gmail.com">
                   <font size="1" color="white"><b>Email:</b> mshe.research@gmail.com &nbsp</font>
-                  <img src="../../images/logos/email.png" style="width:20px;">
+                  <img src="../../../images/logos/email.png" style="width:20px;">
               </a>
           </div>
           <ul class="sidebar-nav" align="center">
-              <li><a href="../../index.html">Home</a></li>
-              <li><a href="../../about.html">About</a></li>
-              <li><a href="../../projects.html">Projects</a></li>
-              <li><a class="active" href="../../blogs.html">Blogs</a></li>
-              <li><a href="../../news.html">News</a></li>
-              <li><a href="../../contact.html">Contact</a></li>
+              <li><a href="../../../index.html">Home</a></li>
+              <li><a href="../../../about.html">About</a></li>
+              <li><a href="../../../projects.html">Projects</a></li>
+              <li><a class="active" href="../../../blogs.html">Blogs</a></li>
+              <li><a href="../../../news.html">News</a></li>
+              <li><a href="../../../contact.html">Contact</a></li>
           </ul>
       </div>
   </div>
@@ -890,7 +890,7 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
               </div>
               <div class="clearfix"></div>
               <ol class="breadcrumb">
-                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../../index.html">Home</a></li>
                 <li class="active">Blogs</li>
               </ol>
             </div>
@@ -918,7 +918,7 @@ mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
     </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">h</span>,<span class="cm-variable">w</span> = <span class="cm-variable">img</span>.<span class="cm-property">shape</span>[:<span class="cm-number">2</span>]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
     </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">"""</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">Performing camera calibration by </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">passing the value of known 3D points (objpoints)</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">and corresponding pixel coordinates of the </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">detected corners (imgpoints)</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-string">"""</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">ret</span>, <span class="cm-variable">mtx</span>, <span class="cm-variable">dist</span>, <span class="cm-variable">rvecs</span>, <span class="cm-variable">tvecs</span> = <span class="cm-variable">cv2</span>.<span class="cm-property">calibrateCamera</span>(<span class="cm-variable">objpoints</span>, <span class="cm-variable">imgpoints</span>, <span class="cm-variable">gray</span>.<span class="cm-property">shape</span>[::<span class="cm-operator">-</span><span class="cm-number">1</span>], <span class="cm-keyword">None</span>, <span class="cm-keyword">None</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
     </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"Camera matrix : \n"</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">mtx</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"dist : \n"</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">dist</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"rvecs : \n"</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">rvecs</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-string">"tvecs : \n"</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(<span class="cm-variable">tvecs</span>)</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 1540px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1540px;"></div></div></div></pre><p>&nbsp;</p></div></div>
-    <a href="../../blogs.html"><img src="../../images/prettyPhoto/default/sprite_prev.png" style="width: 45px;position: relative;" title="BACK"><font style="position: relative;color: black;"><b>BACK</b></font></a>
+    <a href="../../../blogs.html"><img src="../../../images/prettyPhoto/default/sprite_prev.png" style="width: 45px;position: relative;" title="BACK"><font style="position: relative;color: black;"><b>BACK</b></font></a>
 </div><!-- end wrapper -->
 </body>
 </html>

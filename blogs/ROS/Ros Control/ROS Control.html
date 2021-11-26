@@ -14,17 +14,17 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../css/bootstrap.min.css">
 <!-- Site CSS -->
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../../style.css">
 <!-- Colors CSS -->
-<link rel="stylesheet" href="../../css/colors.css">
+<link rel="stylesheet" href="../../../css/colors.css">
 <!-- ALL VERSION CSS -->
-<link rel="stylesheet" href="../../css/versions.css">
+<link rel="stylesheet" href="../../../css/versions.css">
 <!-- Responsive CSS -->
-<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../../css/responsive.css">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="../../css/custom.css">
+<link rel="stylesheet" href="../../../css/custom.css">
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
 <!-- Start of Take place -->
@@ -710,21 +710,21 @@
               <p><font size="5" color="white"><b>HomePage</b></font></p>
           </div>
           <div class="logo-sidebar" align="center">
-              <a href="../../index.html"><img src="../../images/logos/Mingshan.png" style="width:210px; height:210px; border-radius:50%;" alt="image"></a>
+              <a href="../../../index.html"><img src="../../../images/logos/Mingshan.png" style="width:210px; height:210px; border-radius:50%;" alt="image"></a>
               <p><font size="1" color="white"><b>B.Eng., Robotic Engineering</b></font></p>
               <p><font size="1" color="white"><b>Research Assitant</b></font></p>
               <a href="mailto:mshe.research@gmail.com">
                   <font size="1" color="white"><b>Email:</b> mshe.research@gmail.com &nbsp</font>
-                  <img src="../../images/logos/email.png" style="width:20px;">
+                  <img src="../../../images/logos/email.png" style="width:20px;">
               </a>
           </div>
           <ul class="sidebar-nav" align="center">
-              <li><a href="../../index.html">Home</a></li>
-              <li><a href="../../about.html">About</a></li>
-              <li><a href="../../projects.html">Projects</a></li>
-              <li><a class="active" href="../../blogs.html">Blogs</a></li>
-              <li><a href="../../news.html">News</a></li>
-              <li><a href="../../contact.html">Contact</a></li>
+              <li><a href="../../../index.html">Home</a></li>
+              <li><a href="../../../about.html">About</a></li>
+              <li><a href="../../../projects.html">Projects</a></li>
+              <li><a class="active" href="../../../blogs.html">Blogs</a></li>
+              <li><a href="../../../news.html">News</a></li>
+              <li><a href="../../../contact.html">Contact</a></li>
           </ul>
       </div>
   </div>
@@ -744,7 +744,7 @@
               </div>
               <div class="clearfix"></div>
               <ol class="breadcrumb">
-                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../../index.html">Home</a></li>
                 <li class="active">Blogs</li>
               </ol>
             </div>
@@ -759,7 +759,7 @@
     </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable-3">int</span> <span class="cm-def">main</span>(<span class="cm-variable-3">int</span> <span class="cm-variable">argc</span>, <span class="cm-variable-3">char</span> <span class="cm-variable-3">**</span><span class="cm-variable">argv</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">// Setup</span></span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">ros::init</span>(<span class="cm-variable">argc</span>, <span class="cm-variable">argv</span>, <span class="cm-string">"robot"</span>);</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">Robot::Robot</span> <span class="cm-variable">robot</span>;</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">controller_manager::ControllerManager</span> <span class="cm-variable">cm</span>(<span class="cm-operator">&amp;</span><span class="cm-variable">robot</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">ros</span>:<span class="cm-variable">AsyncSpinner</span> <span class="cm-variable">spinner</span>(<span class="cm-number">1</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">spinner</span>.<span class="cm-variable">start</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">// Control loop</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">ros::Time</span> <span class="cm-variable">prev_time</span> <span class="cm-operator">=</span> <span class="cm-variable">ros::Time::now</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">ros::Rate</span> <span class="cm-variable">rate</span>(<span class="cm-number">10.0</span>); <span class="cm-comment">// 10 Hz rate</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">while</span> (<span class="cm-variable">ros::ok</span>())</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">const</span> <span class="cm-variable">ros::Time</span> &nbsp; &nbsp; <span class="cm-variable">time</span> &nbsp; <span class="cm-operator">=</span> <span class="cm-variable">ros</span>:<span class="cm-variable">Time::now</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">const</span> <span class="cm-variable">ros::Duration</span> <span class="cm-variable">period</span> <span class="cm-operator">=</span> <span class="cm-variable">time</span> <span class="cm-operator">-</span> <span class="cm-variable">prev_time</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">robot</span>.<span class="cm-variable">read</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">cm</span>.<span class="cm-variable">update</span>(<span class="cm-variable">time</span>, <span class="cm-variable">period</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">root</span>.<span class="cm-variable">write</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">rate</span>.<span class="cm-variable">sleep</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-number">0</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 704px;"></div><div class="CodeMirror-gutters" style="display: none; height: 704px;"></div></div></div></pre><p><img src="/Users/mieongsun/Downloads/smbarber/blogs/Ros Control/5.png" alt="5" style="zoom:40%;" /></p><center>Fig 5. The control and spinner threads</center><p><span>  As we see in the image above, there are different kinds of callbacks that are serviced by this thread. First, those from the controller manager API and second, there&#39;s the ROS API from your controllers which is custom and up to you. And finally there might be other callbacks registered which depends on your setup. It is important to mention, that we have the computations, which are non real-time in a separate thread. Having these non real-time computations separate means that we repect requirements from real-time applications but also deterministic execution.</span></p><p><span>  To deal with concurrency and other things ther&#39;s a package named </span><em><span>realtime_tools</span></em><span> which has tools that are usable from a hard real-time thread. It includes:</span></p><ul><li><strong><span>RealtimePublisher</span></strong><span>: publish to a ROS topic.</span></li><li><strong><span>RealtimeBuffer</span></strong><span>: share resource with non real-time thread.</span></li><li><strong><span>RealtimeClock</span></strong><span>: query estimates of the system clock.</span></li><li><span>...</span></li></ul></div></div>
 
     <!-- End of Take Place -->
-    <a href="../../blogs.html"><img src="../../images/prettyPhoto/default/sprite_prev.png" style="width: 45px;position: relative;" title="BACK"><font style="position: relative;color: black;"><b>BACK</b></font></a>
+    <a href="../../../blogs.html"><img src="../../../images/prettyPhoto/default/sprite_prev.png" style="width: 45px;position: relative;" title="BACK"><font style="position: relative;color: black;"><b>BACK</b></font></a>
 </div><!-- end wrapper -->
 </body>
 </html>
