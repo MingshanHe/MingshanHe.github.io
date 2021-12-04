@@ -9,7 +9,7 @@
 * Profile-specific support, currently only for 402 profile (drives and motion control)
 * ROS interfaces, motion control through *ros_control*
 
-<img src="/home/hms/文档/canopen/1.png" style="zoom: 80%;" />
+<img src="1.png" style="zoom: 80%;" />
 
 ## 2. *socketcan_interface*
 
