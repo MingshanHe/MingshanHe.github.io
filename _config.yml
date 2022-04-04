@@ -104,4 +104,4 @@ theme: hexo-theme-fluid
 deploy:
   type: git
   repository: https://github.com/MingshanHe/MingshanHe.github.io
-  branch: master
+  branch: gh-pages
