@@ -5,4 +5,5 @@ date: 2022-04-05 21:12:03
 
 ------
 
-**2022.4.5**:                           Establish this Website from the old version (^-^)
+**2022.4.5**: Establish this Website from the old version (^-^)
+**2021.7.31**: I have graduated from Northeastern University(^-^)
