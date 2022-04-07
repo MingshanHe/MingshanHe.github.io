@@ -3,6 +3,7 @@ title: Hand-eye_Calibration
 date: 2022-04-05 22:14:06
 tags: hand-eye calibration
 categories: Robotics
+math: true
 ---
 # Hand-eye Calibration
 

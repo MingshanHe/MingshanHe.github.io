@@ -3,6 +3,7 @@ title: Hybrid_Robot_Project
 date: 2022-04-05 22:17:43
 tags: hybrid-robot
 categories: Project
+math: true
 ---
 # Hybrid Robot Project
 

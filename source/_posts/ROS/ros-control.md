@@ -3,6 +3,7 @@ title: ros_control
 date: 2022-04-05 22:09:39
 tags: ros_control framework
 categories: ROS
+math: true
 ---
 
 # ROS Control

@@ -3,6 +3,7 @@ title: pluginlib
 date: 2022-04-05 21:10:36
 tags: pluginlib gazebo
 categories: ROS
+math: true
 ---
 
 # pluginlib
