@@ -210,7 +210,7 @@ https://github.com/Ajun11/CLASS-DESIGN-group-six--TURTLEBOT3
 
 
 
-### 7. 基于TURTLEBOT3目标跟踪改进办法(Open Source)
+### 7. 移动机器人终端智能识别抓取(Open Source)
 
 <img src="/image/Teaching/7.png" style="zoom:80%;" />
 
