@@ -1,0 +1,17 @@
+---
+title: FlowIO
+date: 2022-06-29 16:43:58
+tags: [Soft Robot,Hardware]
+categories: Soft Robot
+---
+
+## Introduction
+
+***FlowIO*** is a miniature, pneumatic development platform with a software toolkit for control, actuation, and sensing of soft robots and programmable materials. Five pneumatic ports and multiple fully-integrated modules to satisfy various pressure, flow, and size requirements make ***FlowIO*** suitable for most wearable and non-wearable pneumatic applications in HCI and soft robotics. ***FlowIO*** includes *a software stack with APIs*, *Blue-tooth capabilities*, and *web-GUI* supported on all major mobile and desktop operating system. The system is fully compatible with *Arduino*, *JavaScript*, and *Google Chrome*, while support for *Scratch*, *Python*, and *Unity* is planned for future development, making ***FlowIO*** suitable for makers from any technical background. Over a dozen people have used the ***FlowIO*** platform, ranging from high-school and college students to graduate students and researchers.
+
+Platform technologies such as Arduino, Raspberry Pi, Lego, and Scratch have liberated entire fields by diminishing barriers to entry. Arduino transformed electronics, Raspberry Pi - portable computing, Lego - robotics, and Scratch - programming. These and similar platforms have not only made esoteric fields more accessible for artists, designers, and makers, but they have also enabled researchers and engineers to prototype more rapidly. ***For instance, an electronics project that two decades ago may have required advanced engineering expertise, and a week of work in a lab with expensive equipment, today such a project can be done in a weekend, by a high-school student, in his/her living room.*** This transformation, I believe, is thanks to: (1) the availability of platforms and tools that are easy to learn and use; (2) the emergence of modules from companies like Adafruit, designed specifically for popular platforms; and (3) a growing community that is continuously contributing software, projects, ideas, tutorials, and other content - inspiring even more people to be part of that community as both users and contributors.
+
+Today, prototyping in soft robotics and programmable materials has ***high barriers*** to entry and is as inaccessible to most people as electronics prototyping was two decades ago. This problem exists because the three aforementioned factors that transformed electronics prototyping have yet to occur in the domain of soft robotics. In recent years, projects such as [PneUI](https://tangible.media.mit.edu/project/pneui/), [aeroMorph](https://tangible.media.mit.edu/project/aeromorph/), [MorphIO](https://dl.acm.org/doi/10.1145/3322276.3322337), [Bubble](https://dl.acm.org/doi/10.1145/3290607.3312868), [AuxeticBreath](https://dl.acm.org/doi/10.1145/3430524.3444636), and numerous others, demonstrate a growing interest in soft robotics from HCI researchers, students, artists, designers, and makers. However, a challenge faced by nearly everyone working on pneumatically actuated projects is that one typically has to build their own driving systems from the group up and dedicate sometimes most of their time on developing the pneumatics, electronics, and software, instead of developing novel soft actuators, applications, or user experiences. This challenge creates significant time inefficiencies, stifles innovation, and even discourages the pursuit of ideas requiring more sophisticated drive electronics or software.
+
+
+

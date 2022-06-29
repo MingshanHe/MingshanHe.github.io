@@ -1,8 +1,8 @@
 ---
 title: Rapidly-exploring_Random_Tree
 date: 2022-04-05 22:15:17
-tags: rrt algorithm
-categories: Robotics
+tags: [Robotics, Algorithm]
+categories: Algorithm
 math: true
 ---
 # Rapidly-exploring Random Tree (RRT)

@@ -1,8 +1,8 @@
 ---
 title: Camera_Calibration
 date: 2022-04-05 22:12:27
-tags: camera-calibration
-categories: Robotics
+tags: [Robotics, Hardware, Algorithm]
+categories: Algorithm
 math: true
 ---
 # Camera Calibration

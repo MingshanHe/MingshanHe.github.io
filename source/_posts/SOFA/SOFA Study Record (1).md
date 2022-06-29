@@ -1,7 +1,8 @@
 ---
 title: SOFA Study Record (1) 
 date: 2022-06-28 10:20:00
-tags: SOFA
+categories: Soft Robot
+tags: [Soft Robot, Simulation]
 ---
 
 ## Introduction

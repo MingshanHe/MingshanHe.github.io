@@ -1,7 +1,8 @@
 ---
 title: A CMake-Based Project
 date: 2022-06-17 22:35:00
-tags: CMake
+tags: [Tool]
+categories: Tool
 ---
 
 # Introduction

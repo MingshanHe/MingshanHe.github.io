@@ -2,8 +2,8 @@
 layout: ros
 title: CANOpen
 date: 2022-04-05 21:59:08
-tags: hardware roscanopen
-categories: ROS
+tags: [ROS, Hardware]
+categories: Hardware
 math: true
 ---
 # ros_canopen

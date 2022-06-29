@@ -1,8 +1,8 @@
 ---
 title: Git
 date: 2022-04-25 12:50:03
-tags: git introduction
-categories: Git
+tags: [Tool]
+categories: Tool
 math: true
 ---
 

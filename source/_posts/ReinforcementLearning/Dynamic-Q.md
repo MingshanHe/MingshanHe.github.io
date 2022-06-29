@@ -1,7 +1,7 @@
 ---
 title: Dynamic-Q
 date: 2022-06-27 21:40:42
-tags: Reinforcement Learning
+tags: [Reinforcement Learning, Algorithm]
 math: true
 ---
 

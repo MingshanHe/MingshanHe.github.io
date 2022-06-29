@@ -1,8 +1,8 @@
 ---
 title: MuJoCo
 date: 2022-05-23 22:29:35
-tags: mujoco simulation instruction
-categories: MuJoCo
+tags: [Reinforcement Learning,Simulation]
+categories: Simulation
 ---
 
 # MuJoCo Instruction
