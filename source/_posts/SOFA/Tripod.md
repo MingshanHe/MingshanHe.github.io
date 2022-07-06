@@ -878,4 +878,9 @@ def createScene(rootNode):
                                    nodeToParse=tripod["RigidifiedStructure.DeformableParts.MechanicalModel"].getLinkPath())
 ```
 
+#### Exploring the scene
+
+* Once the scene animated, observe how the ball follows the movement of the silicone piece: as load as the ball sits into the small hole at the center of the silicone piece, it follows its movements. However, if the silicone piece is sloped enough, the ball falls under gravity force.
+* Thanks to the collision model between the top of the servomotors and the silicone piece, the silicone piece can no longer go through the servomotors.
+
 <img src="/image/SOFA/Tripod/2.gif" alt="1" style="zoom:100%;" />
