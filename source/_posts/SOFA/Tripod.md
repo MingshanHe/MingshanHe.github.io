@@ -765,3 +765,117 @@ When the scene is loaded and animated, it can be interesting to display the exec
 The most time consuming process - and thus the one requiring the greatest computing resources - is related to the computation of the Mechanical behavior, with more than half of the resources allocated to the *solving* tools. This highlights the complexity of the system and explains why the mesh cannot be endlessly tightened: the simulation would take a great amount of time to compute, too much for any real time application.
 
 <img src="/image/SOFA/Tripod/6.png" style="zoom:80%;" />
+
+
+
+### STEP 6: Adding collision models
+
+**At the end of this step, you will be able to:**
+
+* Add a rigid object that interacts with the robot thanks to the collision model
+* Add a collision model so that the collision model can no longer go through the servomotors.
+
+By default SOFA doesn't handle collision as they are so expensive to compute. To activate collisions you need to define specifically the geometries for which collisions  are checked and how they are handled. In this step, we are adding a rigid Sphere object falling on the robot, as well as the description of the contact management between the ball and the silicone piece. (This scene is defined for the simulation only, the interaction with the real robot has not been added.)
+
+A new controller, called `JumpController`, is also added to change rapidly the servo motors angles so the robot can play with the falling ball.
+
+The same keystrokes as in the previous steps are used, adding two new intermediate positions for a more dynamical response.
+
+*  Keystroke to move the servomotors from their default position to the initial one of the real robot: `Ctrl` + `A`
+* Keystroke to position the servomotors to an intermediate position: `Ctrl` + `Q`
+* keystroke to position the servomotors to a high angular position: `Ctrl` + `Z`
+
+```python
+import Sofa
+from splib3.constants import Key
+from stlib3.physics.rigid import Sphere
+from stlib3.scene.contactheader import ContactHeader
+from stlib3.scene import Scene
+from tripod import Tripod
+from tripodcontroller import TripodController
+
+
+class JumpController(Sofa.Core.Controller):
+    """This controller has two roles:
+       - if the user presses up/left/right/down/plus/minus, the servomotor angle
+         is changed.
+       - if the user presses A, an animation is started to move the servomotor to the initial position
+         of the real robot.
+    """
+    def __init__(self, *args, **kwargs):
+        # These are needed (and the normal way to override from a python class)
+        Sofa.Core.Controller.__init__(self, *args, **kwargs)
+        self.stepsize = 0.1
+        self.actuators = kwargs["actuators"]
+
+    def onKeypressedEvent(self, event):
+        key = event['key']
+        self.animateTripod(key)
+
+    def animateTripod(self, key):
+        apos = None
+        if key == Key.Z:
+            apos = -3.14/4
+        if key == Key.Q:
+            apos = -3.14/3
+
+        if apos is not None:
+            for actuator in self.actuators:
+                actuator.ServoMotor.angleIn = apos
+
+
+def createScene(rootNode):
+
+    scene = Scene(rootNode, gravity=[0., -9810., 0.], dt=0.01, plugins=["SofaSparseSolver", 'SofaBoundaryCondition', 'SofaDeformable', 'SofaEngine', 'SofaGeneralRigid', 'SofaMiscMapping', 'SofaGraphComponent', 'SofaGeneralAnimationLoop', 'SofaGeneralEngine'], iterative=False)
+
+    ContactHeader(rootNode, alarmDistance=15, contactDistance=0.5, frictionCoef=0.2)
+
+    # Adding contact handling
+    scene.addMainHeader()
+    scene.addObject('DefaultVisualManagerLoop')
+    scene.Simulation.addObject('GenericConstraintCorrection')
+    scene.VisualStyle.displayFlags = "showCollisionModels"
+    scene.Simulation.TimeIntegrationSchema.rayleighStiffness = 0.005
+    scene.Settings.mouseButton.stiffness = 10
+
+    tripod = scene.Modelling.addChild(Tripod())
+    tripod.addCollision()
+
+
+    # The regular controller that is being used for the last 2 steps
+    controller = scene.addObject(TripodController(name="TripodController", actuators=[tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))
+    # You can set the animation from the python script by adding this call
+    controller.initTripod('A')
+
+    # The additionnal controller that add two predefined positions for the three servomotors
+    scene.addObject(JumpController(name="JumpController", actuators=[tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))
+
+    sphere = Sphere(scene.Modelling, translation=[0.0, 50.0, 0.0],
+                       uniformScale=13.,
+                       totalMass=0.032,
+                       isAStaticObject=True)
+    sphere.addObject('UncoupledConstraintCorrection')
+
+    scene.Simulation.addChild(sphere)
+    scene.Simulation.addChild(tripod)
+
+    # Temporary additions to have the system correctly built in SOFA
+    # Will no longer be required in SOFA v22.06
+    scene.Simulation.addObject('MechanicalMatrixMapper',
+                                 name="deformableAndFreeCenterCoupling",
+                                 template='Vec3,Rigid3',
+                                 object1=tripod["RigidifiedStructure.DeformableParts.dofs"].getLinkPath(),
+                                 object2=tripod["RigidifiedStructure.FreeCenter.dofs"].getLinkPath(),
+                                 nodeToParse=tripod["RigidifiedStructure.DeformableParts.MechanicalModel"].getLinkPath())
+
+    for i in range(3):
+        scene.Simulation.addObject('MechanicalMatrixMapper',
+                                   name="deformableAndArm{i}Coupling".format(i=i),
+                                   template='Vec1,Vec3',
+                                   object1=tripod["ActuatedArm" + str(i) + ".ServoMotor.Articulation.dofs"].getLinkPath(),
+                                   object2=tripod["RigidifiedStructure.DeformableParts.dofs"].getLinkPath(),
+                                   skipJ2tKJ2=True,
+                                   nodeToParse=tripod["RigidifiedStructure.DeformableParts.MechanicalModel"].getLinkPath())
+```
+
+<img src="/image/SOFA/Tripod/2.gif" alt="1" style="zoom:100%;" />
