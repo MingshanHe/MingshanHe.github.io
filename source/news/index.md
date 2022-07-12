@@ -1,5 +1,6 @@
 ---
-title: news
+title: 从前的日色变得慢;车，马，邮件都慢;一生只够爱一个人
+banner_img: /img/News.jpg
 date: 2022-04-05 21:12:03
 ---
 
