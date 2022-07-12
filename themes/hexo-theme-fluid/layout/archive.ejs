@@ -1,0 +1,10 @@
+<%
+page.layout = "archive"
+page.title = theme.archive.title || __('archive.title')
+page.subtitle = "给人以星火者，必心怀火炬"
+page.banner_img = theme.archive.banner_img
+page.banner_img_height = theme.archive.banner_img_height
+page.banner_mask_alpha = theme.archive.banner_mask_alpha
+%>
+
+<%- partial('_partials/archive-list.ejs', { params: { key: page.layout, postTotal: site.posts.length } }) %>
