@@ -351,6 +351,8 @@ navbar:
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "Travel", link: "/travel/", icon: "iconfont icon-map"}
     - { key: "News", link: "/news/", icon: "iconfont icon-comment"}
+    # - { key: "Gallery", link: "/gallery/", icon: "iconfont icon-comment"}
+    - { key: "Photos", link: "/photos/", icon: "iconfont icon-comment"}
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
@@ -957,6 +959,15 @@ tag:
   #   start_color: "#BBBBEE"
   #   end_color: "#337ab7"
 News:
+  banner_img: /img/News.png
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+
+Gallery:
+  banner_img: /img/News.png
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+Photos:
   banner_img: /img/News.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
