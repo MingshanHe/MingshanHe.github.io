@@ -118,8 +118,8 @@
           var data = res.list[j].arr;
           var liTmpl = "";
           for (var i = 0, len = data.link.length; i < len; i++) {
-            var minSrc = 'https://gitee.com/quanluo/blog-picture/raw/master/min_photos/' + data.link[i];
-            var src = 'https://gitee.com/quanluo/blog-picture/raw/master/photos/' + data.link[i];
+            var minSrc = 'https://raw.githubusercontent.com/MingshanHe/Blog-Photos/master/min_photos/' + data.link[i];
+            var src = 'https://raw.githubusercontent.com/MingshanHe/Blog-Photos/master/photos/' + data.link[i];
             // var minSrc = 'https://raw.githubusercontent.com/quanluo/Blog-Picture/master/min_photos/' + data.link[i];
             // var src = 'https://raw.githubusercontent.com/quanluo/Blog-Picture/master/photos/' + data.link[i];
             var type = data.type[i];
