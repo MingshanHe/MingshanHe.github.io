@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mingshan He">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ROS Control1. Overview  The row_control packages takes as input the joint state data from your robot’s actuator’s encoders and an input set point. It uses a generic control loop feedback mechanism, ty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ros_control">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/04/05/ROS/ros-control/index.html">
+<meta property="og:site_name" content="MingshanHe&#39;s HomePage">
+<meta property="og:description" content="ROS Control1. Overview  The row_control packages takes as input the joint state data from your robot’s actuator’s encoders and an input set point. It uses a generic control loop feedback mechanism, ty">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://mingshanhe.github.io/image/ROS/ros_control/1.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/ROS/ros_control/2.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/ROS/ros_control/3.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/ROS/ros_control/4.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/ROS/ros_control/5.png">
+<meta property="article:published_time" content="2022-04-05T13:09:39.000Z">
+<meta property="article:modified_time" content="2022-10-03T03:45:35.174Z">
+<meta property="article:author" content="Mingshan He">
+<meta property="article:tag" content="ROS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mingshanhe.github.io/image/ROS/ros_control/1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>ros_control - MingshanHe&#39;s HomePage</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mingshanhe.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MingshanHe&#39;s HomePage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/travel/">
+                <i class="iconfont icon-map"></i>
+                Travel
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/news/">
+                <i class="iconfont icon-comment"></i>
+                News
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-comment"></i>
+                Photos
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ros_control"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 22:09" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          90 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ros_control</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ROS-Control"><a href="#ROS-Control" class="headerlink" title="ROS Control"></a>ROS Control</h1><h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h2><p>  The <em>row_control</em> packages takes as input the joint state data from your robot’s actuator’s encoders and an input set point. It uses a generic control loop feedback mechanism, typically a PID controller, to control the output, typically effort, sent to your actuators.</p>
+<p><img src="/image/ROS/ros_control/1.png" srcset="/img/loading.gif" lazyload alt="1" style="zoom:80%;" /></p>
+<center>Fig 1. Diagram source in ros_control/documentation</center>
+
+<p>  <em>row_control</em> helps you writing controllers including real-time constraints, transmissions and joint limits. It provides tools for modeling the robot in software, represented by the robot hardware interface (<code>hardware_interface::RobotHW</code>), and comes with ready to use out of the box controllers， thanks to a common interface (<code>controller_interface::ControllerBase</code>) for different applications which then talk to third-party tools. The <strong>important aspects</strong> to highlight is that the hardware access to the robot is <strong>decoupled</strong>, so you don’t expose how you talk to your robot. This means that controllers and your robot hardware structure are decoupled so you can develop them <strong>independently</strong> and in <strong>isolation</strong> which enables you to share and mix and match controllers.</p>
+<p>  When you want to write your robot backend, there’s a possibility to leverage an out of the box simulation backend (<code>gazebo_ros_control</code> plugin). After you’ve tested your robot in simulation, and want to work on the real robot hardware, you will want to write your custom hardware backend for your robot.</p>
+<p>  There is already a set of existing controllers (<code>ros_controllers</code> meta package) that are robot agnostic, which should hopefully enable you to leverage some of those. However, if your application requires it, then there are tools (<code>controller_interface</code>) that help you also implement custom controllers. <code>ros control</code> also provides the <code>controller manager</code> for controlling the life cycle of your controllers.</p>
+<p>  Another <strong>important aspects</strong> is that <em>row_control</em> is real-time ready in the sense that if your application has real-time constraints then you can use <em>row_control</em> with it.</p>
+<p>  In summary, the goals of the <em>row_control</em> are to</p>
+<ul>
+<li>lower the entry barrier for exposing hardware to ROS.</li>
+<li>promote the reuse of control code in the same spirit that ROS has done for non-control code, at least non-real-time control code.</li>
+<li>provide a set of ready-to-use tools.</li>
+<li>have a real-time ready implementation.</li>
+</ul>
+<h2 id="2-Constituent"><a href="#2-Constituent" class="headerlink" title="2. Constituent"></a>2. Constituent</h2><p>  The <em>row_control</em> project consists of a github organization that’s called <em>ros controls</em>. You can find messages, information and action definitions, tools in there that help you writing real-time code (<code>realtime_tools</code>) in the context of control, hardware interfaces (<code>hardware_interface</code>) and the transmission_interface package to describe your robot and the <code>controller_manager</code>. The core framework is found in the <em>ros_control</em> package which is compatible with <code>ros_controllers</code> that provides a set of robot agnostic controllers.</p>
+<p>  The <em>ros_control</em> meta package is composed of the following individual packages:</p>
+<ul>
+<li><strong><em>control_toolbox</em></strong>: This package contains common modules (PID and Sine) that can be used by all controllers.</li>
+<li><strong><em>controller_interface</em></strong>: This package contains the interface base class for existing controllers and to develop new ones that will work with the ros control framework.</li>
+<li><strong><em>controller_manager</em></strong>: This package provides the infrastructure to load, unload, start, and stop controllers.</li>
+<li><strong><em>hardware_interface</em></strong>: This contains the base class for the hardware interfaces.</li>
+<li><strong><em>transmission_interface</em></strong>: This package contains the interface classes to model transmissions.</li>
+</ul>
+<h2 id="3-Details"><a href="#3-Details" class="headerlink" title="3. Details"></a>3. Details</h2><h3 id="3-1-Overview"><a href="#3-1-Overview" class="headerlink" title="3.1 Overview"></a>3.1 Overview</h3><p>  <em>ros control</em> is split into two parts. First there is the robot hardware abstraction, which is used to communicate with the hardware. It provides resources like joints and it also handles resource conflict. On the other hand, we have controllers. They communicate with the hardware through the hardware interface and they require resources that are provided by the hardware abstraction.</p>
+<p><img src="/image/ROS/ros_control/2.png" srcset="/img/loading.gif" lazyload alt="2" style="zoom:40%;" /></p>
+<center>Fig 2. Controllers vs Hardware abstraction</center>
+
+<h3 id="3-2-Hardware-Abstraction-and-Controllers"><a href="#3-2-Hardware-Abstraction-and-Controllers" class="headerlink" title="3.2 Hardware Abstraction and Controllers"></a>3.2 Hardware Abstraction and Controllers</h3><p>  This part will describe the hardware abstraction and the communication between  and with <em>ros_controllers</em>.</p>
+<p><img src="/image/ROS/ros_control/3.png" srcset="/img/loading.gif" lazyload alt="3" style="zoom:30%;" /></p>
+<center>Fig 3. Controllers and hardware interfaces</center>
+
+<p>  The hardware interface is a software representation of the robot and its abstract hardware. In ros control speak, we have the notion of resources, which are actuators, joints and sensors. Some resources are read-only, like <em>joint_states</em>, <em>IMU</em>, <em>force-torque sensors</em>, and so on, and some are read and write compatible, such as position, velocity, and effort joints. A bunch of hardware interfaces, where one is just a set of similar resources, represent a robot.</p>
+<p>  The robot hardware, represented in software, and the controllers are connected via <em>ros control</em>‘s interfaces, not to be confused with typical ROS interfaces like topics, actions or services. This means, we are just passing pointers around which is real-time safe. The interfaces of the robot hardware are used by controllers to connect and communicate with the hardware. At the leftmost part of the image, we see that controllers have their interfaces, which are typically ROS interfaces that are custom so your controller can expose whatever it wants.</p>
+<h3 id="3-3-Exclusive-Resource-Ownwership"><a href="#3-3-Exclusive-Resource-Ownwership" class="headerlink" title="3.3 Exclusive Resource Ownwership"></a>3.3 Exclusive Resource Ownwership</h3><p>  It can have multiple controllers accessing the same interface. By default thers’s a policy of exclusive resource ownership. In this case, it can either have one or the other but not both controllers running at the same time, which is enforced by <em>ros control</em>. If it want other policies, you can implement them as well.</p>
+<h3 id="3-4-Memory-Layout"><a href="#3-4-Memory-Layout" class="headerlink" title="3.4 Memory Layout"></a>3.4 Memory Layout</h3><p>  The following image depicts the memory layout of your raw data and you can see the memory regions where you actually read and write from and to hardware.</p>
+<p><img src="/image/ROS/ros_control/4.png" srcset="/img/loading.gif" lazyload alt="4" style="zoom:28%;" /></p>
+<center>Fig 4. Memory layouts for a joint state interface for reading states </center>
+
+<p>  A resource is nothing else than pointers to the raw data that adds some semantics to the data such as describing that it is a position or velocity, the name of the joint and that it belongs for example to a joint state interface.</p>
+<p>  As you see in the memory layout image above, joint state interfaces are used for reding joint state. If you have a resource that can revceive commands and at the same time provide feedback you can use the joint command interface. This interface is the base interface for other joint interfaces for position, velocity and effort. These interfaces provide semantic meaning which allow you to read the joint state and send semantically meaningful commands. The following is a simple code example.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;hardware_interface/robot_hw.h&gt;</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyRobot</span> : <span class="hljs-keyword">public</span> hardware_interface::RobotHW<br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MyRobot</span>(); <span class="hljs-comment">// Setup robot</span><br>    <span class="hljs-built_in">MyRobot</span>(ros::NodeHandle &amp;nh, urdf::Model *urdf_model = <span class="hljs-literal">NULL</span>);<br>    <br>    <span class="hljs-comment">// Talk to HW</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">write</span><span class="hljs-params">()</span></span>;<br>    <br>    <span class="hljs-comment">// Requirement only if needed ...</span><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">bool</span> <span class="hljs-title">checkForConflict</span><span class="hljs-params">(...)</span> <span class="hljs-type">const</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>  To implement your custom robot hardware interface you inherit from a class called <code>hardware_interface::RobotHW</code> that is part of <em>ros_control</em>. In the constructor you set up your robot, either implemented in code or using a robot description in the form of an urdf model. The later requires that you pass the urdf model to the constructor or load it from the parameter server.</p>
+<p>  After the robot setup we need to implement the <code>read()</code> and <code>write()</code> methods, which is robot specific and up to you to implement. The <code>read()</code> method is used to populate the raw data with your robot’s state and  <code>write()</code> is used to send out raw commands via CAN bus, Ethernet, Ethercat, serial port or whatever protocal your robot hardware uses.</p>
+<p>  In summary, the package called <em>hardware_interface</em> provides all the building blocks for constructing a robot hardware abstraction. It is the software representation of your robot and the idaea is to abstract hardware away wchich is done using resources, interfaces, that are sets of similar resources, and make up a robot, which is a set of interfaces. The hardware interface also handles resource conflicts and by default we have exclusive resource ownership.</p>
+<h3 id="3-5-Simulation"><a href="#3-5-Simulation" class="headerlink" title="3.5 Simulation"></a>3.5 Simulation</h3><p>  To simulate your robot, there is a package called <em>gazebo_ros_control</em> which is located outside the <em>ros control</em> organization repositories in <em>ros-simulation/gazebo_ros_pkgs</em>. It is a <em>Gazebo</em> plugin for <em>ros control</em>. There exists a default plugin, which populates all the joint interfaces from the URDF by parsing transmission specification and optionally joint limits, which will be describe later in the post. If you use the default plugin and want your robot to show up in your <em>Gazebo</em> simulator, the following is all you have to add to your urdf description, apat from the robot’s transmissions.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">gazebo</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;gazebo_ros_control&quot;</span> <span class="hljs-attr">filename</span>=<span class="hljs-string">&quot;libgazebo_ros_control.so&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">robotNamespace</span>&gt;</span>/my_robot<span class="hljs-tag">&lt;/<span class="hljs-name">robotNamespace</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">gazebo</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>  This makes it simple to test <em>ros control</em> because we don’t have to write any robot hardware interface code. Instead, we just need to setup some configuration files.</p>
+<h3 id="3-6-Controllers"><a href="#3-6-Controllers" class="headerlink" title="3.6 Controllers"></a>3.6 Controllers</h3><p>  As mentioned, a controller requires resources in the form of <em>ros control</em> hardware interfaces. Controllers use a plugin interface that implements the controller lifecycle. The lifecycle is a simple state machine with transitions between two states which are “stopped” and “running”. A controller has two computation units where one is real-time safe and the other is non real-time.</p>
+<p>  When you start one controller the following is what gets executed before the controller update:</p>
+<ul>
+<li><p>Resource conflict handling: by this time we know that resources exists but we check if the resource is already in use or available for your controller.</p>
+</li>
+<li><p>The next typical policy is to apply what’s called semantic zero: After the controller starts, you woluld for example hold the position, set the velocity to zero, activate gravity compensation or something else that makes sense in your use case.</p>
+<p>The last real-time safe operation is <em>update()</em> which is a real-time safe computation, if implemented accordingly. This means you have to take care the implementation of <em>update()</em> is actually real-time safe, or if you don’t have real-time constrains, that the implementation is deterministic. The <em>update()</em> mehod is executed periodically in the “running” state.</p>
+<p>Finally, the last part of computations that exist in controllers are non real-time operations which are executed asynchronously and take place in the callbacks of your controller’s ros interface.</p>
+<p>In summary, controllers are dynamically loadable <strong>plugins</strong> that have an interface which defines a very <strong>simple state machine</strong>. This interface clearly separates the operations that are <strong>non real-time safe</strong> from those that are required to be <strong>real-time safe</strong>. Finally, the computation can take place in the controller update, which in this case is both periodic and real-time safe, and we have compution in the <strong>ROS API callbacks</strong>, which is asynchronous and non real-time safe.</p>
+</li>
+</ul>
+<h3 id="3-7-Control-Loop"><a href="#3-7-Control-Loop" class="headerlink" title="3.7 Control Loop"></a>3.7 Control Loop</h3><p>  Typically, you first read the state from the hardware through the hardware interface, then use the controller manager to update hte controllers with the current hardware state, and finally you send the commands from the update step back out to the hardware.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ros/ros.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;my_robot/my_robot.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;controller_manager/controller_manager.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// Setup</span><br>    ros::<span class="hljs-built_in">init</span>(argc, argv, <span class="hljs-string">&quot;robot&quot;</span>);<br>    <br>    Robot::Robot robot;<br>    <span class="hljs-function">controller_manager::ControllerManager <span class="hljs-title">cm</span><span class="hljs-params">(&amp;robot)</span></span>;<br>    <br>    ros:<span class="hljs-function">AsyncSpinner <span class="hljs-title">spinner</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span></span>;<br>    spinner.<span class="hljs-built_in">start</span>();<br>    <br>    <span class="hljs-comment">// Control loop</span><br>    ros::Time prev_time = ros::Time::<span class="hljs-built_in">now</span>();<br>    <span class="hljs-function">ros::Rate <span class="hljs-title">rate</span><span class="hljs-params">(<span class="hljs-number">10.0</span>)</span></span>; <span class="hljs-comment">// 10 Hz rate</span><br>    <br>    <span class="hljs-keyword">while</span> (ros::<span class="hljs-built_in">ok</span>())<br>    &#123;<br>        <span class="hljs-type">const</span> ros::Time     time   = ros:Time::<span class="hljs-built_in">now</span>();<br>        <span class="hljs-type">const</span> ros::Duration period = time - prev_time;<br>        <br>        robot.<span class="hljs-built_in">read</span>();<br>        cm.<span class="hljs-built_in">update</span>(time, period);<br>        root.<span class="hljs-built_in">write</span>();<br>        <br>        rate.<span class="hljs-built_in">sleep</span>();<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="/image/ROS/ros_control/5.png" srcset="/img/loading.gif" lazyload alt="5" style="zoom:40%;" /></p>
+<center>Fig 5. The control and spinner threads</center>
+
+<p>  As we see in the image above, there are different kinds of callbacks that are serviced by this thread. First, those from the controller manager API and second, there’s the ROS API from your controllers which is custom and up to you. And finally there might be other callbacks registered which depends on your setup. It is important to mention, that we have the computations, which are non real-time in a separate thread. Having these non real-time computations separate means that we repect requirements from real-time applications but also deterministic execution.</p>
+<p>  To deal with concurrency and other things ther’s a package named <em>realtime_tools</em> which has tools that are usable from a hard real-time thread. It includes:</p>
+<ul>
+<li><strong>RealtimePublisher</strong>: publish to a ROS topic.</li>
+<li><strong>RealtimeBuffer</strong>: share resource with non real-time thread.</li>
+<li><strong>RealtimeClock</strong>: query estimates of the system clock.</li>
+<li>…</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ROS/" class="category-chain-item">ROS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ROS/">#ROS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ros_control</div>
+      <div>http://mingshanhe.github.io/2022/04/05/ROS/ros-control/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Mingshan He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/05/Robotics/Camera-Calibration/" title="Camera_Calibration">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Camera_Calibration</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/05/ROS/CANOpen/" title="CANOpen">
+                        <span class="hidden-mobile">CANOpen</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'mshe-blog',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Mingshan HE</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

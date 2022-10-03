@@ -1,0 +1,876 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mingshan He">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Camera CalibrationGoal types of distortion caused by cameras how to find the intrinsic and extrinsic properties of a camera how to undistort images based off these properties  Basics  Some pinhole cam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Camera_Calibration">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/04/05/Robotics/Camera-Calibration/index.html">
+<meta property="og:site_name" content="MingshanHe&#39;s HomePage">
+<meta property="og:description" content="Camera CalibrationGoal types of distortion caused by cameras how to find the intrinsic and extrinsic properties of a camera how to undistort images based off these properties  Basics  Some pinhole cam">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://mingshanhe.github.io/image/Robotics/Camera_Calibration/1.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/Robotics/Camera_Calibration/2.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/Robotics/Camera_Calibration/3.png">
+<meta property="article:published_time" content="2022-04-05T13:12:27.000Z">
+<meta property="article:modified_time" content="2022-10-03T03:45:35.175Z">
+<meta property="article:author" content="Mingshan He">
+<meta property="article:tag" content="Hardware">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Robotics">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mingshanhe.github.io/image/Robotics/Camera_Calibration/1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Camera_Calibration - MingshanHe&#39;s HomePage</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mingshanhe.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MingshanHe&#39;s HomePage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/travel/">
+                <i class="iconfont icon-map"></i>
+                Travel
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/news/">
+                <i class="iconfont icon-comment"></i>
+                News
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-comment"></i>
+                Photos
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Camera_Calibration"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 22:12" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          100 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Camera_Calibration</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Camera-Calibration"><a href="#Camera-Calibration" class="headerlink" title="Camera Calibration"></a>Camera Calibration</h1><h2 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h2><ul>
+<li>types of distortion caused by cameras</li>
+<li>how to find the intrinsic and extrinsic properties of a camera</li>
+<li>how to undistort images based off these properties</li>
+</ul>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><p>  Some pinhole cameras introduce significant distortion to images. Two major kinds of distortion are radial distortion and tangetial distortion.</p>
+<ul>
+<li><p>Radial distortion causes straight lines to appear curved. Radial distortion becomes larger the farther points are from the center of the image. Radial distortion can be represented as follows:</p>
+<script type="math/tex; mode=display">
+x_{distorted}=x(1+k_1r^2+k_2r^4+k_3r^6)\\
+y_{distorted}=y(1+k_1r^2+k_2r^4+k_3r^6)</script></li>
+<li></li>
+<li><p>Tangetial distortion occurs because the image-taking lense is <strong>not aligned perfectly parallel</strong> to the imaging plane.</p>
+<script type="math/tex; mode=display">
+x_{distorted}=x+[2p_1xy+p_2(r^2+2x^2)]\\
+y_{distorted}=y+[p_1(r^2+2y^2)+2p_2xy]</script><p>It’s need to find five parameters, known as distortion coefficients give by <strong><em>Distortion coefficients</em></strong>:$k_1$  $k_2$  $p_1$  $p_2$  $k_3$ .</p>
+<p>In addition to this, it need to some other information, like the intrinsic and extrinsic parameters of the camera. <strong><em>Intrinsic parameters</em></strong> are specific to a camera. They include information like focal length $(f_x,f_y)$ and optical centers $(c_x, c_y)$. The focal length and optical centers can be used to create a camera matrix, which can be used to remove distortion due to the lenses of a specific camera. The camera matrix is unique to a specific camera, so once calculated, it can be reused on other images taken by the same camera. The matrix is represented as:</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+camera\space matrix=\begin{bmatrix}f_x&0&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}</script><p>  <strong><em>Extrinsic parameters</em></strong> corresponds to rotation and translation vectors which translates a coordinates of a 3D point to a coordinate system.</p>
+<h2 id="More-Details"><a href="#More-Details" class="headerlink" title="More Details"></a>More Details</h2><p>  Let’s simplify the process of potographing and the model of camera, which illustrated as follows,</p>
+<p><img src="/image/Robotics/Camera_Calibration/1.png" srcset="/img/loading.gif" lazyload alt="3" style="zoom:100%;" /></p>
+<center>Figure 1. Simple Model of Camera</center>
+
+<p>  Firstly, the coordinate of camera has been established by the center of light as the original point $O$, and the direct of $X$ and $Y$ are the two directions of CCD pixel arrangement. The direct of $Z$ could be corrected by the right hand coordinate. Secondly, the coordinate of image established as two dimensions as the directions $U$ and $V$. </p>
+<p><img src="/image/Robotics/Camera_Calibration/2.png" srcset="/img/loading.gif" lazyload alt="3" style="zoom:100%;" /></p>
+<center>Figure 2. Mathmetic Model of Camera</center>
+
+<ul>
+<li><p>From the center of light $O$, the plane of image at $Z = f $, where $f$ is the physical focal length (unit: mm).</p>
+</li>
+<li><p>Point Q is in the space, which location is $Q(X,Y,Z)$ in the coordinate of camera.</p>
+</li>
+<li><p>Point P is in the plane of image, and it has two same description, like position $(x,y,f)$ in the coordinate of image plane and position $(u<em>{ccd},v</em>{ccd})$ in coordinate of pixel arrangement.</p>
+</li>
+<li><p>$k$ and $l$ are the length of two directions of one CCD pixel (unit: mm/pixel), so the definition of focus length are $f_x=\frac{f}{k}$ and $f_y=\frac{f}{l}$ (Unit: pixel).</p>
+</li>
+<li><p>If the offsets from the original point of the coordinate to the light axial are $c_x$ and $c_y$ (unit: pixel)</p>
+</li>
+<li><p>So the map between the position in pixel $(u<em>{ccd},v</em>{ccd})$ and the position in three dimensional space $(X, Y, Z)$ Is:</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}u_{ccd}*Z\\v_{ccd}*Z\\Z\end{bmatrix}=\begin{bmatrix}f_x&0&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}\begin{bmatrix}X\\Y\\Z\end{bmatrix}</script></li>
+</ul>
+<h2 id="The-Purpose-of-Camera-Calibration"><a href="#The-Purpose-of-Camera-Calibration" class="headerlink" title="The Purpose of Camera Calibration"></a>The Purpose of Camera Calibration</h2><p>  The purpose of the calibration process is to find the matrix $K\in\R^3$, the rotation matrix $R\in\R^3$, and the translation vector $t\in\R^3%=$ using a set of known 3D points $(X_w, Y_w, Z_w)$ and their corresponding image coordinates $(u,v)$. When we get the values of intrinsic and extrinsic parameters the camera is said to be calibrated.</p>
+<p>  In summary, a camera calibration algorithms has the following inputs and outputs</p>
+<ol>
+<li><strong>Inputs</strong>: A collection of images with points whose 2D image coordinates and 3D world coordinates are known.</li>
+<li><strong>Outputs</strong>: The camera intrinsic matrix, the rotation and translation of each image.</li>
+</ol>
+<h2 id="Different-Types-of-Camera-Calibration-Methods"><a href="#Different-Types-of-Camera-Calibration-Methods" class="headerlink" title="Different Types of Camera Calibration Methods"></a>Different Types of Camera Calibration Methods</h2><ul>
+<li>Calibration pattern, Geometric clues, Deep Learning based</li>
+</ul>
+<h2 id="Camera-Calibration-Step-by-Step"><a href="#Camera-Calibration-Step-by-Step" class="headerlink" title="Camera Calibration Step by Step"></a>Camera Calibration Step by Step</h2><p><img src="/image/Robotics/Camera_Calibration/3.png" srcset="/img/loading.gif" lazyload alt="3" style="zoom:65%;" /></p>
+<center>Figure 3. Overview of Camera Calibration</center>
+
+<h3 id="Step-1-Define-real-world-coordinates-with-checkerboard-pattern"><a href="#Step-1-Define-real-world-coordinates-with-checkerboard-pattern" class="headerlink" title="Step 1: Define real world coordinates with checkerboard pattern"></a>Step 1: Define real world coordinates with checkerboard pattern</h3><p>  <strong>World Coordinate System</strong>: In the calibration, the world coordinates are fixed by this checkerboard pattern that is attached to a wall in the room. Any corner of the above board can be chosen to the origin of the world coordinate system. The $X<em>{w}$ and $Y</em>{w}$ axes are along the wall, and the $Z<em>{w}$ axis is perpendicular to the wall. All points on the checkerboard are therefore on the XY plane (i.e. $Z</em>{w}=0$).</p>
+<p>  In the process of calibration we calculate the camera parameters by a set of know 3D points $(X<em>{w}, Y</em>{w}, Z_{w})$ and their corresponding pixel location $(u,v)$ in the image.</p>
+<p>  For the 3D points we photograph a checkerboard pattern with known dimensions at many different orientations. The world coordinate is attached to the checkerboard and since all the corner points lie on plane, we can arbitrarily choose $Z_{w}$ for every point to be 0.</p>
+<h4 id="Why-is-the-ckeckerboard-pattern-so-widely-used-in-calibration"><a href="#Why-is-the-ckeckerboard-pattern-so-widely-used-in-calibration" class="headerlink" title="Why is the ckeckerboard pattern so widely used in calibration?"></a>Why is the ckeckerboard pattern so widely used in calibration?</h4><p>  Checkerboard patterns are distinct and easy to detect in an image. Not only that, the corners of squares on the checkerboard are ideal for localizing them because they have sharp gradients in two directions.</p>
+<h3 id="Step-2-Capture-multiple-images-of-the-checkerboard-from-different-viewpoints"><a href="#Step-2-Capture-multiple-images-of-the-checkerboard-from-different-viewpoints" class="headerlink" title="Step 2: Capture multiple images of the checkerboard from different viewpoints"></a>Step 2: Capture multiple images of the checkerboard from different viewpoints</h3><p>  Next, we keep the checkerboard static and take multiple images of the checkerboard by moving the camera. Alternatively, we can also keep the camera constant and photograph the checkerboard pattern at different orientations.</p>
+<h3 id="Step-3-Find-2D-coordinates-of-checkerboard"><a href="#Step-3-Find-2D-coordinates-of-checkerboard" class="headerlink" title="Step 3: Find 2D coordinates of checkerboard"></a>Step 3: Find 2D coordinates of checkerboard</h3><p>  We now have multiple of images of the checkerboard. We also know the 3D location of points on the checkerboard in world coordinates. The last thing we need are the 2D pixel locations of these checkerboard corners in the images.</p>
+<h4 id="3-1-Find-checkerboard-corners"><a href="#3-1-Find-checkerboard-corners" class="headerlink" title="3.1 Find checkerboard corners"></a>3.1 Find checkerboard corners</h4><p>  OpenCV provides a builtin function called <code>findChessboardCorners</code> that looks for a checkerboard and returns the coordinates of the corners. Its usage is given by</p>
+<p><strong>C++</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">findChessboardCorners</span> <span class="hljs-params">(InputArray iamge, Size patternSize, OutputArray corners, <span class="hljs-type">int</span> flags = CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE)</span></span><br></code></pre></td></tr></table></figure>
+<p><strong>Python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">retval, corners = cv2.findCHessboardCorners (image, patternSize, flags)<br></code></pre></td></tr></table></figure>
+<p>Where, <code>image</code> is the source chessboard view (an 8-bit grayscale or color image), <code>patternSize</code> is the number of inner corners per a chessboard row and column ( <code>patternSize = cvSize (points_per_row, points_per_colum) = cvSize(columns, rows)</code>), <code>corners</code> is the output array of detected corners, and flags are the various operation flags.</p>
+<h4 id="3-2-Refine-checkerboard-corners"><a href="#3-2-Refine-checkerboard-corners" class="headerlink" title="3.2 Refine checkerboard corners"></a>3.2 Refine checkerboard corners</h4><p>  Good calibration is all about precision. To get good results, it is important to obtain the location of corners with sub-pixel level of accuracy. The function <code>cornerSubPix</code> takes in the original images, and the location of corners, and looks for the best corner location inside a small neighborhood of the original location.</p>
+<p><strong>C++</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cornerSubPix</span> <span class="hljs-params">(InputArray image, InputOutputArray corners, Size winSize, Size zeroZone, TermCriteria criteria)</span></span><br></code></pre></td></tr></table></figure>
+<p><strong>Python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">cv2.cornerSubPix (image, corners, winSize, zeroZone, criteria)<br></code></pre></td></tr></table></figure>
+<p>Where, <code>image</code> is the imput image, <code>corners</code> are the initial coordinates of the input corners and refined coordinates provided for output, <code>winSize</code> is the half of the side length of the search window, <code>zeroZone</code> is the half of the size of the dead region in the middle of the search zone owver which the summation in the formula below is not done, and <code>criteria</code> is for the termination of the iterative process of corner refinement.</p>
+<h3 id="Step-4-Calibrate-Camera"><a href="#Step-4-Calibrate-Camera" class="headerlink" title="Step 4: Calibrate Camera"></a>Step 4: Calibrate Camera</h3><p>The final step of calibration is to pass the 3D points in world coordinates and their 2D locations in all images to <code>calibrateCamera</code> method.</p>
+<p><strong>C++</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calibrateCamera</span> <span class="hljs-params">(InputArrayOfArrays objectPoints, InputArrayOfArrays iamgePoints, Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs, OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs)</span></span><br></code></pre></td></tr></table></figure>
+<p><strong>Python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">retval, cameraMatrix, distCoeffs, rvecs, tvecs = cv2.calibrateCamera (objectPoints, imagePionts, imageSize)<br></code></pre></td></tr></table></figure>
+<p>Where, <code>objectPoints</code> is a vector of vectors of 3D points, <code>ImagePoints</code> is a vector of vectors of the 2D image points, <code>ImageSize</code> is the size of the image, <code>cameraMatrix</code> is the intrinsic camera matrix, <code>distCoeffs</code> is the lens distortion coefficients, <code>rvecs</code> is the rotation specified as a 3$\times$1 vector, and <code>tvecs</code> is the 3$\times$1 vector.</p>
+<h2 id="Camera-Calibration-Code"><a href="#Camera-Calibration-Code" class="headerlink" title="Camera Calibration Code"></a>Camera Calibration Code</h2><h3 id="C-Code"><a href="#C-Code" class="headerlink" title="C++ Code"></a><strong>C++ Code</strong></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;opencv2/opencv.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;opencv2/calib3d/calib3d.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br> <br><span class="hljs-comment">// Defining the dimensions of checkerboard</span><br><span class="hljs-type">int</span> CHECKERBOARD[<span class="hljs-number">2</span>]&#123;<span class="hljs-number">6</span>,<span class="hljs-number">9</span>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-comment">// Creating vector to store vectors of 3D points for each checkerboard image</span><br>  std::vector&lt;std::vector&lt;cv::Point3f&gt;&gt; objpoints;<br> <br>  <span class="hljs-comment">// Creating vector to store vectors of 2D points for each checkerboard image</span><br>  std::vector&lt;std::vector&lt;cv::Point2f&gt;&gt; imgpoints;<br> <br>  <span class="hljs-comment">// Defining the world coordinates for 3D points</span><br>  std::vector&lt;cv::Point3f&gt; objp;<br><br>  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i&#123;<span class="hljs-number">0</span>&#125;; i&lt;CHECKERBOARD[<span class="hljs-number">1</span>]; i++)<br>  &#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j&#123;<span class="hljs-number">0</span>&#125;; j&lt;CHECKERBOARD[<span class="hljs-number">0</span>]; j++)<br>      objp.<span class="hljs-built_in">push_back</span>(cv::<span class="hljs-built_in">Point3f</span>(j,i,<span class="hljs-number">0</span>));<br>  &#125;<br> <br>  <span class="hljs-comment">// Extracting path of individual image stored in a given directory</span><br>  std::vector&lt;cv::String&gt; images;<br>  <br>  <span class="hljs-comment">// Path of the folder containing checkerboard images</span><br>  std::string path = <span class="hljs-string">&quot;./images/*.jpg&quot;</span>;<br> <br>  cv::<span class="hljs-built_in">glob</span>(path, images);<br><br>  cv::Mat frame, gray;<br><br>  <span class="hljs-comment">// vector to store the pixel coordinates of detected checker board corners</span><br>  std::vector&lt;cv::Point2f&gt; corner_pts;<br>  <span class="hljs-type">bool</span> success;<br><br>  <span class="hljs-comment">// Looping over all the images in the directory</span><br>  <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i&#123;<span class="hljs-number">0</span>&#125;; i&lt;images.<span class="hljs-built_in">size</span>(); i++)<br>  &#123;<br>    frame = cv::<span class="hljs-built_in">imread</span>(images[i]);<br>    cv::<span class="hljs-built_in">cvtColor</span>(frame,gray,cv::COLOR_BGR2GRAY);<br>    <span class="hljs-comment">// Finding checker board corners</span><br>    <span class="hljs-comment">// If desired number of corners are found in the image then success = true </span><br>    success = cv::<span class="hljs-built_in">findChessboardCorners</span>(gray, cv::<span class="hljs-built_in">Size</span>(CHECKERBOARD[<span class="hljs-number">0</span>], CHECKERBOARD[<span class="hljs-number">1</span>]), corner_pts, CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE);<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">     * If desired number of corner are detected,</span><br><span class="hljs-comment">     * we refine the pixel coordinates and display</span><br><span class="hljs-comment">     * them on the images of checker board</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">if</span>(success)<br>    &#123;<br>      <span class="hljs-function">cv::TermCriteria <span class="hljs-title">criteria</span><span class="hljs-params">(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, <span class="hljs-number">30</span>, <span class="hljs-number">0.001</span>)</span></span>;<br>      <span class="hljs-comment">// refining pixel coordinates for given 2d points.</span><br>      cv::<span class="hljs-built_in">cornerSubPix</span>(gray,corner_pts,cv::<span class="hljs-built_in">Size</span>(<span class="hljs-number">11</span>,<span class="hljs-number">11</span>), cv::<span class="hljs-built_in">Size</span>(<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>),criteria);<br>      <br>      <span class="hljs-comment">// Displaying the detected corner points on the checker board</span><br>      cv::<span class="hljs-built_in">drawChessboardCorners</span>(frame, cv::<span class="hljs-built_in">Size</span>(CHECKERBOARD[<span class="hljs-number">0</span>], CHECKERBOARD[<span class="hljs-number">1</span>]), corner_pts, success);<br>       <br>      objpoints.<span class="hljs-built_in">push_back</span>(objp);<br>      imgpoints.<span class="hljs-built_in">push_back</span>(corner_pts);<br>    &#125;<br>    cv::<span class="hljs-built_in">imshow</span>(<span class="hljs-string">&quot;Image&quot;</span>,frame);<br>    cv::<span class="hljs-built_in">waitKey</span>(<span class="hljs-number">0</span>);<br>  &#125;<br>  cv::<span class="hljs-built_in">destroyAllWindows</span>();<br>  cv::Mat cameraMatrix,distCoeffs,R,T;<br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">   * Performing camera calibration by</span><br><span class="hljs-comment">   * passing the value of known 3D points (objpoints)</span><br><span class="hljs-comment">   * and corresponding pixel coordinates of the</span><br><span class="hljs-comment">   * detected corners (imgpoints)</span><br><span class="hljs-comment">  */</span><br>  cv::<span class="hljs-built_in">calibrateCamera</span>(objpoints, imgpoints, cv::<span class="hljs-built_in">Size</span>(gray.rows,gray.cols), cameraMatrix, distCoeffs, R, T);<br><br>  std::cout &lt;&lt; <span class="hljs-string">&quot;cameraMatrix : &quot;</span> &lt;&lt; cameraMatrix &lt;&lt; std::endl;<br>  std::cout &lt;&lt; <span class="hljs-string">&quot;distCoeffs : &quot;</span> &lt;&lt; distCoeffs &lt;&lt; std::endl;<br>  std::cout &lt;&lt; <span class="hljs-string">&quot;Rotation vector : &quot;</span> &lt;&lt; R &lt;&lt; std::endl;<br>  std::cout &lt;&lt; <span class="hljs-string">&quot;Translation vector : &quot;</span> &lt;&lt; T &lt;&lt; std::endl;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Python-Code"><a href="#Python-Code" class="headerlink" title="Python Code"></a><strong>Python Code</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> glob<br><br><span class="hljs-comment"># Defining the dimensions of checkerboard</span><br>CHECKERBOARD = (<span class="hljs-number">6</span>,<span class="hljs-number">9</span>)<br>criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, <span class="hljs-number">30</span>, <span class="hljs-number">0.001</span>)<br><br><span class="hljs-comment"># Creating vector to store vectors of 3D points for each checkerboard image</span><br>objpoints = []<br><span class="hljs-comment"># Creating vector to store vectors of 2D points for each checkerboard image</span><br>imgpoints = [] <br><br><br><span class="hljs-comment"># Defining the world coordinates for 3D points</span><br>objp = np.zeros((<span class="hljs-number">1</span>, CHECKERBOARD[<span class="hljs-number">0</span>] * CHECKERBOARD[<span class="hljs-number">1</span>], <span class="hljs-number">3</span>), np.float32)<br>objp[<span class="hljs-number">0</span>,:,:<span class="hljs-number">2</span>] = np.mgrid[<span class="hljs-number">0</span>:CHECKERBOARD[<span class="hljs-number">0</span>], <span class="hljs-number">0</span>:CHECKERBOARD[<span class="hljs-number">1</span>]].T.reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>prev_img_shape = <span class="hljs-literal">None</span><br><br><span class="hljs-comment"># Extracting path of individual image stored in a given directory</span><br>images = glob.glob(<span class="hljs-string">&#x27;./images/*.jpg&#x27;</span>)<br><span class="hljs-keyword">for</span> fname <span class="hljs-keyword">in</span> images:<br>    img = cv2.imread(fname)<br>    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)<br>    <span class="hljs-comment"># Find the chess board corners</span><br>    <span class="hljs-comment"># If desired number of corners are found in the image then ret = true</span><br>    ret, corners = cv2.findChessboardCorners(gray, CHECKERBOARD, cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK + cv2.CALIB_CB_NORMALIZE_IMAGE)<br>    <br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    If desired number of corner are detected,</span><br><span class="hljs-string">    we refine the pixel coordinates and display </span><br><span class="hljs-string">    them on the images of checker board</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> ret == <span class="hljs-literal">True</span>:<br>        objpoints.append(objp)<br>        <span class="hljs-comment"># refining pixel coordinates for given 2d points.</span><br>        corners2 = cv2.cornerSubPix(gray, corners, (<span class="hljs-number">11</span>,<span class="hljs-number">11</span>),(-<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>), criteria)<br>        <br>        imgpoints.append(corners2)<br><br>        <span class="hljs-comment"># Draw and display the corners</span><br>        img = cv2.drawChessboardCorners(img, CHECKERBOARD, corners2, ret)<br>    <br>    cv2.imshow(<span class="hljs-string">&#x27;img&#x27;</span>,img)<br>    cv2.waitKey(<span class="hljs-number">0</span>)<br><br>cv2.destroyAllWindows()<br><br>h,w = img.shape[:<span class="hljs-number">2</span>]<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">Performing camera calibration by </span><br><span class="hljs-string">passing the value of known 3D points (objpoints)</span><br><span class="hljs-string">and corresponding pixel coordinates of the </span><br><span class="hljs-string">detected corners (imgpoints)</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-<span class="hljs-number">1</span>], <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Camera matrix : \n&quot;</span>)<br><span class="hljs-built_in">print</span>(mtx)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;dist : \n&quot;</span>)<br><span class="hljs-built_in">print</span>(dist)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rvecs : \n&quot;</span>)<br><span class="hljs-built_in">print</span>(rvecs)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;tvecs : \n&quot;</span>)<br><span class="hljs-built_in">print</span>(tvecs)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hardware/">#Hardware</a>
+      
+        <a href="/tags/Algorithm/">#Algorithm</a>
+      
+        <a href="/tags/Robotics/">#Robotics</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Camera_Calibration</div>
+      <div>http://mingshanhe.github.io/2022/04/05/Robotics/Camera-Calibration/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Mingshan He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/05/Robotics/Hand-eye-Calibration/" title="Hand-eye_Calibration">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hand-eye_Calibration</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/05/ROS/ros-control/" title="ros_control">
+                        <span class="hidden-mobile">ros_control</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'mshe-blog',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Mingshan HE</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

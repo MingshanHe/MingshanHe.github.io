@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mingshan He">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ros_canopen1. Overview  This packages provides support for CANopen devices within ROS. It can be divided into different parts:  CAN layer abstraction CANopen master with device&#x2F;object management Profi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CANOpen">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/04/05/ROS/CANOpen/index.html">
+<meta property="og:site_name" content="MingshanHe&#39;s HomePage">
+<meta property="og:description" content="ros_canopen1. Overview  This packages provides support for CANopen devices within ROS. It can be divided into different parts:  CAN layer abstraction CANopen master with device&#x2F;object management Profi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://mingshanhe.github.io/image/1.png">
+<meta property="article:published_time" content="2022-04-05T12:59:08.000Z">
+<meta property="article:modified_time" content="2022-10-03T03:45:35.174Z">
+<meta property="article:author" content="Mingshan He">
+<meta property="article:tag" content="Hardware">
+<meta property="article:tag" content="ROS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mingshanhe.github.io/image/1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>CANOpen - MingshanHe&#39;s HomePage</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mingshanhe.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MingshanHe&#39;s HomePage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/travel/">
+                <i class="iconfont icon-map"></i>
+                Travel
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/news/">
+                <i class="iconfont icon-comment"></i>
+                News
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-comment"></i>
+                Photos
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CANOpen"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 21:59" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CANOpen</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ros-canopen"><a href="#ros-canopen" class="headerlink" title="ros_canopen"></a>ros_canopen</h1><h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h2><p>  This packages provides support for <em>CANopen</em> devices within ROS. It can be divided into different parts:</p>
+<ul>
+<li><em>CAN</em> layer abstraction</li>
+<li><em>CANopen</em> master with device/object management</li>
+<li>Profile-specific support, currently only for 402 profile (drives and motion control)</li>
+<li>ROS interfaces, motion control through <em>ros_control</em><!--  -->
+</li>
+</ul>
+<p><img src="/image/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h2 id="2-socketcan-interface"><a href="#2-socketcan-interface" class="headerlink" title="2. socketcan_interface"></a>2. <em>socketcan_interface</em></h2><h3 id="1-Overview-1"><a href="#1-Overview-1" class="headerlink" title="1) Overview"></a>1) Overview</h3><p>  This packages provides a generic CAN interface class and a SocketCAN-based driver implementation. The interface is divided into three parts:</p>
+<ul>
+<li><p><em>StateInterface</em>: Listener interface for the state of the driver</p>
+</li>
+<li><p><em>CommInterface</em>: Listener interface for receiving messages and send functionality</p>
+</li>
+<li><p><em>DriverInterface</em>: inherits from both and adds management interfaces</p>
+<p>The listeners are based on <code>std::function</code> (since melodic) and use RAII-pointers. The SocketCAN driver is based on <em>Boost.Asio</em> and provides concurrent access to SocketCAN interfaces. It is the default CAN implementation used throughout ros_canopen and requires linux kerner 2.6.25 or newer.</p>
+</li>
+</ul>
+<h3 id="2-Tested-Drivers-and-Devices"><a href="#2-Tested-Drivers-and-Devices" class="headerlink" title="2) Tested Drivers and Devices"></a>2) Tested Drivers and Devices</h3><p>  The SocketCAN driver interface should work with all SocketCAN network interfaces. The linux mainline kernel already includes some device drivers, other devices are supported by vendor-provided implementations.</p>
+<h3 id="3-Preparation"><a href="#3-Preparation" class="headerlink" title="3) Preparation"></a>3) Preparation</h3><h4 id="3-1-Load-driver"><a href="#3-1-Load-driver" class="headerlink" title="3.1 Load driver"></a>3.1 Load driver</h4><p>  Set-up udev rules or type manually:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ sudo modprobe peak_usb <span class="hljs-comment"># kernel driver, since 3.11</span><br></code></pre></td></tr></table></figure>
+<p>  <code>modprobe</code> is a linux program originally written by Rusty Russell and used to add a loadable kernel module to the linux kernel or to remove a loadable kernel module form the kernel.</p>
+<h4 id="3-2-Initialize-NIC-Network-Interface-Card"><a href="#3-2-Initialize-NIC-Network-Interface-Card" class="headerlink" title="3.2 Initialize NIC (Network Interface Card)"></a>3.2 Initialize NIC (Network Interface Card)</h4><p>  Bring-up CAN NIC (Linux kernel drivers):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ sudo ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> can0 up <span class="hljs-built_in">type</span> can bitrate 500000 <span class="hljs-comment"># adjust bitrate as needed</span><br></code></pre></td></tr></table></figure>
+<p>  Further options are available, please consult SocketCAN Readme, section 6.5.</p>
+<h3 id="4-Tools-and-Debugging"><a href="#4-Tools-and-Debugging" class="headerlink" title="4) Tools and Debugging"></a>4) Tools and Debugging</h3><h4 id="4-1-socketcan-dump"><a href="#4-1-socketcan-dump" class="headerlink" title="4.1 socketcan_dump"></a>4.1 socketcan_dump</h4><p>  Simple test program provided with the package, just prints the received messages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ rosrun socetcan_interface socketcan_dump can0<br></code></pre></td></tr></table></figure>
+<h4 id="4-2-Netlink-status"><a href="#4-2-Netlink-status" class="headerlink" title="4.2 Netlink status"></a>4.2 Netlink status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ip -details -statistics <span class="hljs-built_in">link</span> show can0<br></code></pre></td></tr></table></figure>
+<h4 id="4-3-can-utils"><a href="#4-3-can-utils" class="headerlink" title="4.3 can-utils"></a>4.3 can-utils</h4><p>Feature-rich tool suite for SocketCAN, install with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ sudo apt-get install can-utils<br></code></pre></td></tr></table></figure>
+<ul>
+<li>candump</li>
+<li>cansend</li>
+<li>canbusload</li>
+</ul>
+<h2 id="3-socketcan-bridge"><a href="#3-socketcan-bridge" class="headerlink" title="3. socketcan_bridge"></a>3. <em>socketcan_bridge</em></h2><h3 id="1-Overview-2"><a href="#1-Overview-2" class="headerlink" title="1) Overview"></a>1) Overview</h3><p>  The packages provides functionality to expose CAN frames form <em>SocketCAN</em> to a ROS topic. Internally it uses the <em>socketcan_interface</em> form the <em>ros_canopen</em> package, as such it is capable of dealing with both normal and extended CAN frames.</p>
+<h2 id="4-canopen-master"><a href="#4-canopen-master" class="headerlink" title="4. canopen_master"></a>4. <em>canopen_master</em></h2><h3 id="1-Overview-3"><a href="#1-Overview-3" class="headerlink" title="1) Overview"></a>1) Overview</h3><p>  This packages contains a master implementation of the CANopen DS 301 protocol. It provides libraries to connect to CANopen devices and access their data objects via high-level interfaces.</p>
+<h3 id="2-Features"><a href="#2-Features" class="headerlink" title="2) Features"></a>2) Features</h3><p>  The implementation provides support for many CANopen interfaces and services:</p>
+<ul>
+<li>High-level object dictionary for all simple types, except booleans (1bit)</li>
+<li>EDS/DCF parser</li>
+<li>Automatic configuration based on communication objects</li>
+<li>Full SDO client implementation</li>
+<li>PDO subscriber/publisher for different transmission types</li>
+<li>EMCY handling with diagnostics interfaces</li>
+<li>NMT with heartbeat (client), without node-guarding</li>
+<li>Plug-in system for bus synchronization and the SYNC objects</li>
+</ul>
+<h3 id="3-CANopen-basics"><a href="#3-CANopen-basics" class="headerlink" title="3) CANopen basics"></a>3) <em>CANopen</em> basics</h3><h4 id="3-1-NodeID"><a href="#3-1-NodeID" class="headerlink" title="3.1 NodeID"></a>3.1 NodeID</h4><p>  Each device is assigned a node ID in range between 1 and 127. It determines the CAN frame the device and listens to, so it must be unique (perbus).</p>
+<h4 id="3-2-Object-dictionary"><a href="#3-2-Object-dictionary" class="headerlink" title="3.2 Object dictionary"></a>3.2 Object dictionary</h4><p>  All data is stored as objects, which are addressed with 4-digit hexadecimal numbers and an optional hexadecimal 8-bit sub index. The object types range from simple integer values to complex structs and arrays.</p>
+<p>  The object dictionary contains all objects (data &amp; types) and is structured based on the index, notable ranges are:</p>
+<ul>
+<li>1000 - 1FFF: Communication objects</li>
+<li>2000 - 5FFF: Manufacturer-specific objects</li>
+<li>6000 - 6FFF: Profile-specific objects (for first logical device)</li>
+</ul>
+<h4 id="3-3-Network-management-NMT"><a href="#3-3-Network-management-NMT" class="headerlink" title="3.3 Network management (NMT)"></a>3.3 Network management (NMT)</h4><p>  The network management includes a state machine for the overall status (pre-operational, operation, stopped) of the devices and service to control the states. Further it can be used to monitor the devices.</p>
+<h4 id="3-4-Service-data-objects-SDOs"><a href="#3-4-Service-data-objects-SDOs" class="headerlink" title="3.4 Service data objects (SDOs)"></a>3.4 Service data objects (SDOs)</h4><p>  Client/Server interface for reading and writing objects. SDO cannot be used with stopped devices.</p>
+<h4 id="3-5-Process-data-objects-PDOs"><a href="#3-5-Process-data-objects-PDOs" class="headerlink" title="3.5 Process data objects (PDOs)"></a>3.5 Process data objects (PDOs)</h4><p>  Publisher/Subscriber interface for reading and writing objects. Limited to 8 bytes per PDO, can contain multiple (simple) objects. Not all objects can be mapped to PDOs, this depends on the object and the device. PDOs are available in the operational state only.</p>
+<h4 id="3-6-Synchronization-object-SYNC"><a href="#3-6-Synchronization-object-SYNC" class="headerlink" title="3.6 Synchronization object (SYNC)"></a>3.6 Synchronization object (SYNC)</h4><p>  Periodically object sent by the master to synchronize the devices of one bus. PDOs might be set-up to be synchronous (recommended for <em>ros_canopen</em>).</p>
+<h4 id="3-7-Emergency-objects-EMCY"><a href="#3-7-Emergency-objects-EMCY" class="headerlink" title="3.7 Emergency objects (EMCY)"></a>3.7 Emergency objects (EMCY)</h4><p>  The nodes send these objects on critical errors. The standard lists a wide range of errors code, profile can have additional codes.</p>
+<h3 id="4-EDS-DCF-files"><a href="#4-EDS-DCF-files" class="headerlink" title="4) EDS/DCF files"></a>4) EDS/DCF files</h3><p>  The electronic data sheet and the device configuration files are standardized in CiA 306 DS. These are INI files that contain all objects descriptions. The new XML based XDD is currently not supported.</p>
+<p>  The EDS just contains the defaults, the DCF can include specific parameter values, however <em>canopen_master</em> treats both alike. All entries that have parameter values different from the defaults are written to the device at initialization. PDO objects have additional restrictions and are handled separately.</p>
+<p>  All manufactures should provide EDS or DCF files. The editor Vector CANeds 3.6 is available freely and plays well with wine. The 3.7 version is free as well, but bundled to the demos version of the big CAN software suites. However, it can extract the object dictionary from any CANopen device.</p>
+<h3 id="5-Master-plug-ins"><a href="#5-Master-plug-ins" class="headerlink" title="5) Master plug-ins"></a>5) Master plug-ins</h3><p>  Each CANopen bus shall have up to one master that is responsible for the synchronization. The driver has preliminary support for inter-process communication which should allow to run two driver instances on one bus. This implementation is currently not ready for production use however.</p>
+<h2 id="canopen-chain-node"><a href="#canopen-chain-node" class="headerlink" title="canopen_chain_node"></a><em>canopen_chain_node</em></h2><h3 id="1-Overview-4"><a href="#1-Overview-4" class="headerlink" title="1) Overview"></a>1) Overview</h3><p>  This packages contains the ROS interface for <em>socketcan_interface</em> and <em>canopen_master</em>. It can be used as a stand-alone ROS node, but as well as a base class for profile specific ROS interfaces, e.g. <em>canopen_motor_node</em>.</p>
+<p>  It manages a CANopen bus with one or more nodes, which are configures with CANopen EDS/DCF files. The ROS node runs a control loop with CANopen SYNC interval (or with an alternative update interval if the SYNC protocol is not used).</p>
+<h3 id="2-Configuration"><a href="#2-Configuration" class="headerlink" title="2) Configuration"></a>2) Configuration</h3><p>  The configuration can be split into different parts. First the bus has to be set-up, these settings are shared for all node. Then all must be configured with their CANopen and ROS interfaces. All parameters must be loaded into the nodes private namespace.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hardware/" class="category-chain-item">Hardware</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hardware/">#Hardware</a>
+      
+        <a href="/tags/ROS/">#ROS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CANOpen</div>
+      <div>http://mingshanhe.github.io/2022/04/05/ROS/CANOpen/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Mingshan He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/05/ROS/ros-control/" title="ros_control">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ros_control</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/05/ROS/pluginlib/" title="pluginlib">
+                        <span class="hidden-mobile">pluginlib</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'mshe-blog',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Mingshan HE</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

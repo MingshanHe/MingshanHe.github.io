@@ -1,0 +1,1030 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mingshan He">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="IntroductionThis post record how to use the SOFA and the SoftRobots plugin in order to simulate a soft robot. The first part is dedicated to the set up of the simulation environment and the modeling o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOFA Study Record (Tripod)">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/07/05/SOFA/Tripod/index.html">
+<meta property="og:site_name" content="MingshanHe&#39;s HomePage">
+<meta property="og:description" content="IntroductionThis post record how to use the SOFA and the SoftRobots plugin in order to simulate a soft robot. The first part is dedicated to the set up of the simulation environment and the modeling o">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/1.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/2.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/1.gif">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/3.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/4.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/5.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/6.png">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/2.gif">
+<meta property="og:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/3.gif">
+<meta property="article:published_time" content="2022-07-05T01:07:35.000Z">
+<meta property="article:modified_time" content="2022-10-03T03:45:35.176Z">
+<meta property="article:author" content="Mingshan He">
+<meta property="article:tag" content="Soft Robot">
+<meta property="article:tag" content="Hardware">
+<meta property="article:tag" content="Simulation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mingshanhe.github.io/image/SOFA/Tripod/1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>SOFA Study Record (Tripod) - MingshanHe&#39;s HomePage</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mingshanhe.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MingshanHe&#39;s HomePage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/travel/">
+                <i class="iconfont icon-map"></i>
+                Travel
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/news/">
+                <i class="iconfont icon-comment"></i>
+                News
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-comment"></i>
+                Photos
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SOFA Study Record (Tripod)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-05 10:07" pubdate>
+          July 5, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          59k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          492 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SOFA Study Record (Tripod)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This post record how to use the <strong>SOFA</strong> and the <strong>SoftRobots</strong> plugin in order to simulate a soft robot. The first part is dedicated to the set up of the simulation environment and the modeling of a virtual soft robot. Then, this post deals with the control of the real robot associated with the simulation.</p>
+<p>Once completed, the knowledge acquired from this post on the robot called “Tripod” can be applied to other soft robots, thanks to the high modularity of SOFA.</p>
+<p>Tutorial Requirements:</p>
+<ul>
+<li>You have installed <strong>SOFA</strong> with the <strong>STLIB</strong> and <strong>SoftRobots</strong> plugins.</li>
+<li>You have basic knowledge of the <strong>Python</strong> programming language.</li>
+<li>You have basic knowledge of scene modeling with <strong>SOFA</strong></li>
+</ul>
+<p>This soft robot considered here is actuated by three servomotors connected to a deformable silicone material. Each of them controls the deformation of one ‘arm’ of the silicone piece. By combining the effects of the three servomotors, it is possible to control the shape of the whole deformable part, which benefits from a theoretically infinite number of degrees of freedom.</p>
+<p>Reminder of SOFA’s GUI:</p>
+<p>Once a scene is loaded in SOFA, you can click on the [Animate] button in the SOFA GUI to start the simulation. Once you have clicked anywhere on the 3D window and with the robot: depending on what was programmed, you can control the simulation to manipulated the robot, or interact with it by pressing <code>Ctrl+Keys</code>. Moreover, please note that, in order to send data to the robot, it can be necessary to have administrator rights.</p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><h3 id="STEP-1-Building-the-Mechanical-Model-for-the-soft-part-amp-its-Visual-Model"><a href="#STEP-1-Building-the-Mechanical-Model-for-the-soft-part-amp-its-Visual-Model" class="headerlink" title="STEP 1: Building the Mechanical Model for the soft part &amp; its Visual Model"></a>STEP 1: Building the Mechanical Model for the soft part &amp; its Visual Model</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Build the mechanical model of the silicone piece of the robot</li>
+<li>Build the corresponding visual object</li>
+<li>Use meshes for the mechanical description of a soft object</li>
+</ul>
+<p><strong>Reminder of the First Steps tutorial:</strong></p>
+<ul>
+<li>All the objects simulated in a scene are described in nodes attached to the main node <code>rootNode</code>. For this robot, there will be different objects, including one for silicone piece (<code>ElasticBody</code>). Each of them is defined with the function <code>node.createChild()</code></li>
+<li>In order to automatically reload the scene when changes made, run the scene with the <code>-i</code> option.</li>
+<li>The properties of any object can be accessed by double-clicking on it in the <em>Graph</em> panel of the SOFA GUI.</li>
+<li>By right-clicking in the <em>Graph</em> panel, the code file can be opened (Open file in editor in the drop-down menu).</li>
+</ul>
+<p>The first two steps aim at modeling the deformable silicone piece of the robot. The objects composing it are added one by one with the function <code>node.createObject()</code>. A mechanical model of the piece is first created, called <code>ElasticBody</code>. As the silicone piece is soft and can be deformed through constraints, it is necessary to describe its entire volume (and not only its center of gravity as it is usually done for rigid objects). Based on its shape, it is discretized: here it is decomposed into tetrahedral elements, linking all the points - or nodes - of the volume. This discretization produces the following types of elements: tetrahedrons, triangles, lines, and points. These elements are listed into a <code>MechanicalObject</code> named <code>&quot;dofs&quot;</code>. The mesh file describing the discretization into tetrahedral element is <code>&quot;tropod_mid.stl&quot;</code>. The data provided by the meshes must be organized and stored into different data fields (one for the positions of the nodes, one for the triangular elements, …) before SOFA uses them for computation. This formatting is done by means of code blocks called loaders. The loader used here, <code>MeshSTLLoader</code> is designed for <code>STL</code> files.</p>
+<p>The mass distribution of the piece is implemented, as well as time integration scheme (implicit Euler method) and a solver (here the quick resolution method using the <code>LDL</code> matrix decomposition).</p>
+<p>Then, a Visual model of the piece is built, using the same mesh file as for the mechanical model. Because it was decided (for the sake of simplicity) to use the same meshing for both models, the loader is introduced in the rootNode.</p>
+<p>Finally, the two representations are linked together by a mapping, which allows to adapt the visual model to the deformations of the mechanical model of the soft piece. As the same mesh is used for both the mechanical  and the visual model, the mapping is simply mirroring the mechanical model to adapt the visual one. This is why we use an <code>IdentityMapping</code> here.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-comment"># Setting the parameters: Gravity, Assuming the length unit is in millimeters.</span><br>	scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>], plugins=[<span class="hljs-string">&#x27;SofaparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>], iterative=<span class="hljs-literal">False</span>)<br>	scene.addMainHeader()<br>	scene.addObject(<span class="hljs-string">&#x27;DefaultAnimationLoop&#x27;</span>)<br>	scene.addObject(<span class="hljs-string">&#x27;DefaultVisualmanagerLoop&#x27;</span>)<br>	<br>    <span class="hljs-comment"># Setting the parameters: Timestep in seconds</span><br>	rootNode.dt = <span class="hljs-number">0.01</span><br>	<br>    <span class="hljs-comment"># Graphic Modeling of the legends associated to the servomotors</span><br>	blueprint = Sofa.Core.Node(<span class="hljs-string">&#x27;Blueprints&#x27;</span>)<br>    blueprint.addObject(<span class="hljs-string">&#x27;MeshSTLLoader&#x27;</span>, name=<span class="hljs-string">&#x27;loader&#x27;</span>, filename=<span class="hljs-string">&#x27;data/mesh/blueprint.stl&#x27;</span>)<br>    blueprint.addObject(<span class="hljs-string">&#x27;OglModel&#x27;</span>, src=<span class="hljs-string">&#x27;@loader&#x27;</span>)<br>    scene.Settings.addChild(blueprint)<br>    <br>    <span class="hljs-comment"># Tool to load the mesh file of the silicone piece. It will be used for both the mechanical and the visual models.</span><br>    scene.Modelling.addObject(<span class="hljs-string">&#x27;MeshSTLLoader&#x27;</span>, name=<span class="hljs-string">&#x27;loader&#x27;</span>, filename=<span class="hljs-string">&#x27;data/mesh/tripod_mid.stl&#x27;</span>)<br>    <br>    <span class="hljs-comment"># Basic mechanical modeling of the silicone piece</span><br>    elasticbody = scene.Modelling.addChild(<span class="hljs-string">&#x27;MechanicalModel&#x27;</span>)<br>    elasticbody.addObject(<span class="hljs-string">&#x27;MechanicalObject&#x27;</span>, name=<span class="hljs-string">&#x27;dofs&#x27;</span>, <br>                          position=scene.Modelling.loader.position.getLinkPath(),<br>                          showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">5.0</span>,<br>                          rotation=[<span class="hljs-number">90.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>])<br>    elasticbody.addObject(<span class="hljs-string">&#x27;UniformMass&#x27;</span>)<br>    <br>    <span class="hljs-comment"># Visual object</span><br>    visual = scene.Modelling.addChild(<span class="hljs-string">&#x27;VisualModel&#x27;</span>)<br>    <span class="hljs-comment"># The mesh used for the Visual object is the same as the one for the MechanicalObject,</span><br>    <span class="hljs-comment">#and has been introduced in the rootNode</span><br>    visual.addObject(<span class="hljs-string">&#x27;OglModel&#x27;</span>, name=<span class="hljs-string">&#x27;renderer&#x27;</span>,<br>                     	src=scene.Modelling.loader.getLinkPath(),<br>                    	color=[<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.5</span>])<br>    <br>    <span class="hljs-comment"># A mapping applies the deformations computed on the mechanical model (the input parameter)</span><br>    <span class="hljs-comment"># to the visual model (the output parameter)</span><br>    visual.addObject(<span class="hljs-string">&#x27;IdentityMapping&#x27;</span>,<br>                    	<span class="hljs-built_in">input</span>=elasticbody.dofs.getLinkPath()<br>                    	output=visual.renderer.getLinkPath())<br>    scene.Simulation.addChild(scene.Modelling)<br></code></pre></td></tr></table></figure>
+<h4 id="Exploring-the-scene"><a href="#Exploring-the-scene" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h4><ul>
+<li>Try to orient the object differently on the 3D window by modifying its properties. Step 1 of the tutorial can be used as a guideline.</li>
+<li>In the <em>View</em> panel of SOFA GUI, by enabling the <em>Options</em>, you can see the discretization of the silicone piece into tetrahedral elements.</li>
+<li>Identify the white squares, each representing one point (one degree of freedom) of the <code>MechanicalObject</code>, on which the deformations are computed.</li>
+</ul>
+<h4 id="Remarks"><a href="#Remarks" class="headerlink" title="Remarks"></a>Remarks</h4><ul>
+<li>SOFA implements default length and time units, as well as a default gravity force. The user defines his own time and space scale by defining the constants of the model. Here, the gravity of our simulation is defined such as the length unit is in centimeters; and the time unit chosen is the second, which means that the time step is of one millisecond.</li>
+<li>There is a graphic modeling in the scene to display the legends associated with the servomotors, that are described in the file <code>blueprint.stl</code>.</li>
+</ul>
+<p><img src="/image/SOFA/Tripod/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h3 id="STEP-2-Modeling-the-possible-deformations-of-the-soft-material"><a href="#STEP-2-Modeling-the-possible-deformations-of-the-soft-material" class="headerlink" title="STEP 2: Modeling the possible deformations of the soft material"></a>STEP 2: Modeling the possible deformations of the soft material</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Build an elastic deformation model based on the Finite Element Method</li>
+<li>Understand what a <code>ForceField</code>is</li>
+</ul>
+<p>Unlike the rigid objects modeled in the First Steps tutorials, the silicone piece is deformable, and as such, requires additional components describing the behavior of the material when it is submitted to mechanical constraints.</p>
+<p>In order to implement the deformation behavior, the <code>MechanicalObject</code> must be connected to one or multiple <code>ForceFileds</code>. These <code>ForceFields</code> are in charge of computing the internal forces that will guide the deformation of the soft piece. Many different mechanical behaviors exist and it is important to understand the one that best approximates the behavior of the real object. In particular, it is important to know how soft or stiff the material is, as well as if it has an elastic behavior or a more complex one (hyperelastic, plastic, etc…). In our case, it has been chosen to implement a law of elastic deformation, modeled using the Finite Element Method(<code>FEM</code>). Its parameters are the Young modulus, and the Poisson ratio.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">elasticbody.createObject(<span class="hljs-string">&quot;TetrahedronFEMForceField&quot;</span>, youngModulus=<span class="hljs-number">250</span>, poissonRation=<span class="hljs-number">0.45</span>)<br></code></pre></td></tr></table></figure>
+<p> In SOFA, the <code>ElasticMaterialObject</code> from <code>stlib3.physics.deformable</code> provides a ready to use prefabricated object to easily add such an object in our scene. It defines the whole mechanical model of a deformable elastic object.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">ElasticMaterialObject.createPrefab(node, volumeMeshFileName, name, rotation, traslation, surfaceColor, poissonRatio, youngMoudulus, totalMass, solver)<br></code></pre></td></tr></table></figure>
+<p>However, before using this prefabricated object, let’s first build our own, based on a corotational Finite Element Method with a tetrahedral volumetric representation of the shape. The mesh <code>tripod_mid.gidmsh</code> used to store the shape of the deformable object was built with the GiD mesh generator. Starting from the model obtained in the last step, the parameters of the elastic deformation are added to the silicone piece with a <code>ForceField</code> component.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>],<br>                  plugins=[<span class="hljs-string">&#x27;SofaSparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>, <span class="hljs-string">&#x27;SofaSimpleFem&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>], iterative=<span class="hljs-literal">False</span>)<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.dt = <span class="hljs-number">0.01</span><br>        <br>    <span class="hljs-comment"># It is possible to visualize the &#x27;forcefields&#x27; by doing</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&#x27;showForceFields&#x27;</span><br>    <br>    <span class="hljs-comment"># Change the stiffness of the spring while interacting with the simulation</span><br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">1.0</span><br>    <br>    <span class="hljs-comment"># Graphic modelling of the legends associated to the servomotors</span><br>    blueprint = Sofa.Core.Node(<span class="hljs-string">&quot;Blueprints&quot;</span>)<br>    blueprint.addObject(<span class="hljs-string">&#x27;MeshSTLLoader&#x27;</span>, name=<span class="hljs-string">&#x27;loader&#x27;</span>, filename=<span class="hljs-string">&#x27;data/mesh/blueprint.stl&#x27;</span>)<br>    blueprint.addObject(<span class="hljs-string">&#x27;OglModel&#x27;</span>, src=<span class="hljs-string">&#x27;@loader&#x27;</span>)<br>    scene.Modelling.addChild(blueprint)<br><br>    <span class="hljs-comment"># To simulate an elastic object, we need:</span><br>    <span class="hljs-comment"># - a deformation law (here linear elasticity)</span><br>    <span class="hljs-comment"># - a solving method (here FEM)</span><br>    <span class="hljs-comment"># - as we are using FEM we need a space discretization (here tetrahedron)</span><br>    elasticbody = scene.Modelling.addChild(<span class="hljs-string">&#x27;ElasticBody&#x27;</span>)<br><br>    <span class="hljs-comment"># Specific loader for the mechanical model</span><br>    elasticbody.addObject(<span class="hljs-string">&#x27;GIDMeshLoader&#x27;</span>,<br>                          name=<span class="hljs-string">&#x27;loader&#x27;</span>,<br>                          filename=<span class="hljs-string">&#x27;data/mesh/tripod_low.gidmsh&#x27;</span>)<br>    elasticbody.addObject(<span class="hljs-string">&#x27;TetrahedronSetTopologyContainer&#x27;</span>,<br>                          src=<span class="hljs-string">&#x27;@loader&#x27;</span>,<br>                          name=<span class="hljs-string">&#x27;tetras&#x27;</span>)<br>                          <br>    mechanicalmodel = elasticbody.addChild(<span class="hljs-string">&quot;MechanicalModel&quot;</span>)                      <br>    mechanicalmodel.addObject(<span class="hljs-string">&#x27;MechanicalObject&#x27;</span>,<br>                          name=<span class="hljs-string">&#x27;dofs&#x27;</span>,<br>                          position=elasticbody.loader.position.getLinkPath(),<br>                          rotation=[<span class="hljs-number">90.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>],<br>                          showObject=<span class="hljs-literal">True</span>,<br>                          showObjectScale=<span class="hljs-number">5.0</span>)<br>    mechanicalmodel.addObject(<span class="hljs-string">&#x27;UniformMass&#x27;</span>, <br>                          name=<span class="hljs-string">&quot;mass&quot;</span>, <br>                          totalMass=<span class="hljs-number">0.032</span>)<br><br>    <span class="hljs-comment"># ForceField components</span><br>    mechanicalmodel.addObject(<span class="hljs-string">&#x27;TetrahedronFEMForceField&#x27;</span>,<br>                          name=<span class="hljs-string">&quot;linearElasticBehavior&quot;</span>,<br>                          youngModulus=<span class="hljs-number">250</span>,<br>                          poissonRatio=<span class="hljs-number">0.45</span>)<br>    <br>    <span class="hljs-comment"># Visual model</span><br>    visual = Sofa.Core.Node(<span class="hljs-string">&quot;VisualModel&quot;</span>)<br>    <span class="hljs-comment"># Specific loader for the visual model</span><br>    visual.addObject(<span class="hljs-string">&#x27;MeshSTLLoader&#x27;</span>,<br>                     name=<span class="hljs-string">&#x27;loader&#x27;</span>,<br>                     filename=<span class="hljs-string">&#x27;data/mesh/tripod_mid.stl&#x27;</span>,<br>                     rotation=[<span class="hljs-number">90</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>])<br>    visual.addObject(<span class="hljs-string">&#x27;OglModel&#x27;</span>,<br>                     src=visual.loader.getLinkPath(),<br>                     name=<span class="hljs-string">&#x27;renderer&#x27;</span>,<br>                     color=[<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.5</span>])<br>    scene.Modelling.ElasticBody.addChild(visual)<br><br>    visual.addObject(<span class="hljs-string">&#x27;BarycentricMapping&#x27;</span>,<br>                     <span class="hljs-built_in">input</span>=mechanicalmodel.dofs.getLinkPath(),<br>                     output=visual.renderer.getLinkPath())<br>   <br>    scene.Simulation.addChild(elasticbody)                 <br></code></pre></td></tr></table></figure>
+<p><img src="/image/SOFA/Tripod/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h3 id="STEP-3-Adding-externals-constraints"><a href="#STEP-3-Adding-externals-constraints" class="headerlink" title="STEP 3 : Adding externals constraints"></a>STEP 3 : Adding externals constraints</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Add constraints on specific areas through the use of the Fixing Box ROI prefab</li>
+<li>Understand how the Fixing Box is implemented</li>
+<li>Build functions to bring together all the components of an object</li>
+</ul>
+<p>In this step, the prefab <code>FixingBox</code> is described, that allows to fix the position of some areas of a physical object in space. (ROI stands for Region Of Interest.) It will be used in this step to prevent the falling of the silicone piece under gravity, by constraining the position of its central part. The prefab object is called via the following function:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">FixingBox(ParentNode, ApplyTo, translation, scale)<br></code></pre></td></tr></table></figure>
+<p>In parallel, in order to lighten the code and ease the reading, the introduction of a function <code>ElasticBody(parent)</code> is proposed in this step, bringing together all the components of the silicone piece model. This function also uses the prefab <code>ElasticMaterialObject</code>, that implements the mechanical model of an elastic material (including a mesh loader, mass definition, time integration and solver tools, and the description of the Force Fileds).</p>
+<p>Such a function is defined at the beginning of the scene, and can be called as often as wished in the description of the scene (i.e. in the function <code>createScene(rootNode)</code>).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> stlib3.scene impor Scene<br><br><span class="hljs-keyword">from</span> fixingbox <span class="hljs-keyword">import</span> FixingBox<br><br><span class="hljs-keyword">from</span> elasticbody <span class="hljs-keyword">import</span> ElasticBody<br><br><span class="hljs-keyword">from</span> blueprint <span class="hljs-keyword">import</span> Blueprint<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>	scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>],<br>                  plugins=[<span class="hljs-string">&#x27;SofaSparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>, <span class="hljs-string">&#x27;SofaSimpleFem&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>],<br>                  iterative=<span class="hljs-literal">False</span>)<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&#x27;showBehavior&#x27;</span><br>    scene.dt = <span class="hljs-number">0.01</span><br>    <br>    scene.Modelling.addChild(Blueprint())<br>    <br>    scene.Modelling.addChild(ElasticBody(rotation=[<span class="hljs-number">90</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], color=[<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.5</span>]))<br>    <br>    box = FixingBox(scene.Modelling,<br>                    scene.Modelling.ElasticBody.MechanicalModel,<br>                    translation=[<span class="hljs-number">10.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>],<br>                    scale=[<span class="hljs-number">30.</span>, <span class="hljs-number">30.</span>, <span class="hljs-number">30.</span>])<br>    <br>    box.BoxROI.drawBoxes = <span class="hljs-literal">True</span><br>    <br>    scene.Simulation.addChild(scene.Modelling.ElasticBody)<br>    scene.Simulation.addChild(scene.Modelling.FixingBox)<br></code></pre></td></tr></table></figure>
+<h4 id="Exploring-the-scene-1"><a href="#Exploring-the-scene-1" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h4><ul>
+<li>The constraint implemented by the <code>FixingBox</code> prefab, named <code>RestShapeSpringForceField</code>, applies in fact elastic spring forces on the points of the mechanical object (the degrees of freedom) included in the <code>FixingBox</code>, to bring them back to their resting position whenever a modifications is computed (due to gravity forces for example). The stiffness of these ‘springs’ is set at a very hight level, which produces immediate correction of any change in position: the constrained points cannot move anymore.</li>
+<li>The box can be moved anywhere to constraint another area. For example, the translation <code>[30.0, 0.0, 30.0]</code> allows to constraint the end of the arm connected to servo 2.</li>
+<li>By clicking on the <code>[Animate]</code> button, ti can be observed that the <code>FixingBox</code> indeed prevents the silicone piece to fall under gravity force. The unconstrained tips of the piece, however, experience a light bending.</li>
+<li>It is possible to deform the silicone piece with the mouse, by pressing <code>Maj</code> while left-clicking on the piece, dragging the mouse. This can be used to observe how elastic the material is. <strong>By changing the value of the young modulus</strong>, you can compare the rendering of the simulated piece with the real one (for example, test values from 10 to 2000 for the Young modulus after having manipulated the silicone piece on the real robot abit, to get an idea of its elasticity).</li>
+</ul>
+<p><img src="/image/SOFA/Tripod/1.gif" srcset="/img/loading.gif" lazyload alt="1" style="zoom:100%;" /></p>
+<h3 id="STEP-4-Adding-actuators-and-connecting-to-deformable-part"><a href="#STEP-4-Adding-actuators-and-connecting-to-deformable-part" class="headerlink" title="STEP 4: Adding actuators and connecting to deformable part"></a>STEP 4: Adding actuators and connecting to deformable part</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Add prefabs for the actuators (STEP 4-1)</li>
+<li>Rigidify some parts of the deformable model (STEP 4-2)</li>
+<li>Attach the rigidify parts to the actuators (STEP 4-3)</li>
+</ul>
+<h4 id="STEP-4-1-Adding-actuators"><a href="#STEP-4-1-Adding-actuators" class="headerlink" title="STEP 4-1: Adding actuators"></a>STEP 4-1: Adding actuators</h4><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Add prefabs for the actuators</li>
+<li>Position them according to the real robot positioning</li>
+<li>Understand the structure of the prefabs modeling the S90 servomotors and the associated servo-arms used on the Tripod robot: <code>ServoMotor</code>, <code>ServoArm</code> and the prefab <code>ActuatedArm</code> that brings the first two together.</li>
+<li>Understand another graph structure for the objects of the scene, by introducing the object Simulation.</li>
+</ul>
+<p>It is now time to add the actuators that will deform the elastic piece. On the real robot, this is done by 3 servomotors actuating servo-arms attached to the silicone piece. On SOFA, two prefabricated objects have been implemented and brought together in a third one named <code>ActuatedArm</code>. The two elements composing it can be seen on Figure below. The prefabs are described in a python file, that contains all the elements of the model of the object. They are imported at the beginning of the code file of the scene, and can then be used in the scene. The lines to import the <code>ServoArm</code> and the <code>ActuatedArm</code> prefab are the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> actuatedarm <span class="hljs-keyword">import</span> ActuatedArm<br><span class="hljs-keyword">from</span> tripod <span class="hljs-keyword">import</span> ElasticBody<br></code></pre></td></tr></table></figure>
+<p><code>actuatedarm</code> and <code>tripod</code> (as well as <code>s90servo</code> that is used in the <code>actuatedarm</code> file) are the names of the python scripts that describe the prefabs. They are located in the folder <code>details</code> of the Tripod tutorial.</p>
+<p>The prefab <code>ActuatedArm</code> is building up the ensemble composed of a servomotor and a servo-arm, and includes a Fixing Box situated at the tip of the servo-arm, that attaches the silicone piece to the servo-arm.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">ActuatedArm(parent, name, translation, eulerRotation, attachingTo)<br></code></pre></td></tr></table></figure>
+<p>It uses the prefabs <code>ServoMotor</code> and <code>ServoArm</code>, that are described as rigid objects and implemented in the files <code>s90servo.py</code> and <code>actuatedarm.py</code> respectively. By opening those files, you will see that the prefabs are actually defined as classes. At the end of the file, you can find a small scene in the function <code>createScene()</code> that provides an example of use of the prefab.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ServoMotor(parent, translation, rotation, scale, doAddVisualModel)<br><br>ServoArm(parent, mappingInput, name)<br></code></pre></td></tr></table></figure>
+<p>The mechanical model of the <code>ServoMotor</code> and the <code>ServoArm</code> is described in their prefab, but it doesn’t include a time integration scheme nor a solver. In the previous steps, these were added in the object’s node. However, in this step, a different organization is proposed: the mechanical &amp; visual models of the objects are created on one side, grouped in a node called Tripod; and a node ‘Simulation’ is built on the other side, that implements time integration and a solving tool, and links them to their corresponding object. This linking is done thanks to the object <em>Scene</em> from the file <code>tutorial.py</code> located in the same directory, that is also imported at the beginning of the code file.</p>
+<p>Just like for the <code>ElasticBody</code>, a function <code>Tripod()</code> is introduced, now that all the pieces of the robot have been modelled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">Tripod(parent, name=<span class="hljs-string">&quot;Tripod&quot;</span>, radius, numMotors, angleShift)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> tutorial <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> splib3.numerics <span class="hljs-keyword">import</span> sin, cos, to_radians<br><span class="hljs-keyword">from</span> actuatedarm <span class="hljs-keyword">import</span> ActuatedArm<br><span class="hljs-keyword">from</span> elasticbody <span class="hljs-keyword">import</span> ElasticBody<br><span class="hljs-keyword">from</span> blueprint <span class="hljs-keyword">import</span> Blueprint<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Tripod</span>(<span class="hljs-params">name=<span class="hljs-string">&quot;Tripod&quot;</span>, radius=<span class="hljs-number">60</span>, numMotors=<span class="hljs-number">3</span>, angleShift=<span class="hljs-number">180.0</span></span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getTransform</span>(<span class="hljs-params">index, numstep, angleShift, radius, dist</span>):<br>        fi = <span class="hljs-built_in">float</span>(index)<br>        fnumstep = <span class="hljs-built_in">float</span>(numstep)<br>        angle = fi * <span class="hljs-number">360</span> / fnumstep<br>        angle2 = fi * <span class="hljs-number">360</span> / fnumstep + angleShift<br>        eulerRotation = [<span class="hljs-number">0</span>, angle, <span class="hljs-number">0</span>]<br>        translation = [dist * sin(to_radians(angle2)), -<span class="hljs-number">1.35</span>, dist * cos(to_radians(angle2))]<br><br>        <span class="hljs-keyword">return</span> translation, eulerRotation<br>    <br>    self = Sofa.Core.Node(name)<br>    self.actuatedarms = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, numMotors):<br>        name = <span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i)<br>        translation, eulerRotation = __getTransform(i, numMotors, angleShift, radius, radius)<br>        arm = ActuatedArm(name=name, translation=translation, rotation=eulerRotation)<br>        <br>        <span class="hljs-comment"># Add limits to angle that correspond to limits on real robot</span><br>        arm.ServoMotor.minAngle = -<span class="hljs-number">2.0225</span><br>        arm.ServoMotor.maxAngle = -<span class="hljs-number">0.0255</span><br>        self.actuatedarms.append(arm)<br>        self.addChild(arm)<br>            <br>    self.addChild(ElasticBody(translation=[<span class="hljs-number">0.0</span>, <span class="hljs-number">30</span>, <span class="hljs-number">0.0</span>],rotation=[<span class="hljs-number">90</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],color=[<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.5</span>]))<br>    <span class="hljs-keyword">return</span> self  <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-keyword">from</span> splib3.animation <span class="hljs-keyword">import</span> animate<br>    <span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br>    <span class="hljs-keyword">from</span> fixingbox <span class="hljs-keyword">import</span> FixingBox<br>    <span class="hljs-keyword">import</span> math<br><br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>], iterative=<span class="hljs-literal">False</span>,<br>                  plugins=[<span class="hljs-string">&#x27;SofaSparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>, <span class="hljs-string">&#x27;SofaSimpleFem&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>, <span class="hljs-string">&#x27;SofaConstraint&#x27;</span>])<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;GenericConstraintSolver&#x27;</span>, maxIterations=<span class="hljs-number">50</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    rootNode.dt = <span class="hljs-number">0.01</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior&quot;</span><br><br>    scene.Modelling.addChild(Blueprint())<br><br>    tripod = scene.Modelling.addChild(Tripod())<br>        <br>    FixingBox(scene.Modelling, tripod.ElasticBody.MechanicalModel, scale=[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>], translation=[<span class="hljs-number">0.</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0.</span>])<br>    scene.Modelling.FixingBox.BoxROI.drawBoxes = <span class="hljs-literal">True</span><br><br>    scene.Simulation.addChild(scene.Modelling.Tripod)<br>    scene.Simulation.addChild(scene.Modelling.FixingBox)<br><br>    <span class="hljs-comment">## Add animations </span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">myanimate</span>(<span class="hljs-params">targets, factor</span>):<br>        <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> targets:<br>            arm.angleIn.value = -factor * math.pi / <span class="hljs-number">4</span><br>    animate(myanimate, &#123;<span class="hljs-string">&quot;targets&quot;</span>: [tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]&#125;, duration=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<h5 id="Exploring-the-scene-2"><a href="#Exploring-the-scene-2" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h5><ul>
+<li>Explore the Info panel in the window that appears when double-clicking on the different components: you can observe that the prefab objects propose some documentation and a description of specific properties</li>
+<li>Explore the hierarchy of the nodes in the Graph panel, to observe the structure of the <code>ActuatedArm</code> prefab. More particularly, in the <code>ServoMortor</code> prefab of each <code>ActuatedArm</code>, a <code>ServoWheel</code> prefab can be seen. It represents the capability - or degree of freedom - of the servo-arm to rotate around the motor shaft. It is implemented in the file <code>s90servo.py</code> and composed of a Rigid <code>MechanicalObject</code>, on which the rotations are applied, and then transferred to the <code>ActuatedArm</code> on which the <code>ServoWheel</code> is attached</li>
+<li>My modifying the <code>EulerRotation</code> and <code>translation</code> parameters of the <code>ActuatedArm</code> instances, try to constrain different parts of the model.</li>
+</ul>
+<h5 id="Remarks-1"><a href="#Remarks-1" class="headerlink" title="Remarks"></a>Remarks</h5><ul>
+<li>Different solvers have been used so far: <code>SparseLDLSolver</code> for the former steps, and here, the <code>CGLinearSolver</code> (using the Conjugate Gradient Method) introduced in the Simulation object. The difference in the results of the simulation, depending on the solver used is negligible in the scenes presented in this tutorial.</li>
+<li>However, the solving methods sometimes have properties that allow particular manipulations of the objects in the scene. By using the <code>CGLinearSolver</code> for the servomotors, it is possible to move the servomotor base in the simulation window by holding the Shift key while left-clicking on the servo base to drag it. This shows the connection with the silicone piece, that follows the movement, like it would with the real robot.</li>
+<li>Note that the same Shift + Click and drag manipulation isn’t possible on the servo-arm alone. Indeed, since the arm is constrained by the servomotor, trying to move it away from the servomotor would produce a conflict situation and the system would diverge.</li>
+</ul>
+<p><img src="/image/SOFA/Tripod/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h4 id="STEP-4-2-Rigidify-parts-of-the-deformable-piece"><a href="#STEP-4-2-Rigidify-parts-of-the-deformable-piece" class="headerlink" title="STEP 4-2: Rigidify parts of the deformable piece"></a>STEP 4-2: Rigidify parts of the deformable piece</h4><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Rigidify some parts of a deformable object</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> splib3.numerics <span class="hljs-keyword">import</span> to_radians<br><span class="hljs-keyword">from</span> stlib3.physics.mixedmaterial <span class="hljs-keyword">import</span> Rigidify<br><span class="hljs-keyword">from</span> stlib3.components <span class="hljs-keyword">import</span> addOrientedBoxRoi<br><span class="hljs-keyword">from</span> splib3.numerics <span class="hljs-keyword">import</span> vec3<br><span class="hljs-keyword">from</span> splib3.numerics.quat <span class="hljs-keyword">import</span> Quat<br><span class="hljs-keyword">from</span> tutorial <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> actuatedarm <span class="hljs-keyword">import</span> ActuatedArm<br><span class="hljs-keyword">from</span> elasticbody <span class="hljs-keyword">import</span> ElasticBody<br><span class="hljs-keyword">from</span> blueprint <span class="hljs-keyword">import</span> Blueprint<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Tripod</span>(<span class="hljs-params">name=<span class="hljs-string">&quot;Tripod&quot;</span>, radius=<span class="hljs-number">60</span>, numMotors=<span class="hljs-number">3</span>, angleShift=<span class="hljs-number">180.0</span></span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getTransform</span>(<span class="hljs-params">index, numstep, angleShift, radius, dist</span>):<br>        fi = <span class="hljs-built_in">float</span>(index)<br>        fnumstep = <span class="hljs-built_in">float</span>(numstep)<br>        angle = fi * <span class="hljs-number">360</span> / fnumstep<br>        angle2 = fi * <span class="hljs-number">360</span> / fnumstep + angleShift<br>        eulerRotation = [<span class="hljs-number">0</span>, angle, <span class="hljs-number">0</span>]<br>        translation = [dist * sin(to_radians(angle2)), -<span class="hljs-number">1.35</span>, dist * cos(to_radians(angle2))]<br>        <span class="hljs-keyword">return</span> translation, eulerRotation<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__rigidify</span>(<span class="hljs-params">self, radius=<span class="hljs-number">60</span>, numMotors=<span class="hljs-number">3</span>, angleShift=<span class="hljs-number">180.0</span></span>):<br>        deformableObject = self.ElasticBody.MechanicalModel<br>        self.ElasticBody.init()<br>        dist = radius<br>        numstep = numMotors<br>        groupIndices = []<br>        frames = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, numstep):<br>            translation, eulerRotation = __getTransform(i, numstep, angleShift, radius, dist)<br><br>            box = addOrientedBoxRoi(self, position=[<span class="hljs-built_in">list</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> deformableObject.dofs.rest_position.value],<br>                                    name=<span class="hljs-string">&quot;BoxROI&quot;</span> + <span class="hljs-built_in">str</span>(i),<br>                                    translation=vec3.vadd(translation, [<span class="hljs-number">0.0</span>, <span class="hljs-number">25.0</span>, <span class="hljs-number">0.0</span>]),<br>                                    eulerRotation=eulerRotation, scale=[<span class="hljs-number">45</span>, <span class="hljs-number">15</span>, <span class="hljs-number">30</span>])<br><br>            box.drawBoxes = <span class="hljs-literal">False</span><br>            box.init()<br>            groupIndices.append([ind <span class="hljs-keyword">for</span> ind <span class="hljs-keyword">in</span> box.indices.value])<br>            frames.append(vec3.vadd(translation, [<span class="hljs-number">0.0</span>, <span class="hljs-number">25.0</span>, <span class="hljs-number">0.0</span>]) + <span class="hljs-built_in">list</span>(<br>                Quat.createFromEuler([<span class="hljs-number">0</span>, <span class="hljs-built_in">float</span>(i) * <span class="hljs-number">360</span> / <span class="hljs-built_in">float</span>(numstep), <span class="hljs-number">0</span>], inDegree=<span class="hljs-literal">True</span>)))<br><br>        <span class="hljs-comment"># Rigidify the deformable part at extremity to attach arms</span><br>        rigidifiedstruct = Rigidify(self, deformableObject, groupIndices=groupIndices, frames=frames,<br>                                    name=<span class="hljs-string">&quot;RigidifiedStructure&quot;</span>)<br><br><br><br>    self = Sofa.Core.Node(name)<br>    self.actuatedarms = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, numMotors):<br>        name = <span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i)<br>        translation, eulerRotation = __getTransform(i, numMotors, angleShift, radius, radius)<br>        arm = ActuatedArm(name=name, translation=translation, rotation=eulerRotation)<br><br>        <span class="hljs-comment"># Add limits to angle that correspond to limits on real robot</span><br>        arm.ServoMotor.minAngle = -<span class="hljs-number">2.0225</span><br>        arm.ServoMotor.maxAngle = -<span class="hljs-number">0.0255</span><br>        self.actuatedarms.append(arm)<br>        self.addChild(arm)<br><br>    self.addChild(ElasticBody(translation=[<span class="hljs-number">0.0</span>, <span class="hljs-number">30</span>, <span class="hljs-number">0.0</span>], rotation=[<span class="hljs-number">90</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], color=[<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.5</span>]))<br><br>    __rigidify(self, radius, numMotors, angleShift)<br>    <span class="hljs-keyword">return</span> self<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-keyword">from</span> splib3.animation <span class="hljs-keyword">import</span> animate<br>    <span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br>    <span class="hljs-keyword">from</span> fixingbox <span class="hljs-keyword">import</span> FixingBox<br>    <span class="hljs-keyword">import</span> math<br><br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>], iterative=<span class="hljs-literal">False</span>,<br>                  plugins=[<span class="hljs-string">&#x27;SofaSparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>, <span class="hljs-string">&#x27;SofaSimpleFem&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaConstraint&#x27;</span>])<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;GenericConstraintSolver&#x27;</span>, maxIterations=<span class="hljs-number">50</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior&quot;</span><br>    scene.dt = <span class="hljs-number">0.01</span><br><br>    scene.Modelling.addChild(Blueprint())<br>    tripod = scene.Modelling.addChild(Tripod())<br>    tripod.BoxROI0.drawBoxes = <span class="hljs-literal">True</span><br>    tripod.BoxROI1.drawBoxes = <span class="hljs-literal">True</span><br>    tripod.BoxROI2.drawBoxes = <span class="hljs-literal">True</span><br><br>    <span class="hljs-comment"># Use this to activate some rendering on the rigidified object ######################################</span><br>    setData(tripod.RigidifiedStructure.RigidParts.dofs, showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">10</span>, drawMode=<span class="hljs-number">2</span>)<br>    setData(tripod.RigidifiedStructure.RigidParts.RigidifiedParticules.dofs, showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">1</span>,<br>            drawMode=<span class="hljs-number">1</span>, showColor=[<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br>    setData(tripod.RigidifiedStructure.DeformableParts.dofs, showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">1</span>, drawMode=<span class="hljs-number">2</span>)<br>    <span class="hljs-comment">#####################################################################################################</span><br><br>    scene.Simulation.addChild(tripod)<br><br>    FixingBox(scene.Modelling, tripod.ElasticBody.MechanicalModel, scale=[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>], translation=[<span class="hljs-number">0.</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0.</span>])<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">myanimate</span>(<span class="hljs-params">targets, factor</span>):<br>        <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> targets:<br>            arm.ServoMotor.angleIn = -factor * math.pi / <span class="hljs-number">4.</span><br><br>    animate(myanimate, &#123;<span class="hljs-string">&quot;targets&quot;</span>: [tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]&#125;, duration=<span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                               template=<span class="hljs-string">&#x27;Vec3,Rigid3&#x27;</span>,<br>                               name=<span class="hljs-string">&quot;RigidAndDeformableCoupling&quot;</span>,<br>                               object1=tripod.RigidifiedStructure.DeformableParts.dofs.getLinkPath(),<br>                               object2=tripod.RigidifiedStructure.RigidParts.dofs.getLinkPath(),<br>                               nodeToParse=tripod.RigidifiedStructure.DeformableParts.MechanicalModel.getLinkPath())<br></code></pre></td></tr></table></figure>
+<p><img src="/image/SOFA/Tripod/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h4 id="STEP-4-3-Attach-the-actuators-to-the-deformable-piece"><a href="#STEP-4-3-Attach-the-actuators-to-the-deformable-piece" class="headerlink" title="STEP 4-3: Attach the actuators to the deformable piece"></a>STEP 4-3: Attach the actuators to the deformable piece</h4><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Link a deformable object to a rigid actuator</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> splib3.numerics <span class="hljs-keyword">import</span> to_radians<br><span class="hljs-keyword">from</span> stlib3.physics.mixedmaterial <span class="hljs-keyword">import</span> Rigidify<br><span class="hljs-keyword">from</span> stlib3.components <span class="hljs-keyword">import</span> addOrientedBoxRoi<br><span class="hljs-keyword">from</span> splib3.numerics <span class="hljs-keyword">import</span> vec3<br><span class="hljs-keyword">from</span> splib3.numerics.quat <span class="hljs-keyword">import</span> Quat<br><span class="hljs-keyword">from</span> tutorial <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> actuatedarm <span class="hljs-keyword">import</span> ActuatedArm<br><span class="hljs-keyword">from</span> elasticbody <span class="hljs-keyword">import</span> ElasticBody<br><span class="hljs-keyword">from</span> blueprint <span class="hljs-keyword">import</span> Blueprint<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Tripod</span>(<span class="hljs-params">name=<span class="hljs-string">&quot;Tripod&quot;</span>, radius=<span class="hljs-number">60</span>, numMotors=<span class="hljs-number">3</span>, angleShift=<span class="hljs-number">180.0</span></span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getTransform</span>(<span class="hljs-params">index, numstep, angleShift, radius, dist</span>):<br>        fi = <span class="hljs-built_in">float</span>(index)<br>        fnumstep = <span class="hljs-built_in">float</span>(numstep)<br>        angle = fi * <span class="hljs-number">360</span> / fnumstep<br>        angle2 = fi * <span class="hljs-number">360</span> / fnumstep + angleShift<br>        eulerRotation = [<span class="hljs-number">0</span>, angle, <span class="hljs-number">0</span>]<br>        translation = [dist * sin(to_radians(angle2)), -<span class="hljs-number">1.35</span>, dist * cos(to_radians(angle2))]<br>        <span class="hljs-keyword">return</span> translation, eulerRotation<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__rigidify</span>(<span class="hljs-params">self, radius=<span class="hljs-number">60</span>, numMotors=<span class="hljs-number">3</span>, angleShift=<span class="hljs-number">180.0</span></span>):<br>        deformableObject = self.ElasticBody.MechanicalModel<br>        self.ElasticBody.init()<br>        dist = radius<br>        numstep = numMotors<br>        groupIndices = []<br>        frames = []<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, numstep):<br>            translation, eulerRotation = __getTransform(i, numstep, angleShift, radius, dist)<br><br>            box = addOrientedBoxRoi(self, position=[<span class="hljs-built_in">list</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> deformableObject.dofs.rest_position.value],<br>                                    name=<span class="hljs-string">&quot;BoxROI&quot;</span> + <span class="hljs-built_in">str</span>(i),<br>                                    translation=vec3.vadd(translation, [<span class="hljs-number">0.0</span>, <span class="hljs-number">25.0</span>, <span class="hljs-number">0.0</span>]),<br>                                    eulerRotation=eulerRotation, scale=[<span class="hljs-number">45</span>, <span class="hljs-number">15</span>, <span class="hljs-number">30</span>])<br><br>            box.drawBoxes = <span class="hljs-literal">False</span><br>            box.init()<br>            groupIndices.append([ind <span class="hljs-keyword">for</span> ind <span class="hljs-keyword">in</span> box.indices.value])<br>            frames.append(vec3.vadd(translation, [<span class="hljs-number">0.0</span>, <span class="hljs-number">25.0</span>, <span class="hljs-number">0.0</span>]) + <span class="hljs-built_in">list</span>(<br>                Quat.createFromEuler([<span class="hljs-number">0</span>, <span class="hljs-built_in">float</span>(i) * <span class="hljs-number">360</span> / <span class="hljs-built_in">float</span>(numstep), <span class="hljs-number">0</span>], inDegree=<span class="hljs-literal">True</span>)))<br><br>        <span class="hljs-comment"># Rigidify the deformable part at extremity to attach arms</span><br>        rigidifiedstruct = Rigidify(self, deformableObject, groupIndices=groupIndices, frames=frames,<br>                                    name=<span class="hljs-string">&quot;RigidifiedStructure&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__attachToActuatedArms</span>(<span class="hljs-params">self, numstep</span>):<br>         rigidParts = self.RigidifiedStructure.RigidParts<br>         <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> self.actuatedarms:<br>            arm.ServoMotor.Articulation.ServoWheel.addChild(rigidParts)<br><br>         rigidParts.addObject(<span class="hljs-string">&#x27;SubsetMultiMapping&#x27;</span>,<br>                              <span class="hljs-built_in">input</span>=[self.actuatedarms[<span class="hljs-number">0</span>].ServoMotor.Articulation.ServoWheel.getLinkPath(),<br>                                     self.actuatedarms[<span class="hljs-number">1</span>].ServoMotor.Articulation.ServoWheel.getLinkPath(),<br>                                     self.actuatedarms[<span class="hljs-number">2</span>].ServoMotor.Articulation.ServoWheel.getLinkPath()],<br>                              output=<span class="hljs-string">&#x27;@./&#x27;</span>, indexPairs=[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>])<br><br>    self = Sofa.Core.Node(name)<br>    self.actuatedarms = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, numMotors):<br>        name = <span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i)<br>        translation, eulerRotation = __getTransform(i, numMotors, angleShift, radius, radius)<br>        arm = ActuatedArm(name=name, translation=translation, rotation=eulerRotation)<br><br>        <span class="hljs-comment"># Add limits to angle that correspond to limits on real robot</span><br>        arm.ServoMotor.minAngle = -<span class="hljs-number">2.0225</span><br>        arm.ServoMotor.maxAngle = -<span class="hljs-number">0.0255</span><br>        self.actuatedarms.append(arm)<br>        self.addChild(arm)<br><br>    self.addChild(ElasticBody(translation=[<span class="hljs-number">0.0</span>, <span class="hljs-number">30</span>, <span class="hljs-number">0.0</span>], rotation=[<span class="hljs-number">90</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], color=[<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.5</span>]))<br>    __rigidify(self, radius, numMotors, angleShift)<br>    __attachToActuatedArms(self, numMotors)<br>    <span class="hljs-keyword">return</span> self<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-keyword">from</span> splib3.animation <span class="hljs-keyword">import</span> animate<br>    <span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br>    <span class="hljs-keyword">import</span> math<br><br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.0</span>, -<span class="hljs-number">9810</span>, <span class="hljs-number">0.0</span>], iterative=<span class="hljs-literal">False</span>,<br>                  plugins=[<span class="hljs-string">&#x27;SofaSparseSolver&#x27;</span>, <span class="hljs-string">&#x27;SofaOpenglVisual&#x27;</span>, <span class="hljs-string">&#x27;SofaSimpleFem&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaConstraint&#x27;</span>])<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;GenericConstraintSolver&#x27;</span>, maxIterations=<span class="hljs-number">50</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    scene.Simulation.TimeIntegrationSchema.rayleighStiffness = <span class="hljs-number">0.05</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior&quot;</span><br>    scene.dt = <span class="hljs-number">0.01</span><br><br>    <span class="hljs-comment"># Add the blueprint</span><br>    scene.Modelling.addChild(Blueprint())<br><br>    <span class="hljs-comment"># Add the tripod</span><br>    tripod = scene.Modelling.addChild(Tripod())<br>    tripod.BoxROI0.drawBoxes = <span class="hljs-literal">True</span><br>    tripod.BoxROI1.drawBoxes = <span class="hljs-literal">True</span><br>    tripod.BoxROI2.drawBoxes = <span class="hljs-literal">True</span><br><br>    scene.Simulation.addChild(tripod)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">myanimate</span>(<span class="hljs-params">targets, factor</span>):<br>        <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> targets:<br>            arm.angleIn = -factor * math.pi / <span class="hljs-number">4.</span><br><br>    animate(myanimate, &#123;<span class="hljs-string">&quot;targets&quot;</span>: [tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]&#125;, duration=<span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>        scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                   name=<span class="hljs-string">&quot;ArmAndDeformableCoupling&quot;</span> + <span class="hljs-built_in">str</span>(i),<br>                                   template=<span class="hljs-string">&#x27;Vec1,Vec3&#x27;</span>,<br>                                   object1=tripod[<span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&quot;.ServoMotor.Articulation.dofs&quot;</span>].getLinkPath(),<br>                                   object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                   skipJ2tKJ2=<span class="hljs-literal">False</span> <span class="hljs-keyword">if</span> i == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-literal">True</span>,<br>                                   nodeToParse=tripod.RigidifiedStructure.DeformableParts.MechanicalModel.getLinkPath())<br></code></pre></td></tr></table></figure>
+<p><img src="/image/SOFA/Tripod/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h3 id="STEP-5-Adding-controllers"><a href="#STEP-5-Adding-controllers" class="headerlink" title="STEP 5: Adding controllers"></a>STEP 5: Adding controllers</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Implement a controller for interactive change of the servomotors angular position with keyboard keys</li>
+<li>Define an animation function, that acts on the actuators by translating &amp; rotating them</li>
+</ul>
+<p>The servomotors have a default angular position, that  corresponds to an angle of 180 degree. To interactively change this default position, a dedicated object will be added, called a <em>Controller</em>. Controllers allow to implement custom behavior and end-user interaction directly, using python.</p>
+<p>In this step we are adding such a controller, in order to be able to control the position of each servo-arm with keyboard keys. On the real robot, the initial position considered is the one when the silicone piece is laying flat, which means that the servomotors are at an angle of 90 degree.</p>
+<p>The keys involved in the control and the effect they trigger are described below:</p>
+<p>The following combinations allow to control the angular position of the servomotors, seqparately.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Keyboard keys</th>
+<th style="text-align:center">Effect on angle</th>
+<th style="text-align:center">For Servo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>UP</code></td>
+<td style="text-align:center">Increase</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>DOWN</code></td>
+<td style="text-align:center">Decrease</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>LEFT</code></td>
+<td style="text-align:center">Increase</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>RIGHT</code></td>
+<td style="text-align:center">Decrease</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>PLUS</code></td>
+<td style="text-align:center">Increase</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Ctrl</code>+<code>MINUS</code></td>
+<td style="text-align:center">Decrease</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>SOFA allows a default animation management: this is what was being used up to now. In this step, we want to add a more specific animation that updates the scene at each time step, depending on the keys pressed by the user. The control of this animation is done thanks to a python script controller (<code>class CONTROLLER_NAME(SOFA.Core.Controller)</code>) that is added in our scene file. It uses the function (or <em>method</em>) <code>onKeypressedEvent()</code> that is included in SOFA by default and that triggers an action if a designated key is pressed. The controller is implemented such as, after each key press, the designated servomotor moves from a <code>stepsize</code> value of 0.1 rad (that is a little less than 6 degree) by changing the value of the attribute <code>ServoMotor.angleIn</code>.</p>
+<p>Moreover, another animation is added in the function <code>setupanimation(actuators, step, angularstep, factor)</code>, in order to move with one keystroke the three servomotors from their default angular position to the initial position of the real robot. It is triggered by the <code>Ctrl</code>+<code>A</code>.</p>
+<p>The animation is implemented, using the function <code>animate(cb, params, duration)</code> from the <code>STLIB</code> plugin, and the function <code>setupanimation(actuators, step, angularstep, factor)</code>. The <code>animate</code> function calls <code>setupanimation</code> and provides the structure of the animation: a small variation of the parameters (<code>step</code> value) is computed each time that the <code>setupanimation</code> function is called; the <code>animate</code> function is a recursive function, that calls itself over and over again, as long as the <code>duration</code> value hasn’t been reached.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene                   <span class="hljs-comment">#&lt; Prefab for the scene</span><br><span class="hljs-keyword">from</span> tripod <span class="hljs-keyword">import</span> Tripod                        <span class="hljs-comment">#&lt; Prefab for the Tripod</span><br><span class="hljs-keyword">from</span> tripodcontroller <span class="hljs-keyword">import</span> TripodController    <span class="hljs-comment">#&lt; Implementation of a controller that modify the Tripod</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyController</span>(Sofa.Core.Controller):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        <span class="hljs-comment"># These are needed (and the normal way to override from a python class)</span><br>        Sofa.Core.Controller.__init__(self, *args, **kwargs)<br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">onKeypressedEvent</span>(<span class="hljs-params">self, key</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Key Pressed&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br><br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.</span>, -<span class="hljs-number">9810.</span>, <span class="hljs-number">0.</span>], dt=<span class="hljs-number">0.01</span>, iterative=<span class="hljs-literal">False</span>, plugins=[<span class="hljs-string">&quot;SofaSparseSolver&quot;</span>,<span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralEngine&#x27;</span>])<br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;GenericConstraintSolver&#x27;</span>, maxIterations=<span class="hljs-number">50</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.Simulation.TimeIntegrationSchema.rayleighStiffness = <span class="hljs-number">0.005</span><br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior&quot;</span><br><br>    tripod = Tripod()<br>    scene.Modelling.addChild(tripod)<br>    scene.Modelling.addObject(TripodController(name=<span class="hljs-string">&quot;TripodController&quot;</span>,actuators=[tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))<br>    scene.Simulation.addChild(tripod)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                 name=<span class="hljs-string">&quot;deformableAndFreeCenterCoupling&quot;</span>,<br>                                 template=<span class="hljs-string">&#x27;Vec3,Rigid3&#x27;</span>,<br>                                 object1=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                 object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.FreeCenter.dofs&quot;</span>].getLinkPath(),<br>                                 nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>        scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                   name=<span class="hljs-string">&quot;deformableAndArm&#123;i&#125;Coupling&quot;</span>.<span class="hljs-built_in">format</span>(i=i),<br>                                   template=<span class="hljs-string">&#x27;Vec1,Vec3&#x27;</span>,<br>                                   object1=tripod[<span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&quot;.ServoMotor.Articulation.dofs&quot;</span>].getLinkPath(),<br>                                   object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                   skipJ2tKJ2=<span class="hljs-literal">True</span>,<br>                                   nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br></code></pre></td></tr></table></figure>
+<h4 id="Exploring-the-scene-3"><a href="#Exploring-the-scene-3" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h4><ul>
+<li>After clicking on the <code>[Animate]</code> button, and then anywhere in the simulation window, use the defined keystrokes to deform the silicone shape by controlling the angular position of the servomotors.</li>
+<li>Try to implement a different animation, modifying the initial position of the angular position of the servomotors.</li>
+</ul>
+<h4 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h4><p>When the scene is loaded and animated, it can be interesting to display the execution time’s distribution between the different components of the simulation. For that purpose, activate the <em>Log Time</em> option in the <em>Stats</em> panel of the simulation window. The steps duration statistics appear then in the terminal window.</p>
+<p>The most time consuming process - and thus the one requiring the greatest computing resources - is related to the computation of the Mechanical behavior, with more than half of the resources allocated to the <em>solving</em> tools. This highlights the complexity of the system and explains why the mesh cannot be endlessly tightened: the simulation would take a great amount of time to compute, too much for any real time application.</p>
+<p><img src="/image/SOFA/Tripod/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<h3 id="STEP-6-Adding-collision-models"><a href="#STEP-6-Adding-collision-models" class="headerlink" title="STEP 6: Adding collision models"></a>STEP 6: Adding collision models</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Add a rigid object that interacts with the robot thanks to the collision model</li>
+<li>Add a collision model so that the collision model can no longer go through the servomotors.</li>
+</ul>
+<p>By default SOFA doesn’t handle collision as they are so expensive to compute. To activate collisions you need to define specifically the geometries for which collisions  are checked and how they are handled. In this step, we are adding a rigid Sphere object falling on the robot, as well as the description of the contact management between the ball and the silicone piece. (This scene is defined for the simulation only, the interaction with the real robot has not been added.)</p>
+<p>A new controller, called <code>JumpController</code>, is also added to change rapidly the servo motors angles so the robot can play with the falling ball.</p>
+<p>The same keystrokes as in the previous steps are used, adding two new intermediate positions for a more dynamical response.</p>
+<ul>
+<li>Keystroke to move the servomotors from their default position to the initial one of the real robot: <code>Ctrl</code> + <code>A</code></li>
+<li>Keystroke to position the servomotors to an intermediate position: <code>Ctrl</code> + <code>Q</code></li>
+<li>keystroke to position the servomotors to a high angular position: <code>Ctrl</code> + <code>Z</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> splib3.constants <span class="hljs-keyword">import</span> Key<br><span class="hljs-keyword">from</span> stlib3.physics.rigid <span class="hljs-keyword">import</span> Sphere<br><span class="hljs-keyword">from</span> stlib3.scene.contactheader <span class="hljs-keyword">import</span> ContactHeader<br><span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br><span class="hljs-keyword">from</span> tripod <span class="hljs-keyword">import</span> Tripod<br><span class="hljs-keyword">from</span> tripodcontroller <span class="hljs-keyword">import</span> TripodController<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">JumpController</span>(Sofa.Core.Controller):<br>    <span class="hljs-string">&quot;&quot;&quot;This controller has two roles:</span><br><span class="hljs-string">       - if the user presses up/left/right/down/plus/minus, the servomotor angle</span><br><span class="hljs-string">         is changed.</span><br><span class="hljs-string">       - if the user presses A, an animation is started to move the servomotor to the initial position</span><br><span class="hljs-string">         of the real robot.</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        <span class="hljs-comment"># These are needed (and the normal way to override from a python class)</span><br>        Sofa.Core.Controller.__init__(self, *args, **kwargs)<br>        self.stepsize = <span class="hljs-number">0.1</span><br>        self.actuators = kwargs[<span class="hljs-string">&quot;actuators&quot;</span>]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">onKeypressedEvent</span>(<span class="hljs-params">self, event</span>):<br>        key = event[<span class="hljs-string">&#x27;key&#x27;</span>]<br>        self.animateTripod(key)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">animateTripod</span>(<span class="hljs-params">self, key</span>):<br>        apos = <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">if</span> key == Key.Z:<br>            apos = -<span class="hljs-number">3.14</span>/<span class="hljs-number">4</span><br>        <span class="hljs-keyword">if</span> key == Key.Q:<br>            apos = -<span class="hljs-number">3.14</span>/<span class="hljs-number">3</span><br><br>        <span class="hljs-keyword">if</span> apos <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">for</span> actuator <span class="hljs-keyword">in</span> self.actuators:<br>                actuator.ServoMotor.angleIn = apos<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br><br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.</span>, -<span class="hljs-number">9810.</span>, <span class="hljs-number">0.</span>], dt=<span class="hljs-number">0.01</span>, plugins=[<span class="hljs-string">&quot;SofaSparseSolver&quot;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralEngine&#x27;</span>], iterative=<span class="hljs-literal">False</span>)<br><br>    ContactHeader(rootNode, alarmDistance=<span class="hljs-number">15</span>, contactDistance=<span class="hljs-number">0.5</span>, frictionCoef=<span class="hljs-number">0.2</span>)<br><br>    <span class="hljs-comment"># Adding contact handling</span><br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showCollisionModels&quot;</span><br>    scene.Simulation.TimeIntegrationSchema.rayleighStiffness = <span class="hljs-number">0.005</span><br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br><br>    tripod = scene.Modelling.addChild(Tripod())<br>    tripod.addCollision()<br><br><br>    <span class="hljs-comment"># The regular controller that is being used for the last 2 steps</span><br>    controller = scene.addObject(TripodController(name=<span class="hljs-string">&quot;TripodController&quot;</span>, actuators=[tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))<br>    <span class="hljs-comment"># You can set the animation from the python script by adding this call</span><br>    controller.initTripod(<span class="hljs-string">&#x27;A&#x27;</span>)<br><br>    <span class="hljs-comment"># The additionnal controller that add two predefined positions for the three servomotors</span><br>    scene.addObject(JumpController(name=<span class="hljs-string">&quot;JumpController&quot;</span>, actuators=[tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))<br><br>    sphere = Sphere(scene.Modelling, translation=[<span class="hljs-number">0.0</span>, <span class="hljs-number">50.0</span>, <span class="hljs-number">0.0</span>],<br>                       uniformScale=<span class="hljs-number">13.</span>,<br>                       totalMass=<span class="hljs-number">0.032</span>,<br>                       isAStaticObject=<span class="hljs-literal">True</span>)<br>    sphere.addObject(<span class="hljs-string">&#x27;UncoupledConstraintCorrection&#x27;</span>)<br><br>    scene.Simulation.addChild(sphere)<br>    scene.Simulation.addChild(tripod)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                 name=<span class="hljs-string">&quot;deformableAndFreeCenterCoupling&quot;</span>,<br>                                 template=<span class="hljs-string">&#x27;Vec3,Rigid3&#x27;</span>,<br>                                 object1=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                 object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.FreeCenter.dofs&quot;</span>].getLinkPath(),<br>                                 nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>        scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                   name=<span class="hljs-string">&quot;deformableAndArm&#123;i&#125;Coupling&quot;</span>.<span class="hljs-built_in">format</span>(i=i),<br>                                   template=<span class="hljs-string">&#x27;Vec1,Vec3&#x27;</span>,<br>                                   object1=tripod[<span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&quot;.ServoMotor.Articulation.dofs&quot;</span>].getLinkPath(),<br>                                   object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                   skipJ2tKJ2=<span class="hljs-literal">True</span>,<br>                                   nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br></code></pre></td></tr></table></figure>
+<h4 id="Exploring-the-scene-4"><a href="#Exploring-the-scene-4" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h4><ul>
+<li>Once the scene animated, observe how the ball follows the movement of the silicone piece: as load as the ball sits into the small hole at the center of the silicone piece, it follows its movements. However, if the silicone piece is sloped enough, the ball falls under gravity force.</li>
+<li>Thanks to the collision model between the top of the servomotors and the silicone piece, the silicone piece can no longer go through the servomotors.</li>
+</ul>
+<p><img src="/image/SOFA/Tripod/2.gif" srcset="/img/loading.gif" lazyload alt="1" style="zoom:100%;" /></p>
+<h3 id="STEP-7-Connecting-to-the-physical-robot"><a href="#STEP-7-Connecting-to-the-physical-robot" class="headerlink" title="STEP 7: Connecting to the physical robot"></a>STEP 7: Connecting to the physical robot</h3><p><strong>At the end of this step, you will be able to:</strong></p>
+<ul>
+<li>Connect the simulated robot to the real one.</li>
+<li>Directly control the angular position of their real servomotors by actuating the simulated ones.</li>
+</ul>
+<p>It is now time to connect our simulated robot to the real one. This requires the additions of two elements. The first one, <code>SerialPortBridgeGeneric</code>, is a component that defines how the communication through the USB/Serial port is handled; it is an object of the <code>rootNode</code>.</p>
+<p>The second one, <code>SerialPortController</code>, is another Controller, reading the angular position of the simulated servomotors (in one of the data field) and sends them via the USB communication cable. The angular position of the simulated servomotors is stored in <code>actuators[i].ServoMotor.angleIn</code> in radian, and is transfered to the field <code>serialport.packetOut</code> of the controller board.</p>
+<p>Because the data are now sent to the real robot, it is necessary to implement a limitation of the possible angular positions to be reached: between 60 and 180 degrees. Any angle outside this interval is limited to the interval’s extreme value instead.</p>
+<p>The keystrokes implemented are the same as for the previous steps, adding one to start sending data to the robot.</p>
+<ul>
+<li>Keystroke to start sending data to the real robot: <code>Ctrl</code> + <code>B</code></li>
+<li>Keystroke to move the servomotors from their default position to the initial one of the real robot: <code>Ctrl</code> + <code>A</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> tutorial <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> splib3.animation <span class="hljs-keyword">import</span> animate<br><span class="hljs-keyword">from</span> splib3.constants <span class="hljs-keyword">import</span> Key<br><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> floor, pi<br><span class="hljs-keyword">from</span> tripod <span class="hljs-keyword">import</span> Tripod<br><span class="hljs-keyword">from</span> tripodcontroller <span class="hljs-keyword">import</span> TripodController, setupanimation<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TripodControllerWithCom</span>(<span class="hljs-title class_ inherited__">TripodController</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;This controller has three roles:</span><br><span class="hljs-string">       - if the user presses up/left/right/down/plus/minus, the servomotor angle</span><br><span class="hljs-string">         is changed.</span><br><span class="hljs-string">       - if the user presses A, an animation is started to move the servomotor to the initial position</span><br><span class="hljs-string">         of the real robot.</span><br><span class="hljs-string">       - if thr user presses B start the communication with controller card, send</span><br><span class="hljs-string">         servomotor commands</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        TripodController.__init__(self, *args, **kwargs)<br>        self.serialportctrl = kwargs[<span class="hljs-string">&#x27;serialportctrl&#x27;</span>]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">initTripod</span>(<span class="hljs-params">self, key</span>):<br>        <span class="hljs-keyword">if</span> key == Key.A <span class="hljs-keyword">and</span> self.serialportctrl.state == <span class="hljs-string">&quot;init&quot;</span>:<br>            self.serialportctrl.state = <span class="hljs-string">&quot;no-comm&quot;</span><br>            animate(setupanimation, &#123;<span class="hljs-string">&quot;actuators&quot;</span>: self.actuators, <span class="hljs-string">&quot;step&quot;</span>: <span class="hljs-number">35.0</span>, <span class="hljs-string">&quot;angularstep&quot;</span>: -<span class="hljs-number">1.4965</span>&#125;, duration=<span class="hljs-number">0.2</span>)<br><br>        <span class="hljs-comment"># Inclusion of the keystroke to start data sending = establishing communication (&#x27;comm&#x27;)</span><br>        <span class="hljs-keyword">if</span> key == Key.B <span class="hljs-keyword">and</span> self.serialportctrl.state == <span class="hljs-string">&quot;no-comm&quot;</span>:<br>            self.serialportctrl.state = <span class="hljs-string">&quot;comm&quot;</span><br><br><br><span class="hljs-comment"># Description of how the communication is handled</span><br><span class="hljs-comment"># CHANGE HERE the serialport that correspond to your computer</span><br><span class="hljs-comment"># def SerialPortBridgeGeneric(rootNode, serialport=&#x27;/dev/cu.usbserial-1420&#x27;):</span><br><span class="hljs-comment"># def SerialPortBridgeGeneric(rootNode, serialport=&#x27;COM3&#x27;):</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">SerialPortBridgeGeneric</span>(<span class="hljs-params">rootNode, serialport=<span class="hljs-string">&#x27;/dev/ttyUSB0&#x27;</span></span>):<br>    <span class="hljs-keyword">return</span> rootNode.addObject(<span class="hljs-string">&#x27;SerialPortBridgeGeneric&#x27;</span>, port=serialport, baudRate=<span class="hljs-number">115200</span>, size=<span class="hljs-number">3</span>, listening=<span class="hljs-literal">True</span>,<br>                              header=<span class="hljs-number">255</span>)<br><br><br><span class="hljs-comment"># Data sending controller</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SerialPortController</span>(Sofa.Core.Controller):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        Sofa.Core.Controller.__init__(self, *args, **kwargs)<br>        self.name = <span class="hljs-string">&quot;serialportcontroller&quot;</span><br>        self.actuatedarms = kwargs[<span class="hljs-string">&#x27;inputs&#x27;</span>]<br>        self.serialport = kwargs[<span class="hljs-string">&#x27;serialport&#x27;</span>]<br>        self.serialport.packetOut = [<span class="hljs-number">150</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>]<br>        self.state = <span class="hljs-string">&quot;init&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">onAnimateEndEvent</span>(<span class="hljs-params">self, event</span>):<br>        <span class="hljs-comment"># Data sending if the robot is initializing or in the no-communication state</span><br>        <span class="hljs-keyword">if</span> self.state == <span class="hljs-string">&quot;init&quot;</span>:<br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-keyword">if</span> self.state == <span class="hljs-string">&quot;no-comm&quot;</span>:<br>            <span class="hljs-keyword">return</span><br><br>        <span class="hljs-comment"># Vector storing the simulated servomotors&#x27; angular position</span><br>        angles = []<br><br>        <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> self.actuatedarms:<br>            <span class="hljs-comment"># Conversion of the angle values from radians to degrees</span><br>            angleDegree = arm.servomotor.angleOut.value * <span class="hljs-number">360</span> / (<span class="hljs-number">2.0</span> * pi)<br>            angleByte = <span class="hljs-built_in">int</span>(floor(angleDegree)) + <span class="hljs-number">179</span><br><br>            <span class="hljs-comment"># Limitation of the angular position&#x27;s command</span><br>            <span class="hljs-keyword">if</span> angleByte &lt; <span class="hljs-number">60</span>:<br>                angleByte = <span class="hljs-number">60</span><br>            <span class="hljs-keyword">if</span> angleByte &gt; <span class="hljs-number">180</span>:<br>                angleByte = <span class="hljs-number">180</span><br><br>            <span class="hljs-comment"># Filling the list of the 3 angle values</span><br>            angles.append(angleByte)<br>        <span class="hljs-comment"># The controller board of the real robot receives `angles` values</span><br>        self.serialport.packetOut = angles<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.</span>, -<span class="hljs-number">9810.</span>, <span class="hljs-number">0.</span>], dt=<span class="hljs-number">0.01</span>, iterative=<span class="hljs-literal">False</span>,<br>                  plugins=[<span class="hljs-string">&quot;SofaSparseSolver&quot;</span>, <span class="hljs-string">&quot;SofaOpenglVisual&quot;</span>, <span class="hljs-string">&quot;SofaSimpleFem&quot;</span>, <span class="hljs-string">&quot;SoftRobots&quot;</span>,<br>                           <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>,<br>                           <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralEngine&#x27;</span>])<br><br>    <span class="hljs-comment"># Adding contact handling</span><br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;GenericConstraintSolver&#x27;</span>, maxIterations=<span class="hljs-number">50</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior&quot;</span><br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br><br>    tripod = scene.Modelling.addChild(Tripod())<br><br>    serial = SerialPortBridgeGeneric(scene)<br><br>    <span class="hljs-comment"># The real robot receives data from the 3 actuators</span><br>    serialportctrl = scene.addObject(<br>        SerialPortController(name=<span class="hljs-string">&quot;SerialPortController&quot;</span>, inputs=tripod.actuatedarms, serialport=serial))<br><br>    <span class="hljs-comment"># The simulation&#x27;s control with keystrokes is still available</span><br>    controller = scene.addObject(<br>        TripodControllerWithCom(scene, actuators=tripod.actuatedarms, serialportctrl=serialportctrl))<br>    <span class="hljs-comment"># You can set the animation from the python script by adding this call</span><br>    controller.initTripod(<span class="hljs-string">&#x27;A&#x27;</span>)<br><br>    scene.Simulation.addChild(tripod)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                 name=<span class="hljs-string">&quot;deformableAndFreeCenterCoupling&quot;</span>,<br>                                 template=<span class="hljs-string">&#x27;Vec3,Rigid3&#x27;</span>,<br>                                 object1=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                 object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.FreeCenter.dofs&quot;</span>].getLinkPath(),<br>                                 nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>        scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                   name=<span class="hljs-string">&quot;deformableAndArm&#123;i&#125;Coupling&quot;</span>.<span class="hljs-built_in">format</span>(i=i),<br>                                   template=<span class="hljs-string">&#x27;Vec1,Vec3&#x27;</span>,<br>                                   object1=tripod[<span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&quot;.ServoMotor.Articulation.dofs&quot;</span>].getLinkPath(),<br>                                   object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                   skipJ2tKJ2=<span class="hljs-literal">True</span>,<br>                                   nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br></code></pre></td></tr></table></figure>
+<h4 id="Exploring-the-scene-5"><a href="#Exploring-the-scene-5" class="headerlink" title="Exploring the scene"></a>Exploring the scene</h4><ul>
+<li>Start the scene with the <code>[Animate]</code> button, then click anywhere in the simulation window and type the keystroke to start sending data to the real robot. Observe how the real robot responds to the modifications of the simulation: this is the direct control, where the user specifies the angular position to reach, which are then also sent to the robot.</li>
+<li>Remark how the real robot is limited in his movements, while nothing prevents the user to make complete turns around the motor shaft with the servo-arms in the simulation.</li>
+</ul>
+<h3 id="STEP-8-Additional-Modules"><a href="#STEP-8-Additional-Modules" class="headerlink" title="STEP 8: Additional Modules"></a>STEP 8: Additional Modules</h3><h4 id="STEP-8-1-Inverse-Control"><a href="#STEP-8-1-Inverse-Control" class="headerlink" title="STEP 8.1: Inverse Control"></a>STEP 8.1: Inverse Control</h4><p>In the previous steps we where controlling the robot by directly specifying the angle of the Servo Motor object. In this step we will use SOFA to inverse the model and adding a effector to the simulation so that it becomes possible to specify the effector’s position and let the simulation compute the angular positions to apply to reach the effector’s position.</p>
+<p>The same keystrokes as in the previous steps are used, adding a new one to start the inverse resolution.</p>
+<ul>
+<li>Keystroke to start sending data to the real robot: <code>Ctrl</code> + <code>B</code></li>
+<li>Keystroke to move the servomotors from their default position to the initial one of the real robot: <code>Ctrl</code> + <code>A</code></li>
+<li>Keystroke to start the inverse resolution: <code>Ctrl</code> + <code>I</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">from</span> tutorial <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tripod <span class="hljs-keyword">import</span> Tripod<br><span class="hljs-keyword">from</span> tripodcontroller <span class="hljs-keyword">import</span> SerialPortController, SerialPortBridgeGeneric, InverseController, DirectController<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">EffectorGoal</span>(<span class="hljs-params">position</span>):<br>    self = Sofa.Core.Node(<span class="hljs-string">&#x27;Goal&#x27;</span>)<br>    self.addObject(<span class="hljs-string">&#x27;EulerImplicitSolver&#x27;</span>, firstOrder=<span class="hljs-literal">True</span>)<br>    self.addObject(<span class="hljs-string">&#x27;CGLinearSolver&#x27;</span>, iterations=<span class="hljs-number">100</span>, threshold=<span class="hljs-number">1e-5</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    self.addObject(<span class="hljs-string">&#x27;MechanicalObject&#x27;</span>, name=<span class="hljs-string">&#x27;goalMO&#x27;</span>, template=<span class="hljs-string">&#x27;Rigid3&#x27;</span>, position=position+[<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>], showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">10</span>)<br>    self.addObject(<span class="hljs-string">&#x27;UncoupledConstraintCorrection&#x27;</span>)<br><br>    spheres = self.addChild(<span class="hljs-string">&#x27;Spheres&#x27;</span>)<br>    spheres.addObject(<span class="hljs-string">&#x27;MechanicalObject&#x27;</span>, name=<span class="hljs-string">&#x27;mo&#x27;</span>, position=[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],  [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],   [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>],   [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>]])<br>    spheres.addObject(<span class="hljs-string">&#x27;SphereCollisionModel&#x27;</span>, radius=<span class="hljs-number">5</span>, group=<span class="hljs-number">1</span>)<br>    spheres.addObject(<span class="hljs-string">&#x27;RigidMapping&#x27;</span>)<br>    <span class="hljs-keyword">return</span> self<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GoalController</span>(Sofa.Core.Controller):<br>    <span class="hljs-string">&quot;&quot;&quot;This controller moves the goal position when the inverse control is activated</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        Sofa.Core.Controller.__init__(self, *args, **kwargs)<br>        self.name = <span class="hljs-string">&quot;GoalController&quot;</span><br>        self.activated = <span class="hljs-literal">False</span><br>        self.time = <span class="hljs-number">0</span><br>        self.dy = <span class="hljs-number">0.1</span><br>        goalNode = args[<span class="hljs-number">1</span>]<br>        self.mo = goalNode.goalMO<br>        self.dt = goalNode.getRoot().dt.value<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">onKeyPressed</span>(<span class="hljs-params">self, key</span>):<br>        <span class="hljs-keyword">if</span> key == Key.I:<br>            self.activated = <span class="hljs-literal">True</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">onAnimateBeginEvent</span>(<span class="hljs-params">self, e</span>):<br>        <span class="hljs-keyword">if</span> self.activated:<br>            self.time = self.time+self.dt<br><br>        <span class="hljs-keyword">if</span> self.time &gt;= <span class="hljs-number">1</span>:<br>            self.time = <span class="hljs-number">0</span>;<br>            self.dy = -self.dy<br><br>        pos = [self.mo.position[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], self.mo.position[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>], self.mo.position[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>]]<br>        pos[<span class="hljs-number">1</span>] += self.dy<br>        self.mo.position = [[pos[<span class="hljs-number">0</span>], pos[<span class="hljs-number">1</span>], pos[<span class="hljs-number">2</span>], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>]]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">addInverseComponents</span>(<span class="hljs-params">arms, freecenter, goalNode, use_orientation</span>):<br>    actuators=[]<br>    <span class="hljs-keyword">for</span> arm <span class="hljs-keyword">in</span> arms:<br>        actuator = arm.ServoMotor.Articulation.addChild(<span class="hljs-string">&#x27;actuator&#x27;</span>)<br>        actuators.append(actuator)<br>        actuator.activated = <span class="hljs-literal">False</span><br>        actuator.addObject(<span class="hljs-string">&#x27;JointActuator&#x27;</span>, name=<span class="hljs-string">&#x27;JointActuator&#x27;</span>, template=<span class="hljs-string">&#x27;Vec1&#x27;</span>,<br>                                                index=<span class="hljs-number">0</span>, applyForce=<span class="hljs-literal">True</span>,<br>                                                minAngle=-<span class="hljs-number">1.5</span>, maxAngle=<span class="hljs-number">1.5</span>, maxAngleVariation=<span class="hljs-number">0.1</span>)<br><br>    effector = freecenter.addChild(<span class="hljs-string">&quot;Effector&quot;</span>)<br>    freecenter.dofs.showObject=<span class="hljs-literal">True</span><br>    effector.activated = <span class="hljs-literal">False</span><br>    actuators.append(effector)<br>    <span class="hljs-keyword">if</span> goalNode <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        effector.addObject(<span class="hljs-string">&#x27;PositionEffector&#x27;</span>, name=<span class="hljs-string">&#x27;effector&#x27;</span>, template=<span class="hljs-string">&#x27;Rigid3&#x27;</span>,<br>                               useDirections=[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],<br>                               indices=<span class="hljs-number">0</span>, effectorGoal=[<span class="hljs-number">10</span>, <span class="hljs-number">40</span>, <span class="hljs-number">0</span>], limitShiftToTarget=<span class="hljs-literal">True</span>,<br>                               maxShiftToTarget=<span class="hljs-number">5</span>)<br>    <span class="hljs-keyword">elif</span> use_orientation:<br>        effector.addObject(<span class="hljs-string">&#x27;PositionEffector&#x27;</span>, name=<span class="hljs-string">&#x27;effector&#x27;</span>, template=<span class="hljs-string">&#x27;Rigid3&#x27;</span>,<br>                               useDirections=[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],<br>                               indices=<span class="hljs-number">0</span>, effectorGoal=goalNode.goalMO.position.getLinkPath())<br>    <span class="hljs-keyword">else</span>:<br>        effector.addObject(<span class="hljs-string">&#x27;PositionEffector&#x27;</span>, name=<span class="hljs-string">&#x27;effector&#x27;</span>, template=<span class="hljs-string">&#x27;Rigid3&#x27;</span>,<br>                               useDirections=[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],<br>                               indices=<span class="hljs-number">0</span>, effectorGoal=goalNode.goalMO.position.getLinkPath(),<br>                               limitShiftToTarget=<span class="hljs-literal">True</span>, maxShiftToTarget=<span class="hljs-number">5</span>)<br>    <span class="hljs-keyword">return</span> actuators<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br>    <span class="hljs-keyword">from</span> stlib3.scene <span class="hljs-keyword">import</span> Scene<br>    scene = Scene(rootNode, gravity=[<span class="hljs-number">0.</span>, -<span class="hljs-number">9810.</span>, <span class="hljs-number">0.</span>], dt=<span class="hljs-number">0.01</span>, iterative=<span class="hljs-literal">False</span>, plugins=[<span class="hljs-string">&quot;SofaSparseSolver&quot;</span>, <span class="hljs-string">&quot;SofaOpenglVisual&quot;</span>, <span class="hljs-string">&quot;SofaSimpleFem&quot;</span>, <span class="hljs-string">&quot;SoftRobots&quot;</span>,<span class="hljs-string">&quot;SoftRobots.Inverse&quot;</span>, <span class="hljs-string">&#x27;SofaBoundaryCondition&#x27;</span>, <span class="hljs-string">&#x27;SofaDeformable&#x27;</span>, <span class="hljs-string">&#x27;SofaEngine&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaMiscMapping&#x27;</span>, <span class="hljs-string">&#x27;SofaRigid&#x27;</span>, <span class="hljs-string">&#x27;SofaGraphComponent&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralAnimationLoop&#x27;</span>, <span class="hljs-string">&#x27;SofaGeneralEngine&#x27;</span>])<br><br>    <span class="hljs-comment"># Adding contact handling</span><br>    scene.addMainHeader()<br>    scene.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br><br>    <span class="hljs-comment"># Inverse Solver</span><br>    scene.addObject(<span class="hljs-string">&#x27;FreeMotionAnimationLoop&#x27;</span>)<br>    scene.addObject(<span class="hljs-string">&#x27;QPInverseProblemSolver&#x27;</span>, name=<span class="hljs-string">&#x27;QP&#x27;</span>, printLog=<span class="hljs-literal">False</span>)<br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>    scene.Settings.mouseButton.stiffness = <span class="hljs-number">10</span><br>    scene.VisualStyle.displayFlags = <span class="hljs-string">&quot;showBehavior showCollision&quot;</span><br><br>    tripod = scene.Modelling.addChild(Tripod())<br><br>    <span class="hljs-comment"># Serial port bridge</span><br>    serial = SerialPortBridgeGeneric(rootNode)<br><br>    <span class="hljs-comment"># Choose here to control position or orientation of end-effector</span><br>    orientation = <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">if</span> orientation:<br>        <span class="hljs-comment"># inverse in orientation</span><br>        goalNode = EffectorGoal([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>])<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># inverse in position</span><br>        goalNode = EffectorGoal([<span class="hljs-number">0</span>, <span class="hljs-number">40</span>, <span class="hljs-number">0</span>])<br>    scene.Modelling.addChild(goalNode)<br><br>    actuators = addInverseComponents(tripod.actuatedarms, tripod.RigidifiedStructure.FreeCenter, goalNode, orientation)<br><br>    <span class="hljs-comment"># The real robot receives data from the 3 actuators</span><br>    <span class="hljs-comment"># serialportctrl = scene.addObject(SerialPortController(scene, inputs=tripod.actuatedarms, serialport=serial))</span><br>    invCtr = scene.addObject(InverseController(scene, goalNode, actuators, tripod.ActuatedArm0.ServoMotor.Articulation.ServoWheel.RigidParts,<br>                                                tripod, serial,<br>                                                [tripod.ActuatedArm0, tripod.ActuatedArm1, tripod.ActuatedArm2]))<br><br>    <span class="hljs-comment"># The regular controller that is being used for the last 2 steps but with small additions</span><br>    scene.addObject(DirectController(scene, tripod.actuatedarms, invCtr))<br><br>    scene.Simulation.addChild(tripod)<br><br>    <span class="hljs-comment"># Temporary additions to have the system correctly built in SOFA</span><br>    <span class="hljs-comment"># Will no longer be required in SOFA v22.06</span><br>    scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                 name=<span class="hljs-string">&quot;deformableAndFreeCenterCoupling&quot;</span>,<br>                                 template=<span class="hljs-string">&#x27;Vec3,Rigid3&#x27;</span>,<br>                                 object1=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                 object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.FreeCenter.dofs&quot;</span>].getLinkPath(),<br>                                 nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>):<br>        scene.Simulation.addObject(<span class="hljs-string">&#x27;MechanicalMatrixMapper&#x27;</span>,<br>                                   name=<span class="hljs-string">&quot;deformableAndArm&#123;i&#125;Coupling&quot;</span>.<span class="hljs-built_in">format</span>(i=i),<br>                                   template=<span class="hljs-string">&#x27;Vec1,Vec3&#x27;</span>,<br>                                   object1=tripod[<span class="hljs-string">&quot;ActuatedArm&quot;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&quot;.ServoMotor.Articulation.dofs&quot;</span>].getLinkPath(),<br>                                   object2=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.dofs&quot;</span>].getLinkPath(),<br>                                   skipJ2tKJ2=<span class="hljs-literal">True</span>,<br>                                   nodeToParse=tripod[<span class="hljs-string">&quot;RigidifiedStructure.DeformableParts.MechanicalModel&quot;</span>].getLinkPath())<br></code></pre></td></tr></table></figure>
+<h4 id="STEP-8-2-Defining-a-motion-path-for-the-maze"><a href="#STEP-8-2-Defining-a-motion-path-for-the-maze" class="headerlink" title="STEP 8.2: Defining a motion path for the maze"></a>STEP 8.2: Defining a motion path for the maze</h4><p>In the previous steps we where controlling the robot in inverse mode. We want now to make the robot follow a predefined path.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> Sofa<br><span class="hljs-keyword">import</span> Sofa.Core<br><span class="hljs-keyword">from</span> stlib3.scene.contactheader <span class="hljs-keyword">import</span> ContactHeader<br><span class="hljs-keyword">from</span> mazecontroller <span class="hljs-keyword">import</span> MazeController<br><span class="hljs-keyword">import</span> json<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Maze</span>(Sofa.Prefab):<br><br>    properties = [<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;name&#x27;</span>,           <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;Node name&#x27;</span>,                  <span class="hljs-string">&#x27;default&#x27;</span>:<span class="hljs-string">&#x27;Maze&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;index&#x27;</span>,          <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;int&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;index of rigid to attach to&#x27;</span>,   <span class="hljs-string">&#x27;default&#x27;</span>:<span class="hljs-number">0</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;translation&#x27;</span>,    <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;Vec3d&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;&#x27;</span>,                            <span class="hljs-string">&#x27;default&#x27;</span>:[<span class="hljs-number">0</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>]&#125;,<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;rotation&#x27;</span>,       <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;Vec3d&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;&#x27;</span>,                            <span class="hljs-string">&#x27;default&#x27;</span>:[-<span class="hljs-number">90</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]&#125;<br>    ]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        Sofa.Prefab.__init__(self, *args, **kwargs)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">init</span>(<span class="hljs-params">self</span>):<br>        self.addObject(<span class="hljs-string">&quot;MeshSTLLoader&quot;</span>, name=<span class="hljs-string">&quot;loader&quot;</span>, filename=<span class="hljs-string">&quot;data/mesh/maze/maze_12_coarse.stl&quot;</span>,<br>                       translation=self.translation.value, rotation=self.rotation.value)<br>        self.addObject(<span class="hljs-string">&quot;MeshTopology&quot;</span>, src=<span class="hljs-string">&#x27;@loader&#x27;</span>)<br>        self.addObject(<span class="hljs-string">&quot;MechanicalObject&quot;</span>)<br>        self.addObject(<span class="hljs-string">&quot;TriangleCollisionModel&quot;</span>)<br>        self.addObject(<span class="hljs-string">&quot;LineCollisionModel&quot;</span>)<br>        self.addObject(<span class="hljs-string">&quot;PointCollisionModel&quot;</span>)<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Sphere</span>(Sofa.Prefab):<br><br>    properties = [<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;name&#x27;</span>,        <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;Node name&#x27;</span>,  <span class="hljs-string">&#x27;default&#x27;</span>:<span class="hljs-string">&#x27;Sphere&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;position&#x27;</span>,    <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;Vec3d&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;&#x27;</span>,            <span class="hljs-string">&#x27;default&#x27;</span>:[-<span class="hljs-number">22</span>,<span class="hljs-number">50</span>,-<span class="hljs-number">27</span>]&#125;,<br>        &#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;withSolver&#x27;</span>,  <span class="hljs-string">&#x27;type&#x27;</span>:<span class="hljs-string">&#x27;bool&#x27;</span>, <span class="hljs-string">&#x27;help&#x27;</span>:<span class="hljs-string">&#x27;&#x27;</span>,             <span class="hljs-string">&#x27;default&#x27;</span>:<span class="hljs-literal">False</span>&#125;<br>    ]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        Sofa.Prefab.__init__(self, *args, **kwargs)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">init</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">if</span> self.withSolver.value:<br>            self.addObject(<span class="hljs-string">&#x27;EulerImplicitSolver&#x27;</span>)<br>            self.addObject(<span class="hljs-string">&#x27;SparseLDLSolver&#x27;</span>)<br>            self.addObject(<span class="hljs-string">&#x27;GenericConstraintCorrection&#x27;</span>)<br>        self.addObject(<span class="hljs-string">&quot;MechanicalObject&quot;</span>, position=self.position.value)<br>        self.addObject(<span class="hljs-string">&quot;UniformMass&quot;</span>, totalMass=<span class="hljs-number">1e-4</span>)<br>        self.addObject(<span class="hljs-string">&#x27;SphereCollisionModel&#x27;</span>, radius=<span class="hljs-number">2</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">createScene</span>(<span class="hljs-params">rootNode</span>):<br><br>    rootNode.gravity=[<span class="hljs-number">0.</span>, -<span class="hljs-number">9810.</span>, <span class="hljs-number">0.</span>]<br>    rootNode.dt=<span class="hljs-number">0.01</span><br>    ContactHeader(rootNode, alarmDistance=<span class="hljs-number">15</span>, contactDistance=<span class="hljs-number">0.5</span>, frictionCoef=<span class="hljs-number">0</span>)<br>    rootNode.addObject(<span class="hljs-string">&#x27;VisualStyle&#x27;</span>, displayFlags=[<span class="hljs-string">&#x27;showCollisionModels&#x27;</span>, <span class="hljs-string">&#x27;showBehavior&#x27;</span>])<br>    rootNode.addObject(<span class="hljs-string">&#x27;DefaultVisualManagerLoop&#x27;</span>)<br><br>    effector = rootNode.addChild(<span class="hljs-string">&#x27;Effector&#x27;</span>)<br>    effector.addObject(<span class="hljs-string">&#x27;EulerImplicitSolver&#x27;</span>, firstOrder=<span class="hljs-literal">True</span>)<br>    effector.addObject(<span class="hljs-string">&#x27;CGLinearSolver&#x27;</span>, iterations=<span class="hljs-number">100</span>, threshold=<span class="hljs-number">1e-5</span>, tolerance=<span class="hljs-number">1e-5</span>)<br>    effector.addObject(<span class="hljs-string">&#x27;MechanicalObject&#x27;</span>, template=<span class="hljs-string">&#x27;Rigid3&#x27;</span>, name=<span class="hljs-string">&#x27;goalMO&#x27;</span>, position=[<span class="hljs-number">0</span>,<span class="hljs-number">40</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>], showObject=<span class="hljs-literal">True</span>, showObjectScale=<span class="hljs-number">10</span>)<br>    effector.addObject(<span class="hljs-string">&#x27;RestShapeSpringsForceField&#x27;</span>, points=<span class="hljs-number">0</span>, angularStiffness=<span class="hljs-number">1e5</span>, stiffness=<span class="hljs-number">1e5</span>)<br>    effector.addObject(<span class="hljs-string">&#x27;UncoupledConstraintCorrection&#x27;</span>, compliance=<span class="hljs-string">&#x27;1e-10  1e-10  0 0 1e-10  0 1e-10 &#x27;</span>)<br><br>    <span class="hljs-comment"># Open maze planning from JSON file</span><br>    data = json.load(<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;mazeplanning.json&#x27;</span>))<br>    effector.addObject(MazeController(effector, data[<span class="hljs-string">&quot;anglePlanningTable&quot;</span>], <span class="hljs-literal">True</span>))<br><br>    maze = effector.addChild(Maze())<br>    maze.addObject(<span class="hljs-string">&quot;RigidMapping&quot;</span>, index=<span class="hljs-number">0</span>)<br><br>    rootNode.addChild(Sphere(withSolver=<span class="hljs-literal">True</span>))<br><br>    <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+<h4 id="STEP-8-3-Inverse-control-to-follow-a-predefined-motion-path"><a href="#STEP-8-3-Inverse-control-to-follow-a-predefined-motion-path" class="headerlink" title="STEP 8.3: Inverse control to follow a predefined motion path"></a>STEP 8.3: Inverse control to follow a predefined motion path</h4><p>We can now include the maze trajectory withing the tripod robot scene to make a full simulation and compare it with the real-world example.</p>
+<p><img src="/image/SOFA/Tripod/3.gif" srcset="/img/loading.gif" lazyload alt="1" style="zoom:100%;" /></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Congratulation, you completed this tutorial. You are strongly encouraged to pursue with the other tutorials.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Soft-Robot/" class="category-chain-item">Soft Robot</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Soft-Robot/">#Soft Robot</a>
+      
+        <a href="/tags/Hardware/">#Hardware</a>
+      
+        <a href="/tags/Simulation/">#Simulation</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SOFA Study Record (Tripod)</div>
+      <div>http://mingshanhe.github.io/2022/07/05/SOFA/Tripod/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Mingshan He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/12/ROS2/ROS2/" title="ROS2 (Humble) Installation">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ROS2 (Humble) Installation</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/29/FlowIO/FlowIO/" title="FlowIO">
+                        <span class="hidden-mobile">FlowIO</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'mshe-blog',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Mingshan HE</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

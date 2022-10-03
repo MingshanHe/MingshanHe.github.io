@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mingshan He">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hybrid Robot ProjectPlatform Producer: Beijing Union University (BUU) Completed by Mingshan He (First Author &amp; Engineer) Introduction  This project are mainly about the hybrid robot which contains">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hybrid_Robot_Project">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/04/05/Projects/Hybrid-Robot-Project/index.html">
+<meta property="og:site_name" content="MingshanHe&#39;s HomePage">
+<meta property="og:description" content="Hybrid Robot ProjectPlatform Producer: Beijing Union University (BUU) Completed by Mingshan He (First Author &amp; Engineer) Introduction  This project are mainly about the hybrid robot which contains">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-05T13:17:43.000Z">
+<meta property="article:modified_time" content="2022-10-03T03:45:35.174Z">
+<meta property="article:author" content="Mingshan He">
+<meta property="article:tag" content="Hardware">
+<meta property="article:tag" content="Project">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hybrid_Robot_Project - MingshanHe&#39;s HomePage</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mingshanhe.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MingshanHe&#39;s HomePage</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/travel/">
+                <i class="iconfont icon-map"></i>
+                Travel
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/news/">
+                <i class="iconfont icon-comment"></i>
+                News
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/">
+                <i class="iconfont icon-comment"></i>
+                Photos
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hybrid_Robot_Project"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 22:17" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          70 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hybrid_Robot_Project</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Hybrid-Robot-Project"><a href="#Hybrid-Robot-Project" class="headerlink" title="Hybrid Robot Project"></a>Hybrid Robot Project</h1><p><strong>Platform Producer:</strong> <em>Beijing Union University (BUU)</em></p>
+<p>Completed by <em>Mingshan He</em> (First Author &amp; Engineer)</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>  This project are mainly about the hybrid robot which contains the moving platform (sage) and collaborate robot (xMate). The moving platform are carrying the lidar and the camera (Realsense2 Di145). On the other hand, the collaborate robot are carrying the gripper (PGI140) and the camera (Realsense2 Di145). Hence, it can complete the tasts which need the movement and grasp. The destination in this project is that the whole platform moving in the known environment with SLAM and grasp a object directed by the operator.</p>
+<h2 id="Constituent"><a href="#Constituent" class="headerlink" title="Constituent"></a>Constituent</h2><h3 id="1-Computer-Vision"><a href="#1-Computer-Vision" class="headerlink" title="1. Computer Vision"></a>1. Computer Vision</h3><p>  Before this project, I have prepared the knowledge about the camera calibration and running the calibration programm using the hand-eye camera. In this project, it need to recognize the object to grasp by the camera on the collaborate arm and the place to move by the one on the moving platform. </p>
+<h3 id="2-SLAM"><a href="#2-SLAM" class="headerlink" title="2. SLAM"></a>2. SLAM</h3><p>  The navigation module are refered the framework of the turtlebot. Map creating by the <em>gmapping</em> and navigation using <em>graph</em>.</p>
+<h3 id="3-Control-Framework"><a href="#3-Control-Framework" class="headerlink" title="3. Control Framework"></a>3. Control Framework</h3><p>  Mainly for the robot control.</p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>  The <code>*</code>  flag means the file is created and edited by Mingshan He.</p>
+<h3 id="1-Computer-Vision-（catkin-rs）"><a href="#1-Computer-Vision-（catkin-rs）" class="headerlink" title="1. Computer Vision （catkin_rs）"></a>1. Computer Vision （catkin_rs）</h3><p>  In this module, it need to launch the camera to recognize. This project has been designed to recognize the position and orientation of the object by using the <em>aruco</em> tag. In the <em>aruco_ros</em> folder contains the file to launch the recognition algorithm and it will publish the result in the particular topic as pose message. There is a gripper (DH Robotics PGI140) in the end of robot arm which supply the producer the gripper function. The grasp function is developed in Cartesian coordinate, which has a better performance. </p>
+<h4 id="1-1-Realsense2-Camera"><a href="#1-1-Realsense2-Camera" class="headerlink" title="1.1 Realsense2 Camera"></a>1.1 Realsense2 Camera</h4><p>  This folder are containing the libraries and drivers for the Intel Realsense2 camera. You can use the following order to drive the camera and view the image from it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ roslaunch realsense2_camera rs_rgbd.launch<br></code></pre></td></tr></table></figure>
+<p>  After launch this file, the node of camera has been registered in the ros master. If you wanna to have a look at the image callback from the camera, you can use the <code>rqt</code> plugins.</p>
+<p>  Installation can be refered the link website: <a target="_blank" rel="noopener" href="https://github.com/IntelRealSense/realsense-ros">https://github.com/IntelRealSense/realsense-ros</a>.</p>
+<h4 id="1-2-Calibration"><a href="#1-2-Calibration" class="headerlink" title="1.2 Calibration"></a>1.2 Calibration</h4><p>  <strong>Why Calibration?</strong> First, the gripper need to arrive at the appointed position which solved from the image. During the camera capture the image, there is a distance between the camera and gripper. And it is exactly influence the correctness of grasp. Hence, the calibration is need to compensate it. <strong>What’s Calibration?</strong> There are several approaches in the calibration. In this project, I have used the <em>aruco</em> tag to calibrate. After calibration, the programm will provide a offset contains the distance of linear and angular. The frame of camera can be modeled by this method and the transform between the end of effector and camera is defined. </p>
+<h4 id="1-3-TF-Transform"><a href="#1-3-TF-Transform" class="headerlink" title="1.3 TF Transform"></a>1.3 TF Transform</h4><p>  <strong>TF</strong> is the shorten of the transform. It is the prevalent packages to presant the transform of the joints in ros. The link and joints of robot can be described in <em>robot_description</em> as urdf file. If the externed device like camera or gripper is installed at the end of robot arm, you can use the <em>tf</em> package to broadcaste the transform between the device and the end instead of modifing the urdf file frequently. </p>
+<p>  In this project, the devices of gripper and camera are applied to accomplish the functions. As all we know, the gripper and joint7 has the same axis which means there are only distance along the revolute axis of joint7. And the distance can be compensated by the camera, so I just create the transform between the camera and link7 which is the end of the robot. You can use the following order to launch the tf service to broadcast the camera frame based on the link7.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ roslaunch realsense2_camera camera.launch<br></code></pre></td></tr></table></figure>
+<p>  For the recoginition of object, I have used the <em>aruco</em> tag which have mentioned on the bellow. So it also need to use the result of the recognition to broadcast the transform between the camera and the tag. The order is described as follows.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ rosrun realsense2_camera aruco_tf_node<br></code></pre></td></tr></table></figure>
+<p>  In this node, it has also published the information of tag in the topic. The robot controller need it to arrive at the appointed position to grasp object.</p>
+<h3 id="2-SLAM-Simultaneous-Localization-and-Mapping-catkin-ws"><a href="#2-SLAM-Simultaneous-Localization-and-Mapping-catkin-ws" class="headerlink" title="2. SLAM(Simultaneous Localization and Mapping: catkin_ws)"></a>2. SLAM(Simultaneous Localization and Mapping: catkin_ws)</h3><p>  Navigation is the ability of a mobile robot to determine its position in the environment where it is located (localization), and to plan and execute the path to a target location. It enables autonomous avoiding both static and dynamic obstacles. For navigation to work, it is very important to have a map of the environment.</p>
+<h4 id="2-1-Algorithm-Overview"><a href="#2-1-Algorithm-Overview" class="headerlink" title="2.1 Algorithm Overview"></a>2.1 Algorithm Overview</h4><p>  <strong>AMCL</strong> and <strong>Gmapping</strong> (or some other SLAM algorithm) are important parts for mapping process. AMCL (Adaptive Monte Carlo Localization) is a probalistic localization system for a robot moving in 2D. Gmapping is an implementation of a specific SLAM algorithm. And it is an algorithm that is already implemented in ROS.</p>
+<h4 id="2-2-Gmapping-Create-Map"><a href="#2-2-Gmapping-Create-Map" class="headerlink" title="2.2 Gmapping: Create Map"></a>2.2 Gmapping: Create Map</h4><p>  The <em>Gmapping</em> package contains the ROS node named <em>slam_gmapping</em>, which builds a 2D map, using data on laser sensor measurements and the data on the position of the mobile robot. The node <em>slam_gmapping</em> (in ros this node is named <em>gmapping</em>) is subscribed to the topics <code>/scan</code> and <code>/tf</code>, in order to obtain the necessary data to build the map. This node reads data from the laser and transformations and then creates <strong>OGM</strong> (Occupancy Grid Map) based on that data. The map that is being created is being published on the topic <code>/map</code> throughout the mapping process. Topic <code>/map</code> uses a message of type <code>nav_msgs/OccupancyGrid</code>. In <strong>OGM</strong>, the occupancy is represented by the integer value in the range from 0 to 100. A value of 0 means completely unoccupied and 100 means fully occupied (e.g., wall), and a special value is -1, which means an unknown are.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ roslaunch four_wheels scan_mode.launch<br></code></pre></td></tr></table></figure>
+<h5 id="2-2-1-More-details"><a href="#2-2-1-More-details" class="headerlink" title="2.2.1 More details"></a>2.2.1 More details</h5><p>  <strong><em>Problem Formulation:</em></strong> <strong>Given</strong> observations $z<em>{l:t} = z_l,…,z_t$, and odometry measurements $u</em>{2:t} = u<em>l,…,u_t$; <strong>Find</strong> Posterior $p (x</em>{l:t}, m | z<em>{l:t}, u</em>{2:t})$ With m a grid map</p>
+<p>  <strong><em>Key Ideas:</em></strong> </p>
+<p>  <strong>Rao-Blackwellized Particle Filter</strong>: Each particle equals the sample of history of robot poses and posterior over maps given the sample pose history; approximate posterior over maps by distribution with all probability mass on the most likely map whenever posterior is needed.</p>
+<p>  <strong>Proposal distribution $\pi$:</strong> Approximate the optimal sequential proposal distribution $p^{<em>}(x<em>t) = p(x_t | x^i</em>{l:t-l}, z<em>{l:t}, u</em>{l:t}) \propto p(z<em>t | m^i</em>{t-l}, x<em>t) p(x_t | x^i</em>{t-l}, u_t)$ . First, find the local optimum argmax $p^</em>(x)$; Second, sample $x^k$ around the local optimum, with weights $w^k = p^{<em>}(x^k)$; Third, fit a Gaussian over the weighted samples; Finally, this Guassian is an approximation of the optimal sequential proposal $p^</em>$.</p>
+<p>  <strong>Weight</strong> update for optimal sequential proposal is $p(z<em>t | x^i</em>{l:t-l}, z<em>{l:t-l}, u</em>{l:t}) = p(z<em>t | m^i</em>{t-l}, x^i<em>{t-l}, u</em>{t-l})$, which is efficiently approximated from the same samples as aboved</p>
+<p>  <strong>Resampling </strong> based on the effective sample size $S_{eff}$</p>
+<p><strong><em>Algorithm:</em></strong> <strong>Improved RBPF for Map Learning</strong></p>
+<p><strong>Require</strong>:</p>
+<p>  $S_{t-1}$, the sample set of the previous time step</p>
+<p>  $z_t$, the most recent laser scan</p>
+<p>  $u_{t-1}$, the most recent odometry measurement</p>
+<p><strong>Ensure:</strong></p>
+<p>  $S_t$, the new sample set</p>
+<p>  $S_t$ = {}</p>
+<p>  <strong>for all</strong> $s^{(i)}<em>{t-1} \in S</em>{t-1}$ <strong>do</strong></p>
+<p>​    …</p>
+<p>Referred from UC. Berkerly</p>
+<h4 id="2-3-AMCL"><a href="#2-3-AMCL" class="headerlink" title="2.3 AMCL"></a>2.3 AMCL</h4><p>  ACML is a probabilistic localization system for a robot moving in 2D. It implements the adaptive (or KLD-sampling) Monte Carlo localization approach (as described by Dieter Fox), which uses a particle filter to track the pose of a robot against a know map.</p>
+<h4 id="2-2-Initialization"><a href="#2-2-Initialization" class="headerlink" title="2.2 Initialization"></a>2.2 Initialization</h4><p>  To initial the robot pose, which can not localization by theirself.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ rosrun move_control init_pose<br></code></pre></td></tr></table></figure>
+<p>  To set the goal of the destination, which is supposed to be known.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ rosrun move_control set_goal<br></code></pre></td></tr></table></figure>
+<h4 id="2-3-Navigation"><a href="#2-3-Navigation" class="headerlink" title="2.3 Navigation"></a>2.3 Navigation</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ roslaunch four_wheels navigation_mode.launch<br></code></pre></td></tr></table></figure>
+<h3 id="3-Robot-Arm-ROKAE-xMate-3-Pro-amp-DH-Robotics-PGI140-catkin-ca"><a href="#3-Robot-Arm-ROKAE-xMate-3-Pro-amp-DH-Robotics-PGI140-catkin-ca" class="headerlink" title="3. Robot Arm (ROKAE xMate 3 Pro &amp; DH Robotics PGI140: catkin_ca)"></a>3. Robot Arm (ROKAE xMate 3 Pro &amp; DH Robotics PGI140: catkin_ca)</h3><h4 id="3-1-Control-Device"><a href="#3-1-Control-Device" class="headerlink" title="3.1 Control Device"></a>3.1 Control Device</h4><p>  The hardware of control device has been used the industrial control computer which produced by Bing Han. In the programm, it has contained all of the algorithm of the robot and hardware device. The code has not been opensourced, so I have not any details to describe. For control the robot by this, you need to login the computer in ssh and run the executable files in following command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh root@192.168.188.99 (password: root)<br>$ ./DeviceDriverMain --<span class="hljs-built_in">type</span> 4 --cycle 1000<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh root@192.168.188.99 (password: root)<br>$ ./robot/HYYRobotMain<br></code></pre></td></tr></table></figure>
+<h4 id="3-2-ROS-Control"><a href="#3-2-ROS-Control" class="headerlink" title="3.2 ROS Control"></a>3.2 ROS Control</h4><p>  The ros control is the prevalent control package in ros, I have concluded it in the other blog. If you have interest in it, you can click the link. You can run the ros control as following command and start the ros controller.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh root@192.168.188.99 (password: root)<br>$ roslaunch device_driver device_driver.launch<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh root@192.168.188.99 (password: root)<br>$ roslaunch device_driver start_controller.launch controller_name:=hyy_trajectory_controller<br></code></pre></td></tr></table></figure>
+<p>  If you wanna to stop the controller or power off the robot. You can use the following command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh root@192.168.188.99 (password: root)<br>$ roslaunch device_driver stop_controller.launch controller_name:=hyy_trajectory_controller<br></code></pre></td></tr></table></figure>
+<h4 id="3-3-KDL-Kinematic-amp-Dinamic-Library"><a href="#3-3-KDL-Kinematic-amp-Dinamic-Library" class="headerlink" title="3.3 KDL(Kinematic &amp; Dinamic Library)"></a>3.3 KDL(Kinematic &amp; Dinamic Library)</h4><p>  In this project, I have developed the moving library in Cartesian coordinate. And the device controller also has the <em>MoveL</em> function which has the same function.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ roslaunch move_control cartesian_demo_node<br></code></pre></td></tr></table></figure>
+<h4 id="3-4-Gripper-DH-Robotics-PGI140"><a href="#3-4-Gripper-DH-Robotics-PGI140" class="headerlink" title="3.4 Gripper (DH Robotics PGI140)"></a>3.4 Gripper (DH Robotics PGI140)</h4><ul>
+<li>Serial and Modbus 485</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ rosrun move_control Gripper_node<br></code></pre></td></tr></table></figure>
+<ul>
+<li>描述视觉算法，以及其他，特征识别， 边缘提取。aruco的算法的描述，功能包中的实现位置。思维导图（代码位置）。</li>
+<li>关键技术的描述，提前了解的基础。</li>
+<li>上架的实现。</li>
+<li>动作规划的算法，描述以及代码位置。</li>
+<li>指令顺序，每输入一个指令后的截图，演示视频。</li>
+<li>自主建图：不能用keyboard建图，给一系列必须经过的点（这些点给定），边走边图，实时的避障，需要嵌入目标识别和定位的算法，最终成功实现对目标的自助规划抓取。</li>
+<li>所有的文档，需要调参的参数的说明，调参的代码位置。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Project/" class="category-chain-item">Project</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hardware/">#Hardware</a>
+      
+        <a href="/tags/Project/">#Project</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hybrid_Robot_Project</div>
+      <div>http://mingshanhe.github.io/2022/04/05/Projects/Hybrid-Robot-Project/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Mingshan He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/Tool/Git/Git/" title="Git">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/05/Hardware/EtherCAT-protocol/" title="EtherCAT_protocol">
+                        <span class="hidden-mobile">EtherCAT_protocol</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'mshe-blog',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Mingshan HE</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
