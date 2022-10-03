@@ -2,8 +2,11 @@
 title: photos
 date: 2022-04-04 22:19:42
 layout: photos
-
 ---
+# Important Photos
+
+
+
 <link rel="stylesheet" href="./ins.css">
 <div class="photos-btn-wrap">
 	<a class="photos-btn active" href="javascript:void(0)">Photos</a>

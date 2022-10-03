@@ -5,6 +5,7 @@ date: 2022-04-05 21:12:03
 ---
 
 
+**2022.09.01**: I have enrolled in Seoul National University. And I have had the first seminar with Biorobotics Laboratory.
 
 **2022.06.27**: I have visited SSR Group which is leaded by Prof. Ding in Tsinghua University as a visiting student. 
 
