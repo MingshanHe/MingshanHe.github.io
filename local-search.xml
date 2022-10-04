@@ -33,11 +33,11 @@
     
     <tags>
       
-      <tag>Soft Robot</tag>
-      
       <tag>Hardware</tag>
       
       <tag>Simulation</tag>
+      
+      <tag>Soft Robot</tag>
       
     </tags>
     
@@ -62,9 +62,9 @@
     
     <tags>
       
-      <tag>Soft Robot</tag>
-      
       <tag>Hardware</tag>
+      
+      <tag>Soft Robot</tag>
       
     </tags>
     
@@ -89,9 +89,9 @@
     
     <tags>
       
-      <tag>Soft Robot</tag>
-      
       <tag>Simulation</tag>
+      
+      <tag>Soft Robot</tag>
       
     </tags>
     
@@ -116,9 +116,9 @@
     
     <tags>
       
-      <tag>Soft Robot</tag>
-      
       <tag>Simulation</tag>
+      
+      <tag>Soft Robot</tag>
       
     </tags>
     
@@ -208,9 +208,9 @@
     
     <tags>
       
-      <tag>Reinforcement Learning</tag>
-      
       <tag>Simulation</tag>
+      
+      <tag>Reinforcement Learning</tag>
       
     </tags>
     
@@ -235,11 +235,11 @@
     
     <tags>
       
-      <tag>Simulation</tag>
-      
       <tag>ROS</tag>
       
       <tag>Drone</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
@@ -264,11 +264,11 @@
     
     <tags>
       
-      <tag>Simulation</tag>
-      
       <tag>ROS</tag>
       
       <tag>Drone</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
@@ -370,9 +370,9 @@
     
     <tags>
       
-      <tag>Algorithm</tag>
-      
       <tag>Robotics</tag>
+      
+      <tag>Algorithm</tag>
       
     </tags>
     
@@ -399,9 +399,9 @@
       
       <tag>Hardware</tag>
       
-      <tag>Algorithm</tag>
-      
       <tag>Robotics</tag>
+      
+      <tag>Algorithm</tag>
       
     </tags>
     
@@ -428,9 +428,9 @@
       
       <tag>Hardware</tag>
       
-      <tag>Algorithm</tag>
-      
       <tag>Robotics</tag>
+      
+      <tag>Algorithm</tag>
       
     </tags>
     
