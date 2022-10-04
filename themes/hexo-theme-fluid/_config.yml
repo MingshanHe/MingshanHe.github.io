@@ -349,10 +349,10 @@ navbar:
     - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
-    - { key: "Travel", link: "/travel/", icon: "iconfont icon-map"}
+    # - { key: "Travel", link: "/travel/", icon: "iconfont icon-map"}
     - { key: "News", link: "/news/", icon: "iconfont icon-comment"}
     # - { key: "Gallery", link: "/gallery/", icon: "iconfont icon-comment"}
-    - { key: "Photos", link: "/photos/", icon: "iconfont icon-comment"}
+    - { key: "Photos", link: "/photos/", icon: "iconfont icon-images"}
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
