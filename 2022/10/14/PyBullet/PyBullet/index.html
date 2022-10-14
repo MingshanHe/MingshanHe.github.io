@@ -16,27 +16,25 @@
   <meta name="author" content="Mingshan He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MuJoCo Instruction1. InstallThe installation of MuJoCo is simple and it have been archived by official website. There are two steps you need to install MuJoCo in Ubuntu operating system which I use us">
+    <meta name="description" content="PyBulletIntroduction  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MuJoCo">
-<meta property="og:url" content="http://mingshanhe.github.io/2022/05/23/MuJoCo/MuJoCo/index.html">
+<meta property="og:title" content="PyBullet">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/10/14/PyBullet/PyBullet/index.html">
 <meta property="og:site_name" content="MingshanHe&#39;s HomePage">
-<meta property="og:description" content="MuJoCo Instruction1. InstallThe installation of MuJoCo is simple and it have been archived by official website. There are two steps you need to install MuJoCo in Ubuntu operating system which I use us">
+<meta property="og:description" content="PyBulletIntroduction  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://mingshanhe.github.io/image/Mujoco/1.png">
-<meta property="article:published_time" content="2022-05-23T13:29:35.000Z">
-<meta property="article:modified_time" content="2022-10-03T03:45:35.174Z">
+<meta property="article:published_time" content="2022-10-14T13:12:51.000Z">
+<meta property="article:modified_time" content="2022-10-14T13:14:39.204Z">
 <meta property="article:author" content="Mingshan He">
-<meta property="article:tag" content="Reinforcement Learning">
 <meta property="article:tag" content="Simulation">
+<meta property="article:tag" content="PyBullet">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://mingshanhe.github.io/image/Mujoco/1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>MuJoCo - MingshanHe&#39;s HomePage</title>
+  <title>PyBullet - MingshanHe&#39;s HomePage</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -240,7 +238,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="MuJoCo"></span>
+            <span id="subtitle" data-typed-text="PyBullet"></span>
           
         </div>
 
@@ -251,8 +249,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-23 22:29" pubdate>
-          May 23, 2022 pm
+        <time datetime="2022-10-14 22:12" pubdate>
+          October 14, 2022 pm
         </time>
       </span>
     
@@ -263,7 +261,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          632 words
+          4.3k words
         
       </span>
     
@@ -274,7 +272,7 @@
         
         
         
-          6 mins
+          37 mins
         
       </span>
     
@@ -312,19 +310,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MuJoCo</h1>
+            <h1 style="display: none">PyBullet</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="MuJoCo-Instruction"><a href="#MuJoCo-Instruction" class="headerlink" title="MuJoCo Instruction"></a>MuJoCo Instruction</h1><h2 id="1-Install"><a href="#1-Install" class="headerlink" title="1. Install"></a>1. Install</h2><p>The installation of <code>MuJoCo</code> is simple and it have been archived by official website. There are two steps you need to install <code>MuJoCo</code> in Ubuntu operating system which I use usually. You need to choose download two files from <a target="_blank" rel="noopener" href="https://roboti.us/download.html">official website</a>, which I have downloaded are <code>mujoco200_linux</code> and the License of the it.</p>
-<p>After unpack it, drop the license file in the bin folder and navigate to the sample folder in terminal.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> mujoco200_linux/sample &amp;&amp; make<br></code></pre></td></tr></table></figure>
-<p>Then the codes will be compiled with makefile and you could navigate to bin folder and run the simulate file with following command.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./simulate ../model/arm26.xml<br></code></pre></td></tr></table></figure>
-<p>After these commands, you should see a GUI open up and a two joint arm moving if everything worked fine.</p>
-<p><img src="/image/Mujoco/1.png" srcset="/img/loading.gif" lazyload alt="1" style="zoom:80%;" /></p>
-
+                <h1 id="PyBullet"><a href="#PyBullet" class="headerlink" title="PyBullet"></a>PyBullet</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation, inverse dynamics computation, forward and inverse kinematics, collision detection and ray intersection queries.</p>
+<p>  PyBullet can be easily used with <code>TensorFlow</code> and <code>OpenAI Gym</code>. Researchers from Google Brain, Stanford AI Lab, INRIA and many other labs use PyBullet. If you use PyBullet in your research, please add a citation.</p>
+<h3 id="Hello-PyBullet-World"><a href="#Hello-PyBullet-World" class="headerlink" title="Hello PyBullet World"></a>Hello PyBullet World</h3><p>Here is a PyBullet script.(<code>Hello_PyBullet_World.py</code>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pybullet <span class="hljs-keyword">as</span> p<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> pybullet_data<br><br>physicsClient = p.connect(p.GUI)<span class="hljs-comment">#or p.DIRECT for non-graphical version</span><br><br>p.setAdditionalSearchPath(pybullet_data.getDataPath()) <span class="hljs-comment">#optionally</span><br><br>p.setGravity(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">10</span>) <span class="hljs-comment"># Gravity</span><br><br>planeId = p.loadURDF(<span class="hljs-string">&quot;plane.urdf&quot;</span>) <span class="hljs-comment"># load basic plane URDF</span><br><br>startPos = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>] <span class="hljs-comment"># the Original Pos of the object </span><br><br>startOrientation = p.getQuaternionFromEuler([<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]) <span class="hljs-comment"># the Original Ori with the Euler of the object</span><br><br>boxId = p.loadURDF(<span class="hljs-string">&quot;r2d2.urdf&quot;</span>,startPos, startOrientation) <span class="hljs-comment"># load object URDF</span><br><br><span class="hljs-comment"># Set the simulation time and time sleep of the step</span><br><span class="hljs-comment"># I think the step time makes the step time discrete and makes the calculate resourses more efficency.</span><br><span class="hljs-comment"># You could modify this value to accelerate the simulation or deaccelerate.</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">10000</span>):<br>    p.stepSimulation()<br>    time.sleep(<span class="hljs-number">1.</span>/<span class="hljs-number">240.</span>)<br>cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[USER INFO]:&quot;</span>)<br><span class="hljs-built_in">print</span>(cubePos,cubeOrn)<br>p.disconnect()<br><br></code></pre></td></tr></table></figure>
+<h4 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h4><h5 id="connect-disconnect-bullet-client"><a href="#connect-disconnect-bullet-client" class="headerlink" title="connect, disconnect, bullet_client"></a>connect, disconnect, bullet_client</h5><p>  After importing the PyBullet module, the first thing to do is <strong>connecting</strong> to the physics simulation. PyBullet is designed around a client-server driven API, with a client sending commands and a physics server returning the status.</p>
+<p>  You can provide your own data files, or you can use the <code>PyBullet_data</code> package that ships with PyBullet. For this, import <code>pybullet_data</code> and register the directory using <code>pybullet.setAdditionalSearchPath(pybullet_data.getDatapath())</code>. For other connection types:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">pybullet.connect(pybullet.DIRECT)<br>pybullet.connect(pybullet.GUI, options=<span class="hljs-string">&quot;--opengl2&quot;</span>)<br>pybullet.connect(pybullet.SHARED_MEMORY,<span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;192.168.0.1&quot;</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.TCP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6667</span>)<br></code></pre></td></tr></table></figure>
+<p>  You can <strong>disconnect</strong> from a physics server, using the physics client Id returned by the connect call (if non-negative). A <code>DIRECT</code> or <code>GUI</code> physics server will shutdown A separate (out-of-process) physics server will keep on running.</p>
+<p>  If you want to use multiple independent simulations in parallel, you can use <code>pybullet_utils.bullet_client</code>.</p>
+<h5 id="setGravity"><a href="#setGravity" class="headerlink" title="setGravity"></a>setGravity</h5><p>  By default, there is no gravitational force enabled. <code>setGravity</code> lets you set the default gravity force for all objects.</p>
+<h5 id="loadURDF-loadSDF-loadMJCF"><a href="#loadURDF-loadSDF-loadMJCF" class="headerlink" title="loadURDF, loadSDF, loadMJCF"></a>loadURDF, loadSDF, loadMJCF</h5><p>  The <code>loadURDF</code> will send a command to the physics server to load a physics model from a Universal Robot Description File. There are some loadURDF arguments:</p>
+<p>  <code>basePosition</code> create the base of the object at the specified position in world space coordinates; <code>baseOrientation</code> create the base of the object at the specified orientation as world space quaternion [X,Y,Z,W]; <code>useMaxmalCoordinates</code>by default, the joints in the URDF file are created using the reduced coordinate method; <code>useFixedBase</code> force the base of the loaded object to the static; <code>globalScaling</code> will apply a scale factor to the URDF model.</p>
+<p>  The <code>loadSDF</code> command only extracts some essential parts of the SDF related to the robot models and geometry, and ignores many elements related to cameras, lights and so on The <code>loadMJCF</code> command performs basic import of MuJoCo MJCF xml files.</p>
+<h5 id="saveState-saveBullet-restoreState-removeState-saveWorld"><a href="#saveState-saveBullet-restoreState-removeState-saveWorld" class="headerlink" title="saveState, saveBullet, restoreState, removeState, saveWorld"></a>saveState, saveBullet, restoreState, removeState, saveWorld</h5><p>  When you need deterministic simulation after restoring to a previously saved state, all important state information, including contact points, need to be stored.(<code>SaveData.py</code>)</p>
+<h5 id="createCollisionShape-VisualShape"><a href="#createCollisionShape-VisualShape" class="headerlink" title="createCollisionShape, VisualShape"></a>createCollisionShape, VisualShape</h5><p>  Although the recommended and easiest way to create stuff in the world is using the loading functions (loadURDF/SDF/MJCF/Bullet), you can also create collision and visual shapes programmatically and use them to create a multi body using createMultiBody. You can create a visual shape in a similar way to creating a collision shape, with some additional arguments to control the visual appearance, such as diffuse and specular color. (<code>createMultiBodyLinks.py</code> and <code>createVisualShape.py</code>)</p>
+<h5 id="stepSimulation-performCollisionDetection"><a href="#stepSimulation-performCollisionDetection" class="headerlink" title="stepSimulation, performCollisionDetection"></a>stepSimulation, performCollisionDetection</h5><p>  stepSimulation will perform all the actions in a single forward dynamics simulation step such as collision detection, constraint solving and integration. The default time step is <strong>1/240</strong> second, it can be changed using the <code>setTimeStep</code> or <code>setphysicsEngineParameter</code> API. The performCollisionDetection API will perform just the collision detection stage of the stepSimulation.</p>
+<h2 id="Controlling-a-robot"><a href="#Controlling-a-robot" class="headerlink" title="Controlling a robot"></a>Controlling a robot</h2>
                 
               </div>
             
@@ -332,34 +339,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Simulation/" class="category-chain-item">Simulation</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Reinforcement-Learning/">#Reinforcement Learning</a>
-      
         <a href="/tags/Simulation/">#Simulation</a>
+      
+        <a href="/tags/PyBullet/">#PyBullet</a>
       
     </div>
   
@@ -371,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MuJoCo</div>
-      <div>http://mingshanhe.github.io/2022/05/23/MuJoCo/MuJoCo/</div>
+      <div>PyBullet</div>
+      <div>http://mingshanhe.github.io/2022/10/14/PyBullet/PyBullet/</div>
     </div>
     <div class="license-meta">
       
@@ -384,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 23, 2022</div>
+          <div>October 14, 2022</div>
         </div>
       
       
@@ -414,18 +400,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/15/Teaching/Mobile%20Robot%20Control%20Experiment%20%5BA047619%5D%20Spring%202022/" title="Mobile Robot Control Experiment [A047619] Spring 2022">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mobile Robot Control Experiment [A047619] Spring 2022</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/20/ROS/PX4_2/" title="PX4 Geometric Controller">
-                        <span class="hidden-mobile">PX4 Geometric Controller</span>
+                      <a href="/2022/07/12/ROS2/ROS2/" title="ROS2 (Humble) Installation">
+                        <span class="hidden-mobile">ROS2 (Humble) Installation</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -503,6 +483,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -721,6 +707,40 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

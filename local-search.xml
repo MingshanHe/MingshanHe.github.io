@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>PyBullet</title>
+    <link href="/2022/10/14/PyBullet/PyBullet/"/>
+    <url>/2022/10/14/PyBullet/PyBullet/</url>
+    
+    <content type="html"><![CDATA[<h1 id="PyBullet"><a href="#PyBullet" class="headerlink" title="PyBullet"></a>PyBullet</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation, inverse dynamics computation, forward and inverse kinematics, collision detection and ray intersection queries.</p><p>  PyBullet can be easily used with <code>TensorFlow</code> and <code>OpenAI Gym</code>. Researchers from Google Brain, Stanford AI Lab, INRIA and many other labs use PyBullet. If you use PyBullet in your research, please add a citation.</p><h3 id="Hello-PyBullet-World"><a href="#Hello-PyBullet-World" class="headerlink" title="Hello PyBullet World"></a>Hello PyBullet World</h3><p>Here is a PyBullet script.(<code>Hello_PyBullet_World.py</code>)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pybullet <span class="hljs-keyword">as</span> p<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> pybullet_data<br><br>physicsClient = p.connect(p.GUI)<span class="hljs-comment">#or p.DIRECT for non-graphical version</span><br><br>p.setAdditionalSearchPath(pybullet_data.getDataPath()) <span class="hljs-comment">#optionally</span><br><br>p.setGravity(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">10</span>) <span class="hljs-comment"># Gravity</span><br><br>planeId = p.loadURDF(<span class="hljs-string">&quot;plane.urdf&quot;</span>) <span class="hljs-comment"># load basic plane URDF</span><br><br>startPos = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>] <span class="hljs-comment"># the Original Pos of the object </span><br><br>startOrientation = p.getQuaternionFromEuler([<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]) <span class="hljs-comment"># the Original Ori with the Euler of the object</span><br><br>boxId = p.loadURDF(<span class="hljs-string">&quot;r2d2.urdf&quot;</span>,startPos, startOrientation) <span class="hljs-comment"># load object URDF</span><br><br><span class="hljs-comment"># Set the simulation time and time sleep of the step</span><br><span class="hljs-comment"># I think the step time makes the step time discrete and makes the calculate resourses more efficency.</span><br><span class="hljs-comment"># You could modify this value to accelerate the simulation or deaccelerate.</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">10000</span>):<br>    p.stepSimulation()<br>    time.sleep(<span class="hljs-number">1.</span>/<span class="hljs-number">240.</span>)<br>cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[USER INFO]:&quot;</span>)<br><span class="hljs-built_in">print</span>(cubePos,cubeOrn)<br>p.disconnect()<br><br></code></pre></td></tr></table></figure><h4 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h4><h5 id="connect-disconnect-bullet-client"><a href="#connect-disconnect-bullet-client" class="headerlink" title="connect, disconnect, bullet_client"></a>connect, disconnect, bullet_client</h5><p>  After importing the PyBullet module, the first thing to do is <strong>connecting</strong> to the physics simulation. PyBullet is designed around a client-server driven API, with a client sending commands and a physics server returning the status.</p><p>  You can provide your own data files, or you can use the <code>PyBullet_data</code> package that ships with PyBullet. For this, import <code>pybullet_data</code> and register the directory using <code>pybullet.setAdditionalSearchPath(pybullet_data.getDatapath())</code>. For other connection types:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">pybullet.connect(pybullet.DIRECT)<br>pybullet.connect(pybullet.GUI, options=<span class="hljs-string">&quot;--opengl2&quot;</span>)<br>pybullet.connect(pybullet.SHARED_MEMORY,<span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;192.168.0.1&quot;</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.TCP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6667</span>)<br></code></pre></td></tr></table></figure><p>  You can <strong>disconnect</strong> from a physics server, using the physics client Id returned by the connect call (if non-negative). A <code>DIRECT</code> or <code>GUI</code> physics server will shutdown A separate (out-of-process) physics server will keep on running.</p><p>  If you want to use multiple independent simulations in parallel, you can use <code>pybullet_utils.bullet_client</code>.</p><h5 id="setGravity"><a href="#setGravity" class="headerlink" title="setGravity"></a>setGravity</h5><p>  By default, there is no gravitational force enabled. <code>setGravity</code> lets you set the default gravity force for all objects.</p><h5 id="loadURDF-loadSDF-loadMJCF"><a href="#loadURDF-loadSDF-loadMJCF" class="headerlink" title="loadURDF, loadSDF, loadMJCF"></a>loadURDF, loadSDF, loadMJCF</h5><p>  The <code>loadURDF</code> will send a command to the physics server to load a physics model from a Universal Robot Description File. There are some loadURDF arguments:</p><p>  <code>basePosition</code> create the base of the object at the specified position in world space coordinates; <code>baseOrientation</code> create the base of the object at the specified orientation as world space quaternion [X,Y,Z,W]; <code>useMaxmalCoordinates</code>by default, the joints in the URDF file are created using the reduced coordinate method; <code>useFixedBase</code> force the base of the loaded object to the static; <code>globalScaling</code> will apply a scale factor to the URDF model.</p><p>  The <code>loadSDF</code> command only extracts some essential parts of the SDF related to the robot models and geometry, and ignores many elements related to cameras, lights and so on The <code>loadMJCF</code> command performs basic import of MuJoCo MJCF xml files.</p><h5 id="saveState-saveBullet-restoreState-removeState-saveWorld"><a href="#saveState-saveBullet-restoreState-removeState-saveWorld" class="headerlink" title="saveState, saveBullet, restoreState, removeState, saveWorld"></a>saveState, saveBullet, restoreState, removeState, saveWorld</h5><p>  When you need deterministic simulation after restoring to a previously saved state, all important state information, including contact points, need to be stored.(<code>SaveData.py</code>)</p><h5 id="createCollisionShape-VisualShape"><a href="#createCollisionShape-VisualShape" class="headerlink" title="createCollisionShape, VisualShape"></a>createCollisionShape, VisualShape</h5><p>  Although the recommended and easiest way to create stuff in the world is using the loading functions (loadURDF/SDF/MJCF/Bullet), you can also create collision and visual shapes programmatically and use them to create a multi body using createMultiBody. You can create a visual shape in a similar way to creating a collision shape, with some additional arguments to control the visual appearance, such as diffuse and specular color. (<code>createMultiBodyLinks.py</code> and <code>createVisualShape.py</code>)</p><h5 id="stepSimulation-performCollisionDetection"><a href="#stepSimulation-performCollisionDetection" class="headerlink" title="stepSimulation, performCollisionDetection"></a>stepSimulation, performCollisionDetection</h5><p>  stepSimulation will perform all the actions in a single forward dynamics simulation step such as collision detection, constraint solving and integration. The default time step is <strong>1/240</strong> second, it can be changed using the <code>setTimeStep</code> or <code>setphysicsEngineParameter</code> API. The performCollisionDetection API will perform just the collision detection stage of the stepSimulation.</p><h2 id="Controlling-a-robot"><a href="#Controlling-a-robot" class="headerlink" title="Controlling a robot"></a>Controlling a robot</h2>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Simulation</tag>
+      
+      <tag>PyBullet</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ROS2 (Humble) Installation</title>
     <link href="/2022/07/12/ROS2/ROS2/"/>
     <url>/2022/07/12/ROS2/ROS2/</url>
@@ -33,11 +54,11 @@
     
     <tags>
       
+      <tag>Soft Robot</tag>
+      
       <tag>Hardware</tag>
       
       <tag>Simulation</tag>
-      
-      <tag>Soft Robot</tag>
       
     </tags>
     
@@ -62,9 +83,9 @@
     
     <tags>
       
-      <tag>Hardware</tag>
-      
       <tag>Soft Robot</tag>
+      
+      <tag>Hardware</tag>
       
     </tags>
     
@@ -89,9 +110,9 @@
     
     <tags>
       
-      <tag>Simulation</tag>
-      
       <tag>Soft Robot</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
@@ -116,9 +137,9 @@
     
     <tags>
       
-      <tag>Simulation</tag>
-      
       <tag>Soft Robot</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
@@ -208,9 +229,9 @@
     
     <tags>
       
-      <tag>Simulation</tag>
-      
       <tag>Reinforcement Learning</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
@@ -235,11 +256,11 @@
     
     <tags>
       
+      <tag>Simulation</tag>
+      
       <tag>ROS</tag>
       
       <tag>Drone</tag>
-      
-      <tag>Simulation</tag>
       
     </tags>
     
@@ -264,11 +285,11 @@
     
     <tags>
       
+      <tag>Simulation</tag>
+      
       <tag>ROS</tag>
       
       <tag>Drone</tag>
-      
-      <tag>Simulation</tag>
       
     </tags>
     
@@ -370,9 +391,9 @@
     
     <tags>
       
-      <tag>Robotics</tag>
-      
       <tag>Algorithm</tag>
+      
+      <tag>Robotics</tag>
       
     </tags>
     
@@ -399,9 +420,9 @@
       
       <tag>Hardware</tag>
       
-      <tag>Robotics</tag>
-      
       <tag>Algorithm</tag>
+      
+      <tag>Robotics</tag>
       
     </tags>
     
@@ -428,9 +449,9 @@
       
       <tag>Hardware</tag>
       
-      <tag>Robotics</tag>
-      
       <tag>Algorithm</tag>
+      
+      <tag>Robotics</tag>
       
     </tags>
     
