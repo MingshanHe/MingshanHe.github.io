@@ -133,7 +133,7 @@
                   <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
               </figure>';
           }
-          ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '/' + data.month + '</h1>\
+          ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '</h1>\
           <ul class="img-box-ul">' + liTmpl + '</ul>\
           </section>';
         }
