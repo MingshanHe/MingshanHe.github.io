@@ -12,6 +12,7 @@
     "version": "6.1.0"
   },
   "dependencies": {
+    "git": "^0.1.5",
     "hexo": "^6.0.0",
     "hexo-asset-link": "^2.1.1",
     "hexo-deployer-git": "^3.0.0",
@@ -24,6 +25,7 @@
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-fluid": "^1.9.2",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^0.0.3",
+    "image-size": "^1.0.2"
   }
 }
