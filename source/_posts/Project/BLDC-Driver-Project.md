@@ -12,7 +12,7 @@ tags: Hardware, Projects
 
   In this Blog, I will introduce the BLDC Driver, Magnetic Sensor,  FOC algorithm, and the inverse kinematics of the 5-bar linkage with the final project.
 
-<img src="../../image/Project/6.png" style="zoom:40%;" />
+<img src="/image/Project/6.png" style="zoom:40%;" />
 
 # BLDC Driver (PCB)
 
@@ -22,7 +22,7 @@ tags: Hardware, Projects
 
    The `VCC_IN` is the power source provided by the adjustable power supply. In the whole design, the maximum power need to under 35V and 3A. Thus I choose the capacitors which can be used under 35V. At the upper left conner of the image, the diode SS54C and Zener tube SMBJ40CA are used the VCC in the relatively stabe state. And the dioed also avoid the mistake of reverse the power supply. The Unit 1 is the linear regulator which is mainly used to get the MCUs power supply. This component is get `VCC` as input and `VCC_3V3` as output, it can linearly decrease the voltage and the other capacitors are mainly used to eliminate the noise.
 
-<img src="../../image/Project/1.png" alt="PowerModule" style="center;zoom:50%;" />
+<img src="/image/Project/1.png" alt="PowerModule" style="center;zoom:50%;" />
 
   Thus, the power module is mainly used to generate the power to supply the MCUs. There are many other components to design the power supply module, like switch regulator, and provide the `VCC_5V` which is always used to power the sensor components.
 
@@ -30,7 +30,7 @@ tags: Hardware, Projects
 
   As you all know, the Micro-Controller Unit plays an important role in the whole design. I use the common MCU which pin outs are enough to generate PWM signals and other connectivity protocol. As the figure shown, I use the STM32F103C8T6 type to generate 3 PWM signals and 1 I2C protocol. The 12Mhz crystal oscillator is the external clock to give into the MCU, which could generate high frequency signals based on it.
 
-<img src="../../image/Project/2.png" alt="PowerModule" style="center;zoom:40%;" />
+<img src="/image/Project/2.png" alt="PowerModule" style="center;zoom:40%;" />
 
   After a mount of experiments, I know the `BOOT` function is always linked to ground. And it means I need to stop power and repower the whole board can reboot the Micro-Controller Unit after upload my new code. It is so unconvinient that I always need to reboot the adjustable power supply. For cover that, it can use the button linking to the `BOOT` label and press down it when you want to reboot.
 
@@ -38,11 +38,11 @@ tags: Hardware, Projects
 
   First, I want to explain why the driver is needed. The maximum output voltage and current of MCU are limited under 3.3V and 0.1mA. Thus the power is limited no more enough to drive the Motor, which is always needed 24V and 3A. I make this circuit under the document of its data sheet. The main function of this unit is amplifying the input signal based on the `VM11` voltage. It like the basic amplifier circuit, in which the signal can be amplified to the desired input power supply.
 
-<img src="../../image/Project/3.png" alt="PowerModule" style="center;zoom:40%;" />
+<img src="/image/Project/3.png" alt="PowerModule" style="center;zoom:40%;" />
 
   In this unit, the `ENx` label is control if the output signal can be generated. And the `R7`  is the sampling resistence, which can get the current feedback to calculate the torque in the motor. Others not mentioned are designed with the recommended models and types.
 
-<img src="../../image/Project/4.png" alt="PowerModule" style="center;zoom:40%;" />
+<img src="/image/Project/4.png" alt="PowerModule" style="center;zoom:40%;" />
 
   The magnetic sensor is always used in the motor control, especially in BLDC. The sensor can be embedded in the Motor to detect hall effect, and it also can be attached in the back of the driver board and detect. In my condition, the sensor has not embedded in motor, so I need to attach a magnet in the back of the motor and using the sensor to detect the current position. This sensor use I2C protocol, and this protocol can be simply used two lines  `SCL` and `SDA` with HAL library.
 
