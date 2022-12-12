@@ -16,25 +16,30 @@
   <meta name="author" content="Mingshan He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PyBulletIntroduction  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation">
+    <meta name="description" content="Introduction  This is my final project in the master course named “Actuation and Sensing Mechanisms for Robots”. The BLDC (Brushless DC Electric Motor) is a famous motor that is used in several resear">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyBullet">
-<meta property="og:url" content="http://mingshanhe.github.io/2022/10/14/PyBullet/PyBullet/index.html">
+<meta property="og:title" content="BLDC-Driver-Project">
+<meta property="og:url" content="http://mingshanhe.github.io/2022/12/10/Project/BLDC-Driver-Project/index.html">
 <meta property="og:site_name" content="MingshanHe&#39;s HomePage">
-<meta property="og:description" content="PyBulletIntroduction  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation">
+<meta property="og:description" content="Introduction  This is my final project in the master course named “Actuation and Sensing Mechanisms for Robots”. The BLDC (Brushless DC Electric Motor) is a famous motor that is used in several resear">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-14T13:12:51.000Z">
-<meta property="article:modified_time" content="2022-10-14T13:14:39.204Z">
+<meta property="og:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/6.png">
+<meta property="og:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/1.png">
+<meta property="og:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/2.png">
+<meta property="og:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/3.png">
+<meta property="og:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/4.png">
+<meta property="article:published_time" content="2022-12-10T06:45:43.000Z">
+<meta property="article:modified_time" content="2022-12-12T07:31:50.318Z">
 <meta property="article:author" content="Mingshan He">
-<meta property="article:tag" content="Simulation">
-<meta property="article:tag" content="PyBullet">
+<meta property="article:tag" content="Hardware, Projects">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mingshanhe.github.io/2022/12/10/image/Project/6.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>PyBullet - MingshanHe&#39;s HomePage</title>
+  <title>BLDC-Driver-Project - MingshanHe&#39;s HomePage</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -238,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="PyBullet"></span>
+            <span id="subtitle" data-typed-text="BLDC-Driver-Project"></span>
           
         </div>
 
@@ -249,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-14 22:12" pubdate>
-          October 14, 2022 pm
+        <time datetime="2022-12-10 15:45" pubdate>
+          December 10, 2022 pm
         </time>
       </span>
     
@@ -261,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.3k words
+          4.2k words
         
       </span>
     
@@ -272,7 +277,7 @@
         
         
         
-          37 mins
+          35 mins
         
       </span>
     
@@ -310,28 +315,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PyBullet</h1>
+            <h1 style="display: none">BLDC-Driver-Project</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="PyBullet"><a href="#PyBullet" class="headerlink" title="PyBullet"></a>PyBullet</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>  PyBullet is a fast and easy to use Python module for robotics simulation and machine learning, with a focus on sim-to-real transfer. PyBullet provides forward dynamics simulation, inverse dynamics computation, forward and inverse kinematics, collision detection and ray intersection queries.</p>
-<p>  PyBullet can be easily used with <code>TensorFlow</code> and <code>OpenAI Gym</code>. Researchers from Google Brain, Stanford AI Lab, INRIA and many other labs use PyBullet. If you use PyBullet in your research, please add a citation.</p>
-<h3 id="Hello-PyBullet-World"><a href="#Hello-PyBullet-World" class="headerlink" title="Hello PyBullet World"></a>Hello PyBullet World</h3><p>Here is a PyBullet script.(<code>Hello_PyBullet_World.py</code>)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pybullet <span class="hljs-keyword">as</span> p<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> pybullet_data<br><br>physicsClient = p.connect(p.GUI)<span class="hljs-comment">#or p.DIRECT for non-graphical version</span><br><br>p.setAdditionalSearchPath(pybullet_data.getDataPath()) <span class="hljs-comment">#optionally</span><br><br>p.setGravity(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">10</span>) <span class="hljs-comment"># Gravity</span><br><br>planeId = p.loadURDF(<span class="hljs-string">&quot;plane.urdf&quot;</span>) <span class="hljs-comment"># load basic plane URDF</span><br><br>startPos = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>] <span class="hljs-comment"># the Original Pos of the object </span><br><br>startOrientation = p.getQuaternionFromEuler([<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]) <span class="hljs-comment"># the Original Ori with the Euler of the object</span><br><br>boxId = p.loadURDF(<span class="hljs-string">&quot;r2d2.urdf&quot;</span>,startPos, startOrientation) <span class="hljs-comment"># load object URDF</span><br><br><span class="hljs-comment"># Set the simulation time and time sleep of the step</span><br><span class="hljs-comment"># I think the step time makes the step time discrete and makes the calculate resourses more efficency.</span><br><span class="hljs-comment"># You could modify this value to accelerate the simulation or deaccelerate.</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">10000</span>):<br>    p.stepSimulation()<br>    time.sleep(<span class="hljs-number">1.</span>/<span class="hljs-number">240.</span>)<br>cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[USER INFO]:&quot;</span>)<br><span class="hljs-built_in">print</span>(cubePos,cubeOrn)<br>p.disconnect()<br><br></code></pre></td></tr></table></figure>
-<h4 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h4><h5 id="connect-disconnect-bullet-client"><a href="#connect-disconnect-bullet-client" class="headerlink" title="connect, disconnect, bullet_client"></a>connect, disconnect, bullet_client</h5><p>  After importing the PyBullet module, the first thing to do is <strong>connecting</strong> to the physics simulation. PyBullet is designed around a client-server driven API, with a client sending commands and a physics server returning the status.</p>
-<p>  You can provide your own data files, or you can use the <code>PyBullet_data</code> package that ships with PyBullet. For this, import <code>pybullet_data</code> and register the directory using <code>pybullet.setAdditionalSearchPath(pybullet_data.getDatapath())</code>. For other connection types:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">pybullet.connect(pybullet.DIRECT)<br>pybullet.connect(pybullet.GUI, options=<span class="hljs-string">&quot;--opengl2&quot;</span>)<br>pybullet.connect(pybullet.SHARED_MEMORY,<span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;192.168.0.1&quot;</span>)<br>pybullet.connect(pybullet.UDP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">1234</span>)<br>pybullet.connect(pybullet.TCP,<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6667</span>)<br></code></pre></td></tr></table></figure>
-<p>  You can <strong>disconnect</strong> from a physics server, using the physics client Id returned by the connect call (if non-negative). A <code>DIRECT</code> or <code>GUI</code> physics server will shutdown A separate (out-of-process) physics server will keep on running.</p>
-<p>  If you want to use multiple independent simulations in parallel, you can use <code>pybullet_utils.bullet_client</code>.</p>
-<h5 id="setGravity"><a href="#setGravity" class="headerlink" title="setGravity"></a>setGravity</h5><p>  By default, there is no gravitational force enabled. <code>setGravity</code> lets you set the default gravity force for all objects.</p>
-<h5 id="loadURDF-loadSDF-loadMJCF"><a href="#loadURDF-loadSDF-loadMJCF" class="headerlink" title="loadURDF, loadSDF, loadMJCF"></a>loadURDF, loadSDF, loadMJCF</h5><p>  The <code>loadURDF</code> will send a command to the physics server to load a physics model from a Universal Robot Description File. There are some loadURDF arguments:</p>
-<p>  <code>basePosition</code> create the base of the object at the specified position in world space coordinates; <code>baseOrientation</code> create the base of the object at the specified orientation as world space quaternion [X,Y,Z,W]; <code>useMaxmalCoordinates</code>by default, the joints in the URDF file are created using the reduced coordinate method; <code>useFixedBase</code> force the base of the loaded object to the static; <code>globalScaling</code> will apply a scale factor to the URDF model.</p>
-<p>  The <code>loadSDF</code> command only extracts some essential parts of the SDF related to the robot models and geometry, and ignores many elements related to cameras, lights and so on The <code>loadMJCF</code> command performs basic import of MuJoCo MJCF xml files.</p>
-<h5 id="saveState-saveBullet-restoreState-removeState-saveWorld"><a href="#saveState-saveBullet-restoreState-removeState-saveWorld" class="headerlink" title="saveState, saveBullet, restoreState, removeState, saveWorld"></a>saveState, saveBullet, restoreState, removeState, saveWorld</h5><p>  When you need deterministic simulation after restoring to a previously saved state, all important state information, including contact points, need to be stored.(<code>SaveData.py</code>)</p>
-<h5 id="createCollisionShape-VisualShape"><a href="#createCollisionShape-VisualShape" class="headerlink" title="createCollisionShape, VisualShape"></a>createCollisionShape, VisualShape</h5><p>  Although the recommended and easiest way to create stuff in the world is using the loading functions (loadURDF/SDF/MJCF/Bullet), you can also create collision and visual shapes programmatically and use them to create a multi body using createMultiBody. You can create a visual shape in a similar way to creating a collision shape, with some additional arguments to control the visual appearance, such as diffuse and specular color. (<code>createMultiBodyLinks.py</code> and <code>createVisualShape.py</code>)</p>
-<h5 id="stepSimulation-performCollisionDetection"><a href="#stepSimulation-performCollisionDetection" class="headerlink" title="stepSimulation, performCollisionDetection"></a>stepSimulation, performCollisionDetection</h5><p>  stepSimulation will perform all the actions in a single forward dynamics simulation step such as collision detection, constraint solving and integration. The default time step is <strong>1/240</strong> second, it can be changed using the <code>setTimeStep</code> or <code>setphysicsEngineParameter</code> API. The performCollisionDetection API will perform just the collision detection stage of the stepSimulation.</p>
-<h2 id="Controlling-a-robot"><a href="#Controlling-a-robot" class="headerlink" title="Controlling a robot"></a>Controlling a robot</h2>
+                <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>  This is my final project in the master course named “Actuation and Sensing Mechanisms for Robots”. The BLDC (Brushless DC Electric Motor) is a famous motor that is used in several research fields. In the seminars and presentations, many different types of robots are introduced including the MIT Cheetah, SEA Module (Series Elastic Actuator), RHex, Sprawl, and so on. </p>
+<p>  In this course, we need to do the final project which is determined by ourselves.  The main reason for us to choose the BLDC is that the robot is usually driven by a motor and I want to get in touch with the driving, sensing, and controlling of this motor. In this project, I designed and assembled the PCB for motor driving and sensing, and programmed the control algorithm with the FOC (Field Orientated Control). Thus, after this project, I am familiar with the motor driver, magnetic sensor, i2c protocol, and FOC algorithm.</p>
+<p>  In this Blog, I will introduce the BLDC Driver, Magnetic Sensor,  FOC algorithm, and the inverse kinematics of the 5-bar linkage with the final project.</p>
+<p><img src="../../image/Project/6.png" srcset="/img/loading.gif" lazyload style="zoom:40%;" /></p>
+<h1 id="BLDC-Driver-PCB"><a href="#BLDC-Driver-PCB" class="headerlink" title="BLDC Driver (PCB)"></a>BLDC Driver (PCB)</h1><p>  As you all know, the main differece between the BLDC motor and DC motor is the bursh which could change the current direction and cause the magnetic force could be change in the right hand rule. Because the BLDC motor is brushless, it is needed the signal generated by the driver to change the current direction. I think it is the main reason for the driver used in BLDC. The driver could provide the different frequencies and phase deviations with MCUs (Micro-controller Unit). The power of the MCU always use 5V and 3.3V, and this is not enough to supply the rotate power overcome the friction. Thus it is always using the amplify circuit or driver chip to get the higher voltage signal. In this module, I seperate it in 5 parts: Power, MCUs, Driver, Sensor, and Port. I will introduce detaily about the Power, Driver and briefly about the others.</p>
+<h2 id="Power-Module"><a href="#Power-Module" class="headerlink" title="Power Module"></a>Power Module</h2><p>   The <code>VCC_IN</code> is the power source provided by the adjustable power supply. In the whole design, the maximum power need to under 35V and 3A. Thus I choose the capacitors which can be used under 35V. At the upper left conner of the image, the diode SS54C and Zener tube SMBJ40CA are used the VCC in the relatively stabe state. And the dioed also avoid the mistake of reverse the power supply. The Unit 1 is the linear regulator which is mainly used to get the MCUs power supply. This component is get <code>VCC</code> as input and <code>VCC_3V3</code> as output, it can linearly decrease the voltage and the other capacitors are mainly used to eliminate the noise.</p>
+<p><img src="../../image/Project/1.png" srcset="/img/loading.gif" lazyload alt="PowerModule" style="center;zoom:50%;" /></p>
+<p>  Thus, the power module is mainly used to generate the power to supply the MCUs. There are many other components to design the power supply module, like switch regulator, and provide the <code>VCC_5V</code> which is always used to power the sensor components.</p>
+<h2 id="MCU-Module"><a href="#MCU-Module" class="headerlink" title="MCU Module"></a>MCU Module</h2><p>  As you all know, the Micro-Controller Unit plays an important role in the whole design. I use the common MCU which pin outs are enough to generate PWM signals and other connectivity protocol. As the figure shown, I use the STM32F103C8T6 type to generate 3 PWM signals and 1 I2C protocol. The 12Mhz crystal oscillator is the external clock to give into the MCU, which could generate high frequency signals based on it.</p>
+<p><img src="../../image/Project/2.png" srcset="/img/loading.gif" lazyload alt="PowerModule" style="center;zoom:40%;" /></p>
+<p>  After a mount of experiments, I know the <code>BOOT</code> function is always linked to ground. And it means I need to stop power and repower the whole board can reboot the Micro-Controller Unit after upload my new code. It is so unconvinient that I always need to reboot the adjustable power supply. For cover that, it can use the button linking to the <code>BOOT</code> label and press down it when you want to reboot.</p>
+<h2 id="DRIVER-amp-SENSOR"><a href="#DRIVER-amp-SENSOR" class="headerlink" title="DRIVER &amp; SENSOR"></a>DRIVER &amp; SENSOR</h2><p>  First, I want to explain why the driver is needed. The maximum output voltage and current of MCU are limited under 3.3V and 0.1mA. Thus the power is limited no more enough to drive the Motor, which is always needed 24V and 3A. I make this circuit under the document of its data sheet. The main function of this unit is amplifying the input signal based on the <code>VM11</code> voltage. It like the basic amplifier circuit, in which the signal can be amplified to the desired input power supply.</p>
+<p><img src="../../image/Project/3.png" srcset="/img/loading.gif" lazyload alt="PowerModule" style="center;zoom:40%;" /></p>
+<p>  In this unit, the <code>ENx</code> label is control if the output signal can be generated. And the <code>R7</code>  is the sampling resistence, which can get the current feedback to calculate the torque in the motor. Others not mentioned are designed with the recommended models and types.</p>
+<p><img src="../../image/Project/4.png" srcset="/img/loading.gif" lazyload alt="PowerModule" style="center;zoom:40%;" /></p>
+<p>  The magnetic sensor is always used in the motor control, especially in BLDC. The sensor can be embedded in the Motor to detect hall effect, and it also can be attached in the back of the driver board and detect. In my condition, the sensor has not embedded in motor, so I need to attach a magnet in the back of the motor and using the sensor to detect the current position. This sensor use I2C protocol, and this protocol can be simply used two lines  <code>SCL</code> and <code>SDA</code> with HAL library.</p>
+<h2 id="FOC-Algorithm"><a href="#FOC-Algorithm" class="headerlink" title="FOC Algorithm"></a>FOC Algorithm</h2><h2 id="Scalable-Vector-Graphics"><a href="#Scalable-Vector-Graphics" class="headerlink" title="Scalable Vector Graphics"></a>Scalable Vector Graphics</h2><p>  I code the <code>c++</code> project to get the scalable vector graphics file and convert it into a mount of points. These points could generally persent the image.</p>
+
                 
               </div>
             
@@ -343,9 +349,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Simulation/">#Simulation</a>
-      
-        <a href="/tags/PyBullet/">#PyBullet</a>
+        <a href="/tags/Hardware-Projects/">#Hardware, Projects</a>
       
     </div>
   
@@ -357,8 +361,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>PyBullet</div>
-      <div>http://mingshanhe.github.io/2022/10/14/PyBullet/PyBullet/</div>
+      <div>BLDC-Driver-Project</div>
+      <div>http://mingshanhe.github.io/2022/12/10/Project/BLDC-Driver-Project/</div>
     </div>
     <div class="license-meta">
       
@@ -370,7 +374,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 14, 2022</div>
+          <div>December 10, 2022</div>
         </div>
       
       
@@ -400,18 +404,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/10/Project/BLDC-Driver-Project/" title="BLDC-Driver-Project">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">BLDC-Driver-Project</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/12/ROS2/ROS2/" title="ROS2 (Humble) Installation">
-                        <span class="hidden-mobile">ROS2 (Humble) Installation</span>
+                      <a href="/2022/10/14/PyBullet/PyBullet/" title="PyBullet">
+                        <span class="hidden-mobile">PyBullet</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -489,12 +487,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -713,40 +705,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
