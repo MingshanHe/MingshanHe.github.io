@@ -12,7 +12,7 @@ tags: Hardware, Projects
 
   In this Blog, I will introduce the BLDC Driver, Magnetic Sensor,  FOC algorithm, and the inverse kinematics of the 5-bar linkage with the final project.
 
-<img src="/image/Project/6.png" style="zoom:40%;" />
+<img src="/image/Project/6.png" style="zoom:40%;"/>
 
 # BLDC Driver (PCB)
 
