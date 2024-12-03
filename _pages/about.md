@@ -17,42 +17,78 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. Suspendisse condimentum, libero vel tempus mattis, risus risus vulputate libero, elementum fermentum mi neque vel nisl. Maecenas facilisis maximus dignissim. Curabitur mattis vulputate dui, tincidunt varius libero luctus eu. Mauris mauris nulla, scelerisque eget massa id, tincidunt congue felis. Sed convallis tempor ipsum rhoncus viverra. Pellentesque nulla orci, accumsan volutpat fringilla vitae, maximus sit amet tortor. Aliquam ultricies odio ut volutpat scelerisque. Donec nisl nisl, porttitor vitae pharetra quis, fringilla sed mi. Fusce pretium dolor ut aliquam consequat. Cras volutpat, tellus accumsan mattis molestie, nisl lacus tempus massa, nec malesuada tortor leo vel quam. Aliquam vel ex consectetur, vehicula leo nec, efficitur eros. Donec convallis non urna quis feugiat.
+My name is Mingshan He(河明山), and now served as research engineer in the Soft Research Center, Seoul National University. I graduated from Seoul National Unversity 2024 and I obained Bachelor's degree from Northeastern University 2021.
 
-My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>).
+My research interest includes Soft Robtoics, Wearable Robotics, and Micro Robotics in Medical Field.
 
 
 # 🔥 News
-- *2022.02*: &nbsp;🎉🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2022.02*: &nbsp;🎉🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+- *2024.08.31*: &nbsp;🎉🎉 I have graduated from Seoul National University.
+- *2022.09.01*: &nbsp;🎉🎉 I have enrolled in Seoul National University. And I have had the first seminar with Biorobotics Laboratory.
+- *2022.06.13*: &nbsp;🎉🎉 I have passed the final selection in KGSP/GKS Programm with CSC.
+- *2021.07.03*: &nbsp;🎉🎉 I have graduated from Northeastern University.
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='images/500x300.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Submitted</div><img src='images/Publications/nature-2024.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf)
 
-**Kaiming He**, Xiangyu Zhang, Shaoqing Ren, Jian Sun
+[Swimming Sheet: A Stable Swimming Mechanism]()
 
-[**Project**](https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=DhtAFkwAAAAJ&citation_for_view=DhtAFkwAAAAJ:ALROH1vI_8AC) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+Jieun Yeo, **Mingshan He**, Hyeoungmin Park, and Kyujin Cho
+
+***Nature***, will be submitted*
+- Proposed a stable swimming mechanism to slitely swimming.
+
+
 </div>
 </div>
 
-- [Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet](https://github.com), A, B, C, **CVPR 2020**
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Submitted</div><img src='images/Publications/ais-2024.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+
+[Reconfigurable suction cup]()
+
+JaeRyeong Choi, **Mingshan He**, and Kyujin Cho
+
+*Advanced Intelligent Systems* ***(AIS)*** *, submitted*
+- Proposed an end effector that can actively switch the radius of the suction gripper. During mode switching, the internal air pressure is greatly affected by Snap Through. 
+- Effectively save time and be able to cover most objects.
+
+
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">IROS 2023</div><img src='images/Publications/iros-2023.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+
+[Visuotactile sensor enabled pneumatic device towards compliant oropharyngeal swab sampling](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10342266&tag=1)
+
+Shoujie Li, **Mingshan He**, Wenbo Ding, Linqi Ye, Xueqian Wang, Junbo Tan, Jinqiu Yuan,Xiao-Ping Zhang
+
+*IEEE/RSJ International Conference on Intelligent Robots and Systems* ***(IROS)*** *, 2023*
+
+- COVID-19 Swab Sampling, Labour Cost, and safety for human robot interaction.
+
+
+</div>
+</div>
 
 # 🎖 Honors and Awards
-- *2021.10* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+- *2022.03* Korean Global Scholarship Program (NIIED & CSC)
 
 # 📖 Educations
-- *2019.06 - 2022.04 (now)*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2015.09 - 2019.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+- *2022.09 - 2024.08*, M.S. in Mechanical Engineering, ***Seoul National University***, Seoul, South Korea. Adivsed by Prof. Kyujin Cho. 
+- *2017.09 - 2021.06*, B.E. in Robot Engineering, ***Northeastern University***, Shenyang, China. Advised by Prof. Fei Wang. 
 
-# 💬 Invited Talks
+<!-- # 💬 Invited Talks
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)
+- *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
 
 # 💻 Internships
-- *2019.05 - 2020.02*, [Lorem](https://github.com/), China.
+- *2022.05 - 2022.08*, Resaerch Assistant, [Smart Sensing and Robotics (SSR)](https://ssr-group.net/), Tsinghua University, Shenzhen, China.
+- *2021.09 - 2022.05*, Resaerch Assistant, [Shenyang Institute of Automation](http://www.sia.cas.cn/), Chinese Academy of Science, Shenyang, China.
