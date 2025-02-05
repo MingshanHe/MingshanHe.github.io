@@ -92,3 +92,5 @@ Shoujie Li, **Mingshan He**, Wenbo Ding, Linqi Ye, Xueqian Wang, Junbo Tan, Jinq
 # 💻 Internships
 - *2022.05 - 2022.08*, Resaerch Assistant, [Smart Sensing and Robotics (SSR)](https://ssr-group.net/), Tsinghua University, Shenzhen, China.
 - *2021.09 - 2022.05*, Resaerch Assistant, [Shenyang Institute of Automation](http://www.sia.cas.cn/), Chinese Academy of Science, Shenyang, China.
+
+<a href="http://www.clustrmaps.com/map/Mingshanhe.github.io" title="Visit tracker for Mingshanhe.github.io"><img src="//www.clustrmaps.com/map_v2.png?d=JNKbEPxtWP8QVlpoebmacw4EJCa5l7aBcVMMwgHRgCk" /></a>
