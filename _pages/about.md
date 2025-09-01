@@ -38,7 +38,7 @@ My research interest includes Robtoics Hardware Design including mechanical and 
 
 Jieun Yeo, **Mingshan He**, Hyeoungmin Park, and Kyujin Cho
 
-***Nature***, will be submitted*
+***Journal***, will be submitted*
 - Proposed a stable swimming mechanism to slitely swimming.
 
 
@@ -54,7 +54,7 @@ Jieun Yeo, **Mingshan He**, Hyeoungmin Park, and Kyujin Cho
 
 JaeRyeong Choi, **Mingshan He**, and Kyujin Cho
 
-*Advanced Intelligent Systems* ***(AIS)*** *, submitted*
+***Journal***, will be submitted*
 - Proposed an end effector that can actively switch the radius of the suction gripper. During mode switching, the internal air pressure is greatly affected by Snap Through. 
 - Effectively save time and be able to cover most objects.
 
