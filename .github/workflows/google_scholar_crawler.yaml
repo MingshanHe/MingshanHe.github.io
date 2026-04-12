@@ -1,25 +1,42 @@
-# name: Get Citation Data
+name: Get Citation Data
 
-# on: 
-#  page_build: 
-#  schedule:
-#   - cron:  '0 8 * * *'
+on: 
+  page_build: 
+  schedule:
+    - cron: '0 8 * * *' # 每天北京时间 16:00 运行
+  workflow_dispatch: # 建议加上这个，允许你在 GitHub 网页手动点击运行测试
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Install Reqs
-#       run: |
-#         sudo apt-get install python3-setuptools
-#     - name: Run
-#       run: |
-#         git init
-#         git config --local user.name "${GITHUB_ACTOR}"
-#         export remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
-#         git add *.json
-#         git commit -m "Updated Citation Data"
-#         git push "${remote_repo}" HEAD:google-scholar-stats --force
-#       env: 
-#         GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # 建议升级到 v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Reqs
+        run: |
+          pip install --upgrade pip
+          # 如果你有 requirements.txt，用下面这句：
+          # pip install -r requirements.txt
+          # 或者安装你需要的特定包，比如：
+          # pip install scholarly
+
+      - name: Run Script
+        run: |
+          # 这里应该运行你的 Python 脚本来生成 JSON
+          # python your_script.py 
+        env: 
+          GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add *.json
+          # 检查是否有内容变更，避免没有更新时 commit 报错
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Updated Citation Data" && git push origin HEAD:google-scholar-stats --force)
