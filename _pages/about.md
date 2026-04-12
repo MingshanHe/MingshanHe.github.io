@@ -17,14 +17,15 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-My name is Mingshan He(河明山), and now served as research engineer in the Tsinghua University. I graduated from Seoul National Unversity 2024 and I obained Bachelor's degree from Northeastern University 2021.
+My name is Mingshan He(河明山), and I am a Ph.D. student at the Institute of Science Tokyo. I graduated from Seoul National University in 2024, and I obtained a Bachelor's degree from Northeastern University in 2021.
 
-My research interest includes Robtoics Hardware Design including mechanical and electrical, Wearable Robotics, and Micro Robotics in Medical Field.
+My research interest includes Robtoics Hardware Design, including mechanical, electrical, and control. And I also have a strong interest in the LLM and its application.
 
 
 # 🔥 News
+- *2026.04.09*: &nbsp;🎉🎉 I have enrolled in the Institute of Science Tokyo for my Ph.D. study. 
 - *2024.08.31*: &nbsp;🎉🎉 I have graduated from Seoul National University.
-- *2022.09.01*: &nbsp;🎉🎉 I have enrolled in Seoul National University. And I have had the first seminar with Biorobotics Laboratory.
+- *2022.09.01*: &nbsp;🎉🎉 I have enrolled in Seoul National University for my Master's study. And I have had the first seminar with the Biorobotics Laboratory.
 - *2022.06.13*: &nbsp;🎉🎉 I have passed the final selection in KGSP/GKS Programm with CSC.
 - *2021.07.03*: &nbsp;🎉🎉 I have graduated from Northeastern University.
 
@@ -33,6 +34,11 @@ My research interest includes Robtoics Hardware Design including mechanical and 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Submitted</div><img src='images/Publications/nature-2024.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
+[Electromagnetic Tracking System for Medical Micro Devices: A Review]()
+**Mingshan He**, Aoji Zhu, and Lidong Yang
+
+***Micromachines***, Oct., 2025*
+- Review.
 
 [Swimming Sheet: A Stable Swimming Mechanism]()
 
