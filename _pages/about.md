@@ -31,13 +31,14 @@ My research interest includes Robtoics Hardware Design, including mechanical, el
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">micromachines</div><img src='images/Publications/micromachines-2026.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">micromachines</div><img src='images/Publications/micromachines-2025.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Electromagnetic Tracking System for Medical Micro Devices: A Review]()
+
 **Mingshan He**, Aoji Zhu, and Lidong Yang
 
-***Micromachines***, Oct., 2025*
+***Micromachines***, Oct., 2025
 - Review.
 
 
