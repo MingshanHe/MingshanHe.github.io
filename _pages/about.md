@@ -31,7 +31,7 @@ My research interest includes Robtoics Hardware Design, including mechanical, el
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Submitted</div><img src='images/Publications/nature-2024.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">micromachines</div><img src='images/Publications/micromachines-2026.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Electromagnetic Tracking System for Medical Micro Devices: A Review]()
@@ -40,6 +40,12 @@ My research interest includes Robtoics Hardware Design, including mechanical, el
 ***Micromachines***, Oct., 2025*
 - Review.
 
+
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Submitted</div><img src='images/Publications/nature-2024.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
 [Swimming Sheet: A Stable Swimming Mechanism]()
 
 Jieun Yeo, **Mingshan He**, Hyeoungmin Park, and Kyujin Cho
