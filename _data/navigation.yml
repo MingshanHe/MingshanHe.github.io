@@ -9,9 +9,6 @@ main:
   - title: "Publications"
     url: "/#-publications"
 
-  - title: "VM2026"
-    url: "/VM2026/"
-
   - title: "Honors and Awards"
     url: "/#-honors-and-awards"
 
@@ -23,3 +20,8 @@ main:
 
   - title: "Internships"
     url: "/#-internships"
+
+  - title: "Poster"
+    children:
+      - title: "VM2026"
+        url: "/VM2026/"

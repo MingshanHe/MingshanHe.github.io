@@ -203,3 +203,98 @@ h1:before, .anchor:before {
     border-radius: $border-radius;
     background: $lighter-gray;
 }
+
+.masthead__menu-item--has-submenu {
+    position: relative;
+}
+
+.masthead__submenu-toggle {
+    display: block;
+    margin: 0 1rem;
+    padding: .5rem 0;
+    color: $masthead-link-color;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: $masthead-link-color-hover;
+        outline: none;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        bottom: 0;
+        height: 4px;
+        background: mix(#fff, $primary-color, 50%);
+        -webkit-transition: $global-transition;
+        transition: $global-transition;
+        -webkit-transform: scaleX(0);
+            -ms-transform: scaleX(0);
+                transform: scaleX(0);
+    }
+}
+
+.masthead__submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    margin-top: .5rem;
+    padding: .35rem 0;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(#000, 0.18);
+    z-index: 30;
+
+    li {
+        display: block !important;
+    }
+
+    a {
+        margin: 0;
+        padding: .55rem 1rem;
+        color: $masthead-link-color;
+        font-size: $type-size-5;
+        text-decoration: none;
+
+        &:hover {
+            color: $masthead-link-color-hover;
+            background: $lighter-gray;
+        }
+    }
+}
+
+.masthead__menu-item--has-submenu:hover,
+.masthead__menu-item--has-submenu:focus-within {
+    .masthead__submenu {
+        display: block;
+    }
+
+    .masthead__submenu-toggle:before {
+        -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+                transform: scaleX(1);
+    }
+}
+
+.hidden-links {
+    .masthead__submenu-toggle {
+        margin: 0;
+        padding: 10px 20px;
+        font-size: $type-size-5;
+    }
+
+    .masthead__submenu {
+        position: static;
+        min-width: 0;
+        margin-top: 0;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+}
