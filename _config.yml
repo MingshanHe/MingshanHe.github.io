@@ -6,7 +6,7 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Mingshan He"
+title                    : "MingshanHe"
 description              : "Robotic Researcher. Focusing on Robotic Hardware Design, Electrical Design, Control Algorithm and LLM & its application"
 repository               : "MingshanHe/mingshanhe.github.io"
 google_scholar_stats_use_cdn : true
